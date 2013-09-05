@@ -33,16 +33,17 @@ public class Man {
     public void liiku() {
 
         if (this.alkuSuunta == Suunta.ALAS) {
-            this.alkuY = this.alkuY+1;
-        } else if(this.alkuSuunta == Suunta.YLOS) {
-            this.alkuY = this.alkuY-1;
-        } else if(this.alkuSuunta == Suunta.OIKEA) {
-            this.alkuX = this.alkuX+1;
-        } else if(this.alkuSuunta == Suunta.VASEN) {
-            this.alkuX = this.alkuX-1;
+            this.alkuY = this.alkuY + 1;
+        } else if (this.alkuSuunta == Suunta.YLOS) {
+            this.alkuY = this.alkuY - 1;
+        } else if (this.alkuSuunta == Suunta.OIKEA) {
+            this.alkuX = this.alkuX + 1;
+        } else if (this.alkuSuunta == Suunta.VASEN) {
+            this.alkuX = this.alkuX - 1;
         }
-
-
     }
-
+    
+    public String toString() {
+        return this.alkuX + "," + this.alkuY;
+    }
 }

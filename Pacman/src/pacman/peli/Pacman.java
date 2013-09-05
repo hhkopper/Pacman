@@ -15,14 +15,12 @@ public class Pacman extends Timer implements ActionListener {
     private int korkeus;
     private Man man;
     private Paivitettava paivitettava;
-//    private Peliruutu[][] pelilauta;
     
     public Pacman(int leveys, int korkeus) {        
         super(1000, null);
         
         this.korkeus = korkeus;
         this.leveys = leveys;
-//        this.pelilauta = new Peliruutu[leveys][korkeus];
         this.man = new Man(leveys/2, korkeus/2, Suunta.OIKEA);
         
         addActionListener(this);
