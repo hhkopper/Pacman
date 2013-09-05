@@ -1,19 +1,33 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package pacman;
+import javax.swing.SwingUtilities;
+import pacman.hahmot.Man;
+import pacman.Suunta;
+import pacman.alusta.Kayttoliittyma;
+import pacman.peli.Pacman;
 
-/**
- *
- * @author hhkopper
- */
-public class Pacman {
+public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Pacman pacman = new Pacman(20,20);
+        
+        Kayttoliittyma kayttis = new Kayttoliittyma(pacman, 20);
+        SwingUtilities.invokeLater(kayttis);
+        
+        while (kayttis.getPaivitettava() == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                System.out.println("Piirtoalustaa ei ole vielä luotu.");
+            }
+        }
+        
+        
+        
+        pacman.setPaivitettava(kayttis.getPaivitettava());
+        pacman.start();
+
+        
+
     }
 }
