@@ -22,16 +22,13 @@ public class Pelialusta {
         for (int i = 0; i <= korkeus - 1;i++) {
             for(int j = 0; j <= leveys -1; j++) {
                 this.pelialusta[i][j] = new Peliruutu(i,j);
+                this.pelialusta[i][j].setRuudunTyyppi(1);
+                this.pelialusta[i][j].setOnkoMan(false);
             }
         }
     }
     
-    public void rakennaSeinat() {
-        for(int m = 0; m <= korkeus-1; m++) {
-            for(int n = 0; n <= leveys-1; n++) {
-                this.pelialusta[m][n].setRuudunTyyppi(1);
-            }
-        }
+    public void rakennaSeinat() {        
         
         for (int i = 0; i < 21; i++) {
             this.pelialusta[i][0].setRuudunTyyppi(0);
@@ -49,4 +46,6 @@ public class Pelialusta {
     public Peliruutu getPeliruutu(int i, int j) {
         return this.pelialusta[i][j];
     }
+    
+    
 }

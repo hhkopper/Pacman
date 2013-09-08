@@ -5,6 +5,7 @@ public class Peliruutu {
     private int x;
     private int y;
     private int ruudunTyyppi;
+    private boolean onkoMan;
     
     public Peliruutu(int x, int y) {
         this.x = x;
@@ -20,7 +21,7 @@ public class Peliruutu {
     }
     
     
-   //jos ruutu on polku se on true, jos seinä on false 
+   //jos ruutu on polku se on 1, jos seinä on 0 
     public int getRuudunTyyppi() {
         return this.ruudunTyyppi;
     }
@@ -29,9 +30,13 @@ public class Peliruutu {
         this.ruudunTyyppi = uusiTyyppi;
     }
     
+    public void setOnkoMan(boolean arvo) {
+        this.onkoMan = arvo;
+    }
+    
     @Override
     public String toString() {
-        return "(" + this.x + "," + this.y + ")";
+        return "(" + this.x + "," + this.y + "), onko man: " + this.onkoMan;
     }
     
 }

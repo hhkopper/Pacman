@@ -25,6 +25,7 @@ public class Main {
         }
         System.out.println("");
         System.out.println("luku on:" + luku);
+        System.out.println(alusta.getPeliruutu(2, 2));
 
 
 

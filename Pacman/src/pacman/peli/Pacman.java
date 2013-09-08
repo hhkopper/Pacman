@@ -34,7 +34,7 @@ public class Pacman extends Timer implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.man.liiku();
+//        this.man.liiku();
         
         this.paivitettava.paivita();
     }
