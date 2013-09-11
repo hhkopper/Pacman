@@ -57,7 +57,7 @@ public class ManTest {
         Pelialusta alusta = new Pelialusta();
         alusta.luoPelialusta();
         Man man = new Man(2,2, Suunta.ALAS);
-        man.luoMan(alusta);
+        man.luoManAlustalle(alusta);
         man.liiku(alusta);
         String vastaus = man.toString();
         assertEquals("2,3", vastaus);
@@ -68,7 +68,7 @@ public class ManTest {
         Pelialusta alusta = new Pelialusta();
         alusta.luoPelialusta();
         Man man = new Man(2, 2, Suunta.YLOS);
-        man.luoMan(alusta);
+        man.luoManAlustalle(alusta);
         man.liiku(alusta);
         assertEquals("2,1", man.toString());
     }
@@ -78,7 +78,7 @@ public class ManTest {
         Pelialusta alusta = new Pelialusta();
         alusta.luoPelialusta();
         Man man = new Man(2, 2, Suunta.VASEN);
-        man.luoMan(alusta);
+        man.luoManAlustalle(alusta);
         man.liiku(alusta);
         assertEquals("1,2", man.toString());
     }
@@ -87,7 +87,7 @@ public class ManTest {
         Pelialusta alusta = new Pelialusta();
         alusta.luoPelialusta();
         Man man = new Man(2, 2, Suunta.OIKEA);
-        man.luoMan(alusta);
+        man.luoManAlustalle(alusta);
         man.liiku(alusta);
         assertEquals("3,2", man.toString());
     }

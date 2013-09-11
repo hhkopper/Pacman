@@ -20,7 +20,7 @@ public class Man {
         this.alkuSuunta = alkuSuunta;
     }
 
-    public void luoMan(Pelialusta alusta) {
+    public void luoManAlustalle(Pelialusta alusta) {
         alusta.getPeliruutu(alkuX, alkuY).setOnkoMan(true);
     }
 
@@ -46,7 +46,7 @@ public class Man {
             }
             alusta.getPeliruutu(alkuX, alkuY).setOnkoMan(true);
             alusta.getPeliruutu(alkuX, alkuY).setOnkoMan(false);
-            
+
 
         } else if (this.alkuSuunta == Suunta.YLOS) {
             this.alkuY = this.alkuY - 1;
