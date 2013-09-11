@@ -24,6 +24,7 @@ public class Pelialusta {
                 this.pelialusta[i][j] = new Peliruutu(i,j);
                 this.pelialusta[i][j].setRuudunTyyppi(1);
                 this.pelialusta[i][j].setOnkoMan(false);
+                this.pelialusta[i][j].setOnkoHaamu(false);
             }
         }
     }
