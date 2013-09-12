@@ -1,5 +1,6 @@
 package pacman.hahmot;
 
+import java.util.ArrayList;
 import java.util.Random;
 import pacman.Suunta;
 import pacman.alusta.Pelialusta;
@@ -56,27 +57,45 @@ public class Haamu {
     public void liiku(Pelialusta alusta) {
 
         if (this.alkuSuunta == Suunta.ALAS) {
-            if (alusta.getPeliruutu(this.x - 1, this.y).getRuudunTyyppi() == 0) {
-                arvoUusiSuunta();
+            if (alusta.getPeliruutu(this.x + 1, this.y).getRuudunTyyppi() == 0) {
+                arvoUusiSuunta(alusta);
+                liiku(alusta);
             }
+            this.x = this.x+1;
+            alusta.getPeliruutu(x, y).setOnkoHaamu(true);
+            alusta.getPeliruutu(x-1, y).setOnkoHaamu(false);
+        } else if(this.alkuSuunta == Suunta.YLOS) {
+            
+        } else if(this.alkuSuunta == Suunta.OIKEA) {
+            
+        } else if(this.alkuSuunta == Suunta.VASEN) {
+            
         }
 
     }
 
-    public void arvoUusiSuunta() {
+    public void arvoUusiSuunta(Pelialusta alusta) {
+        
+        ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
+        
+        if(alusta.getPeliruutu(x, y+1).getRuudunTyyppi() == 1) {
+            mahdollisetSuunnat.add(Suunta.OIKEA);
+        }
+        if(alusta.getPeliruutu(x+1, y).getRuudunTyyppi() == 1) {
+            mahdollisetSuunnat.add(Suunta.ALAS);
+        }
+        if(alusta.getPeliruutu(x, y-1).getRuudunTyyppi() == 1) {
+            mahdollisetSuunnat.add(Suunta.VASEN);
+        }
+        if(alusta.getPeliruutu(x-1, y).getRuudunTyyppi() == 1) {
+            mahdollisetSuunnat.add(Suunta.YLOS);
+        }
+        
         Random arpoja = new Random();
 
-        int arpaluku = arpoja.nextInt(3);
-
-        if (arpaluku == 0) {
-            this.alkuSuunta = Suunta.ALAS;
-        } else if (arpaluku == 1) {
-            this.alkuSuunta = Suunta.YLOS;            
-        } else if (arpaluku == 2) {
-            this.alkuSuunta = Suunta.OIKEA;            
-        } else if (arpaluku == 3) {
-            this.alkuSuunta = Suunta.VASEN;
-        }
+        int arpaluku = arpoja.nextInt(mahdollisetSuunnat.size()-1);
+        
+        this.alkuSuunta = mahdollisetSuunnat.get(arpaluku);
     }
 
     public String toString() {
