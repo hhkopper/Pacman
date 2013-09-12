@@ -49,7 +49,7 @@ public class Peliruutu {
     
     @Override
     public String toString() {
-        return "(" + this.x + "," + this.y + "), onko man: " + this.onkoMan;
+        return "(" + this.x + "," + this.y + "), onko man: " + this.onkoMan + ", onko haamu: " + this.onkoHaamu + ", ruuduntyyppi: " + this.ruudunTyyppi;
     }
     
 }

@@ -38,31 +38,43 @@ public class Man {
 
     public void liiku(Pelialusta alusta) {
 
-        if (this.alkuSuunta == Suunta.ALAS) {
+        if (this.alkuSuunta == Suunta.OIKEA) {
             this.alkuY = this.alkuY + 1;
             if (osuukoSeinaan(alusta)) {
                 this.alkuY--;
                 return;
             }
             alusta.getPeliruutu(alkuX, alkuY).setOnkoMan(true);
-            alusta.getPeliruutu(alkuX, alkuY).setOnkoMan(false);
+            alusta.getPeliruutu(alkuX, alkuY-1).setOnkoMan(false);
 
 
-        } else if (this.alkuSuunta == Suunta.YLOS) {
+        } else if (this.alkuSuunta == Suunta.VASEN) {
             this.alkuY = this.alkuY - 1;
             if (osuukoSeinaan(alusta)) {
                 this.alkuY++;
+                return;
             }
-        } else if (this.alkuSuunta == Suunta.OIKEA) {
+            alusta.getPeliruutu(alkuX, alkuY).setOnkoMan(true);
+            alusta.getPeliruutu(alkuX, alkuY+1).setOnkoMan(false);
+            
+        } else if (this.alkuSuunta == Suunta.ALAS) {
             this.alkuX = this.alkuX + 1;
             if (osuukoSeinaan(alusta)) {
                 this.alkuX--;
+                return;
             }
-        } else if (this.alkuSuunta == Suunta.VASEN) {
+            alusta.getPeliruutu(alkuX, alkuY).setOnkoMan(true);
+            alusta.getPeliruutu(alkuX-1, alkuY).setOnkoMan(false);
+            
+        } else if (this.alkuSuunta == Suunta.YLOS) {
             this.alkuX = this.alkuX - 1;
             if (osuukoSeinaan(alusta)) {
                 this.alkuX++;
+                return;
             }
+            alusta.getPeliruutu(alkuX, alkuY).setOnkoMan(true);
+            alusta.getPeliruutu(alkuX+1, alkuY).setOnkoMan(false);
+            
         }
     }
 
@@ -73,6 +85,14 @@ public class Man {
         }
         return false;
     }
+    
+    public void tarkistaKuoleeko(Pelialusta alusta) {
+        if(alusta.getPeliruutu(alkuX, alkuY).getOnkoMan() == true && alusta.getPeliruutu(alkuX, alkuY).getOnkoHaamu() == true) {
+            this.alkuX = 11;
+            this.alkuY = 9;
+        }
+    }
+    
 
     public String toString() {
         return this.alkuX + "," + this.alkuY;

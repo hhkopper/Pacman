@@ -42,7 +42,8 @@ public class HaamuTest {
     public void haamuLuodaanOikein() {
         Haamu haamu = new Haamu(2,2,Suunta.YLOS, "Punainen");
         String vastaus = haamu.toString();
-        assertEquals("(2,2) Nimi: Punainen", vastaus);
-        
+        assertEquals("(2,2) Nimi: Punainen, YLOS", vastaus);        
     }
+    
+    
 }
