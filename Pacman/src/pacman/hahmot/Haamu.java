@@ -71,6 +71,8 @@ public class Haamu {
         } else if(this.alkuSuunta == Suunta.VASEN) {
             
         }
+        
+        liiku(alusta);
 
     }
 
