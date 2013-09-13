@@ -4,7 +4,6 @@
  */
 package pacman.hahmot;
 
-import pacman.Suunta;
 import pacman.alusta.Pelialusta;
 import pacman.alusta.Peliruutu;
 

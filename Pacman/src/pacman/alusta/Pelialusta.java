@@ -51,11 +51,18 @@ public class Pelialusta {
                 if(lukija.nextInt() == 0) {
                     this.pelialusta[luku][i].setRuudunTyyppi(0);
                 }
+//                if(lukija.nextInt() == 3) {
+//                    this.pelialusta[luku][i].setRuudunTyyppi(3);
+//                }
             }
             luku++;
         }
 
         lukija.close();
+    }
+    
+    public void luoPistepallot() {
+        
     }
 
     public Peliruutu getPeliruutu(int i, int j) {

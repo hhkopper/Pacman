@@ -1,5 +1,5 @@
 
-package pacman;
+package pacman.hahmot;
 
 public enum Suunta {
 

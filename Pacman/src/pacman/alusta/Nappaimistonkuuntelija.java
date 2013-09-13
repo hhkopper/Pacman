@@ -4,7 +4,7 @@ package pacman.alusta;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import pacman.hahmot.Man;
-import pacman.Suunta;
+import pacman.hahmot.Suunta;
 
 public class Nappaimistonkuuntelija implements KeyListener {
     

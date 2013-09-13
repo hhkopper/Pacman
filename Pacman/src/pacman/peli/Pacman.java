@@ -4,7 +4,7 @@ package pacman.peli;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
-import pacman.Suunta;
+import pacman.hahmot.Suunta;
 import pacman.alusta.Paivitettava;
 import pacman.alusta.Peliruutu;
 import pacman.hahmot.Man;

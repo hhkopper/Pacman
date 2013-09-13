@@ -2,7 +2,6 @@ package pacman.hahmot;
 
 import java.util.ArrayList;
 import java.util.Random;
-import pacman.Suunta;
 import pacman.alusta.Pelialusta;
 
 public class Haamu {
@@ -61,42 +60,67 @@ public class Haamu {
                 arvoUusiSuunta(alusta);
                 liiku(alusta);
             }
-            this.x = this.x+1;
+
+            this.x = this.x + 1;
             alusta.getPeliruutu(x, y).setOnkoHaamu(true);
-            alusta.getPeliruutu(x-1, y).setOnkoHaamu(false);
-        } else if(this.alkuSuunta == Suunta.YLOS) {
-            
-        } else if(this.alkuSuunta == Suunta.OIKEA) {
-            
-        } else if(this.alkuSuunta == Suunta.VASEN) {
-            
+            alusta.getPeliruutu(x - 1, y).setOnkoHaamu(false);
+
+        } else if (this.alkuSuunta == Suunta.YLOS) {
+            if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 0) {
+                arvoUusiSuunta(alusta);
+                liiku(alusta);
+            }
+
+            this.x = this.x - 1;
+            alusta.getPeliruutu(x, x).setOnkoHaamu(true);
+            alusta.getPeliruutu(x + 1, y).setOnkoHaamu(false);
+
+        } else if (this.alkuSuunta == Suunta.OIKEA) {
+            if (alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 0) {
+                arvoUusiSuunta(alusta);
+                liiku(alusta);
+            }
+
+            this.y = this.y + 1;
+            alusta.getPeliruutu(x, y).setOnkoHaamu(true);
+            alusta.getPeliruutu(x, y - 1).setOnkoHaamu(false);
+
+        } else if (this.alkuSuunta == Suunta.VASEN) {
+            if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 0) {
+                arvoUusiSuunta(alusta);
+                liiku(alusta);
+            }
+
+            this.y = this.y - 1;
+            alusta.getPeliruutu(x, y).setOnkoHaamu(true);
+            alusta.getPeliruutu(x, y+1).setOnkoHaamu(false);
         }
-        
+
         liiku(alusta);
 
     }
 
     public void arvoUusiSuunta(Pelialusta alusta) {
-        
+
         ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
-        
-        if(alusta.getPeliruutu(x, y+1).getRuudunTyyppi() == 1) {
+
+        if (alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 1) {
             mahdollisetSuunnat.add(Suunta.OIKEA);
         }
-        if(alusta.getPeliruutu(x+1, y).getRuudunTyyppi() == 1) {
+        if (alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 1) {
             mahdollisetSuunnat.add(Suunta.ALAS);
         }
-        if(alusta.getPeliruutu(x, y-1).getRuudunTyyppi() == 1) {
+        if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 1) {
             mahdollisetSuunnat.add(Suunta.VASEN);
         }
-        if(alusta.getPeliruutu(x-1, y).getRuudunTyyppi() == 1) {
+        if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 1) {
             mahdollisetSuunnat.add(Suunta.YLOS);
         }
-        
+
         Random arpoja = new Random();
 
-        int arpaluku = arpoja.nextInt(mahdollisetSuunnat.size()-1);
-        
+        int arpaluku = arpoja.nextInt(mahdollisetSuunnat.size() - 1);
+
         this.alkuSuunta = mahdollisetSuunnat.get(arpaluku);
     }
 
