@@ -16,8 +16,7 @@ public class Main {
         Pelialusta alusta = new Pelialusta(21, 19);
         alusta.luoPelialusta();
         
-        Haamu haamu = new Haamu(8,9,Suunta.ALAS,"RED", alusta);
-        haamu.setAlkuSuunta(Suunta.OIKEA);
+        Haamu haamu = new Haamu(8,9,Suunta.OIKEA,"RED", alusta);
         System.out.println(haamu);
         haamu.liiku();
         System.out.println(haamu);

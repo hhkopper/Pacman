@@ -68,26 +68,34 @@ public class Haamu {
             if (alusta.getPeliruutu(this.x + 1, this.y).getRuudunTyyppi() == 0) {
                 arvoUusiSuunta();
                 liiku();
+            } else {
+                liikuAlas();
             }
-            liikuAlas();
+            
         } else if (this.suunta == Suunta.YLOS) {
             if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 0) {
                 arvoUusiSuunta();
                 liiku();
+            } else {
+                liikuYlos();
             }
-            liikuYlos();
+            
         } else if (this.suunta == Suunta.OIKEA) {
             if (alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 0) {
                 arvoUusiSuunta();
                 liiku();
+            } else {
+                liikuOikea();
             }
-            liikuOikea();
+            
         } else if (this.suunta == Suunta.VASEN) {
             if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 0) {
                 arvoUusiSuunta();
                 liiku();
+            } else {
+                liikuVasen();
             }
-            liikuVasen();
+            
         }
     }
 
@@ -143,6 +151,7 @@ public class Haamu {
         int arpaluku = arpoja.nextInt(mahdollisetSuunnat.size() - 1);
 
         this.suunta = mahdollisetSuunnat.get(arpaluku);
+        
     }
 
     public String toString() {
