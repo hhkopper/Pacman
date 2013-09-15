@@ -8,16 +8,18 @@ public class Haamu {
 
     private int x;
     private int y;
-    private Suunta alkuSuunta;
+    private Suunta suunta;
     private String nimi;
-    String tyyppi;
+    private String tyyppi;
+    private Pelialusta alusta;
 
-    public Haamu(int x, int y, Suunta suunta, String nimi) {
+    public Haamu(int x, int y, Suunta suunta, String nimi, Pelialusta alusta) {
         this.x = x;
         this.y = y;
-        this.alkuSuunta = suunta;
+        this.suunta = suunta;
         this.nimi = nimi;
         this.tyyppi = "vahva";
+        this.alusta = alusta;
     }
 
     public void setX(int x) {
@@ -41,14 +43,14 @@ public class Haamu {
     }
 
     public void setAlkuSuunta(Suunta uusiSuunta) {
-        this.alkuSuunta = uusiSuunta;
+        this.suunta = uusiSuunta;
     }
 
     public Suunta getSuunta() {
-        return this.alkuSuunta;
+        return this.suunta;
     }
 
-    public void luoHaamuAlustalle(Pelialusta alusta) {
+    public void luoHaamuAlustalle() {
         alusta.getPeliruutu(x, y).setOnkoHaamu(true);
     }
 
@@ -60,32 +62,32 @@ public class Haamu {
      * ja tämän jälkeen kutsuu uudestaan liiku metodia, että päästään
      * liikkumaan.
      */
-    public void liiku(Pelialusta alusta) {
+    public void liiku() {
 
-        if (this.alkuSuunta == Suunta.ALAS) {
+        if (this.suunta == Suunta.ALAS) {
             if (alusta.getPeliruutu(this.x + 1, this.y).getRuudunTyyppi() == 0) {
-                arvoUusiSuunta(alusta);
-                liiku(alusta);
+                arvoUusiSuunta();
+                liiku();
             }
-            liikuAlas(alusta);
-        } else if (this.alkuSuunta == Suunta.YLOS) {
+            liikuAlas();
+        } else if (this.suunta == Suunta.YLOS) {
             if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 0) {
-                arvoUusiSuunta(alusta);
-                liiku(alusta);
+                arvoUusiSuunta();
+                liiku();
             }
-            liikuYlos(alusta);
-        } else if (this.alkuSuunta == Suunta.OIKEA) {
+            liikuYlos();
+        } else if (this.suunta == Suunta.OIKEA) {
             if (alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 0) {
-                arvoUusiSuunta(alusta);
-                liiku(alusta);
+                arvoUusiSuunta();
+                liiku();
             }
-            liikuOikea(alusta);
-        } else if (this.alkuSuunta == Suunta.VASEN) {
+            liikuOikea();
+        } else if (this.suunta == Suunta.VASEN) {
             if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 0) {
-                arvoUusiSuunta(alusta);
-                liiku(alusta);
+                arvoUusiSuunta();
+                liiku();
             }
-            liikuVasen(alusta);
+            liikuVasen();
         }
     }
 
@@ -95,31 +97,31 @@ public class Haamu {
      *
      * @param alusta
      */
-    public void liikuAlas(Pelialusta alusta) {
+    public void liikuAlas() {
         this.x = this.x + 1;
         alusta.getPeliruutu(x, y).setOnkoHaamu(true);
         alusta.getPeliruutu(x - 1, y).setOnkoHaamu(false);
     }
 
-    public void liikuYlos(Pelialusta alusta) {
+    public void liikuYlos() {
         this.x = this.x - 1;
         alusta.getPeliruutu(x, y).setOnkoHaamu(true);
         alusta.getPeliruutu(x + 1, y).setOnkoHaamu(false);
     }
 
-    public void liikuVasen(Pelialusta alusta) {
+    public void liikuVasen() {
         this.y = this.y - 1;
         alusta.getPeliruutu(x, y).setOnkoHaamu(true);
         alusta.getPeliruutu(x, y + 1).setOnkoHaamu(false);
     }
 
-    public void liikuOikea(Pelialusta alusta) {
+    public void liikuOikea() {
         this.y = this.y + 1;
         alusta.getPeliruutu(x, y).setOnkoHaamu(true);
         alusta.getPeliruutu(x, y - 1).setOnkoHaamu(false);
     }
 
-    public void arvoUusiSuunta(Pelialusta alusta) {
+    public void arvoUusiSuunta() {
 
         ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
 
@@ -140,10 +142,10 @@ public class Haamu {
 
         int arpaluku = arpoja.nextInt(mahdollisetSuunnat.size() - 1);
 
-        this.alkuSuunta = mahdollisetSuunnat.get(arpaluku);
+        this.suunta = mahdollisetSuunnat.get(arpaluku);
     }
 
     public String toString() {
-        return "(" + this.x + "," + this.y + ") Nimi: " + this.nimi + ", " + this.alkuSuunta;
+        return "(" + this.x + "," + this.y + ") Nimi: " + this.nimi + ", " + this.suunta;
     }
 }

@@ -16,6 +16,12 @@ public class Main {
         Pelialusta alusta = new Pelialusta(21, 19);
         alusta.luoPelialusta();
         
+        Haamu haamu = new Haamu(8,9,Suunta.ALAS,"RED", alusta);
+        haamu.setAlkuSuunta(Suunta.OIKEA);
+        System.out.println(haamu);
+        haamu.liiku();
+        System.out.println(haamu);
+        
 //        Pelialusta alusta = new Pelialusta(21, 19);
 //        alusta.luoPelialusta();
 //
@@ -46,8 +52,8 @@ public class Main {
 //            System.out.println("");
 //        }
 //        
-        Man pacman = new Man(11,9, Suunta.OIKEA, alusta);
-        pacman.luoManAlustalle();
+//        Man pacman = new Man(11,9, Suunta.OIKEA, alusta);
+//        pacman.luoManAlustalle();
 //        
 //        System.out.println(alusta.getPeliruutu(11, 9).getOnkoMan());
 //        System.out.println(alusta.getPeliruutu(11, 9).getRuudunTyyppi());

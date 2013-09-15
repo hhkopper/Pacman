@@ -30,7 +30,7 @@ public class Pelialusta {
         return this.korkeus;
     }
 
-    public void luoPelialusta() {
+    public void luoPelialusta() throws Exception {
         for (int i = 0; i <= korkeus - 1; i++) {
             for (int j = 0; j <= leveys - 1; j++) {
                 this.pelialusta[i][j] = new Peliruutu(i, j);
@@ -40,6 +40,7 @@ public class Pelialusta {
                 this.pelialusta[i][j].setOnkoPistepallo(false);
             }
         }
+        rakennaSeinatJaLuoPisteet();
     }
 
     public void rakennaSeinatJaLuoPisteet() throws Exception {

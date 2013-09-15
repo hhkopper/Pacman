@@ -35,11 +35,11 @@ public class HaamuTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         alusta = new Pelialusta(21, 19);
         alusta.luoPelialusta();
-        haamu = new Haamu(8, 9, Suunta.ALAS, "RED");
-        haamu.luoHaamuAlustalle(alusta);
+        haamu = new Haamu(8, 9, Suunta.ALAS, "RED", alusta);
+        haamu.luoHaamuAlustalle();
     }
 
     @After
@@ -53,28 +53,30 @@ public class HaamuTest {
 
     @Test
     public void haamuLiikkuuOikeinAlas() {
-        haamu.liiku(alusta);
+        haamu.liiku();
         assertEquals("(9,9) Nimi: RED, ALAS" + true + false, haamu.toString() + alusta.getPeliruutu(9, 9).getOnkoHaamu() + alusta.getPeliruutu(8, 9).getOnkoHaamu());
     }
     
     @Test
     public void haamuLiikkuuOikeinYlos() {
         haamu.setAlkuSuunta(Suunta.YLOS);
-        haamu.liiku(alusta);
+        haamu.liiku();
         assertEquals("(7,9) Nimi: RED, YLOS" + false +true, haamu.toString() + alusta.getPeliruutu(8, 9).getOnkoHaamu() + alusta.getPeliruutu(7, 9).getOnkoHaamu());        
     }
     
     @Test
     public void haamuLiikkuuOikeinOikealla() {
+        haamu.setX(7);
         haamu.setAlkuSuunta(Suunta.OIKEA);
-        haamu.liiku(alusta);
-        assertEquals("(8,10) Nimi: RED, OIKEA" + true + false, haamu.toString() + alusta.getPeliruutu(8, 10).getOnkoHaamu() + alusta.getPeliruutu(8, 9).getOnkoHaamu());
+        haamu.liiku();
+        assertEquals("(7,10) Nimi: RED, OIKEA" + true + false, haamu.toString() + alusta.getPeliruutu(7, 10).getOnkoHaamu() + alusta.getPeliruutu(7, 9).getOnkoHaamu());
     }
     
     @Test
     public void haamuLiikkuuOikeinVasemmalle() {
+        haamu.setX(7);
         haamu.setAlkuSuunta(Suunta.VASEN);
-        haamu.liiku(alusta);
-        assertEquals("(8,8) Nimi: RED, VASEN" + true + false, haamu.toString() + alusta.getPeliruutu(8, 8).getOnkoHaamu() + alusta.getPeliruutu(8, 9).getOnkoHaamu());
+        haamu.liiku();
+        assertEquals("(7,8) Nimi: RED, VASEN" + true + false, haamu.toString() + alusta.getPeliruutu(7, 8).getOnkoHaamu() + alusta.getPeliruutu(7, 9).getOnkoHaamu());
     }
 }

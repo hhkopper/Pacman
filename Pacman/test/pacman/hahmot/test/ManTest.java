@@ -36,7 +36,7 @@ public class ManTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         alusta = new Pelialusta(10, 10);
         alusta.luoPelialusta();
         man = new Man(2, 2, Suunta.ALAS, alusta);
@@ -91,12 +91,12 @@ public class ManTest {
         assertEquals("2,2", man.toString());
     }
 
-    @Test
-    public void kuoleekoMan() {
-        man.luoManAlustalle();
-        Haamu haamu = new Haamu(2, 2, Suunta.OIKEA, "punainen");
-        haamu.luoHaamuAlustalle(alusta);
-
-        assertEquals(true, man.tarkistaKuoleeko());
-    }
+//    @Test
+//    public void kuoleekoMan() {
+//        man.luoManAlustalle();
+//        Haamu haamu = new Haamu(2, 2, Suunta.OIKEA, "punainen");
+//        haamu.luoHaamuAlustalle(alusta);
+//
+//        assertEquals(true, man.tarkistaKuoleeko());
+//    }
 }

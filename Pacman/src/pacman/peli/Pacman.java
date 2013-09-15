@@ -1,32 +1,20 @@
 package pacman.peli;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 import pacman.alusta.Pelialusta;
+import pacman.hahmot.Haamu;
 import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
 
-public class Pacman extends Timer implements ActionListener {
 
-    private Pelialusta alusta;
-    private int korkeus;
-    private int leveys;
+
+public class Pacman{
     private Man pacman;
+    private Haamu haamu;
 
     public Pacman(Pelialusta alusta) {
-        super(1000, null);
-        this.alusta = alusta;
-        korkeus = alusta.getKorkeus();
-        leveys = alusta.getLeveys();
-        pacman = new Man(11, 9, Suunta.OIKEA, alusta);
-        
-        addActionListener(this);
-        setInitialDelay(2000);
+        pacman = new Man(11,9,Suunta.OIKEA, alusta);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        pacman.liiku();
+    
+    public void kuoleekoMan() {
     }
 }
