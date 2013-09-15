@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.Scanner;
 import javax.swing.JPanel;
 import pacman.peli.Pacman;
+import pacman.komponentit.Pistepallo;
 
 public class Pelialusta {
 
@@ -20,11 +21,11 @@ public class Pelialusta {
         this.pelialusta = new Peliruutu[korkeus][leveys];
 //        korkeus tulee olla 21 ja leveys 19, ei vielä kovakoodata
     }
-    
+
     public int getLeveys() {
         return this.leveys;
     }
-    
+
     public int getKorkeus() {
         return this.korkeus;
     }
@@ -36,39 +37,44 @@ public class Pelialusta {
                 this.pelialusta[i][j].setRuudunTyyppi(1);
                 this.pelialusta[i][j].setOnkoMan(false);
                 this.pelialusta[i][j].setOnkoHaamu(false);
+                this.pelialusta[i][j].setOnkoPistepallo(false);
             }
         }
     }
 
-    public void rakennaSeinat() throws Exception {
+    public void rakennaSeinatJaLuoPisteet() throws Exception {
         File tiedosto = new File("Kentta");
         Scanner lukija = new Scanner(tiedosto);
-
         int luku = 0;
-                
+
         while (lukija.hasNextLine()) {
             for (int i = 0; i < 19; i++) {
-                if(lukija.nextInt() == 0) {
+                if (lukija.nextInt() == 0) {
                     this.pelialusta[luku][i].setRuudunTyyppi(0);
+                } else {
+                    if (tarkistaEtteiHaamujenKarsinassa(luku, i) == true) {
+                    } else {
+//                        Pistepallo pallo = new Pistepallo(luku, i);
+                        this.pelialusta[luku][i].setOnkoPistepallo(true);
+                    }
                 }
-//                if(lukija.nextInt() == 3) {
-//                    this.pelialusta[luku][i].setRuudunTyyppi(3);
-//                }
             }
             luku++;
         }
-
         lukija.close();
     }
-    
-    public void luoPistepallot() {
-        
+
+    public boolean tarkistaEtteiHaamujenKarsinassa(int luku, int i) {
+        if (luku == 9 && i == 8 || luku == 9 && i == 9 || luku == 9 && i == 10 || luku == 8 && i == 9) {
+            return true;
+        }
+        return false;
     }
 
     public Peliruutu getPeliruutu(int i, int j) {
         return this.pelialusta[i][j];
     }
-    
+
     public String toString() {
         return "Korkeus:" + this.korkeus + ", leveys:" + this.leveys;
     }

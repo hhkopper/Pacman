@@ -3,7 +3,7 @@ package pacman;
 import javax.swing.SwingUtilities;
 import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
-import pacman.alusta.Kayttoliittyma;
+import pacman.gui.Kayttoliittyma;
 import pacman.alusta.Pelialusta;
 import pacman.hahmot.Haamu;
 import pacman.komponentit.Extrapistepallo;
@@ -11,8 +11,11 @@ import pacman.peli.Pacman;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {        
+    public static void main(String[] args) throws Exception {
 
+        Pelialusta alusta = new Pelialusta(21, 19);
+        alusta.luoPelialusta();
+        
 //        Pelialusta alusta = new Pelialusta(21, 19);
 //        alusta.luoPelialusta();
 //
@@ -27,20 +30,24 @@ public class Main {
 //        System.out.println(man);
 
 
-        Pelialusta alusta = new Pelialusta(21,19);
 
-        alusta.luoPelialusta();
-        alusta.rakennaSeinat();
-        
-        for (int i = 0; i < alusta.getKorkeus(); i++) {
-            for (int j = 0; j < alusta.getLeveys(); j++) {
-                System.out.print(alusta.getPeliruutu(i, j).getRuudunTyyppi());
-            }
-            System.out.println("");
-        }
+
+
+//        Haamu haamu = new Haamu(8,9,Suunta.ALAS,"Red");
+//        System.out.println(haamu);
+//        haamu.liiku(alusta);
+//        System.out.println(haamu);
+//        alusta.rakennaSeinatJaLuoPisteet();
+//
+//        for (int i = 0; i < alusta.getKorkeus(); i++) {
+//            for (int j = 0; j < alusta.getLeveys(); j++) {
+//                System.out.print(alusta.getPeliruutu(i, j).getRuudunTyyppi());
+//            }
+//            System.out.println("");
+//        }
 //        
-//        Man pacman = new Man(11,9, Suunta.OIKEA);
-//        pacman.luoManAlustalle(alusta);
+        Man pacman = new Man(11,9, Suunta.OIKEA, alusta);
+        pacman.luoManAlustalle();
 //        
 //        System.out.println(alusta.getPeliruutu(11, 9).getOnkoMan());
 //        System.out.println(alusta.getPeliruutu(11, 9).getRuudunTyyppi());

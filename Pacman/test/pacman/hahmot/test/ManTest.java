@@ -22,6 +22,7 @@ import pacman.hahmot.Man;
 public class ManTest {
 
     private Pelialusta alusta;
+    private Man man;
 
     public ManTest() {
     }
@@ -38,77 +39,64 @@ public class ManTest {
     public void setUp() {
         alusta = new Pelialusta(10, 10);
         alusta.luoPelialusta();
+        man = new Man(2, 2, Suunta.ALAS, alusta);
     }
 
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-
-    @Test
-    public void hello() {
-    }
 
     @Test
     public void manLuodaanOikein() {
-        Man man = new Man(2, 2, Suunta.ALAS);
-        String vastaus = man.toString();
-        assertEquals("2,2", vastaus);
+        assertEquals("2,2", man.toString());
     }
 
     @Test
     public void manLiikkuuOikeinAlas() {
-        Man man = new Man(2, 2, Suunta.ALAS);
-        man.luoManAlustalle(alusta);
-        man.liiku(alusta);
-        String vastaus = man.toString();
-        assertEquals("3,2", vastaus);
+        man.luoManAlustalle();
+        man.liiku();
+        assertEquals("3,2", man.toString());
     }
 
     @Test
     public void manLiikkuuOikeinYlos() {
-        Man man = new Man(2, 2, Suunta.YLOS);
-        man.luoManAlustalle(alusta);
-        man.liiku(alusta);
+        man.setSuunta(Suunta.YLOS);
+        man.luoManAlustalle();
+        man.liiku();
         assertEquals("1,2", man.toString());
     }
 
     @Test
     public void manLiikkuuOikeinVasen() {
-        Man man = new Man(2, 2, Suunta.VASEN);
-        man.luoManAlustalle(alusta);
-        man.liiku(alusta);
+        man.setSuunta(Suunta.VASEN);
+        man.luoManAlustalle();
+        man.liiku();
         assertEquals("2,1", man.toString());
     }
 
     @Test
     public void manLiikkuuOikeinOikea() {
-        Man man = new Man(2, 2, Suunta.OIKEA);
-        man.luoManAlustalle(alusta);
-        man.liiku(alusta);
+        man.setSuunta(Suunta.OIKEA);
+        man.luoManAlustalle();
+        man.liiku();
         assertEquals("2,3", man.toString());
     }
 
     @Test
     public void manOsuukoSeinaanOikein() {
-        Man man = new Man(2, 2, Suunta.OIKEA);
+        man.setSuunta(Suunta.OIKEA);
         alusta.getPeliruutu(2, 3).setRuudunTyyppi(0);
-        man.luoManAlustalle(alusta);
-        man.liiku(alusta);
+        man.luoManAlustalle();
+        man.liiku();
         assertEquals("2,2", man.toString());
     }
 
     @Test
     public void kuoleekoMan() {
-        Man man = new Man(2, 2, Suunta.ALAS);
-        man.luoManAlustalle(alusta);
+        man.luoManAlustalle();
         Haamu haamu = new Haamu(2, 2, Suunta.OIKEA, "punainen");
         haamu.luoHaamuAlustalle(alusta);
 
-        man.tarkistaKuoleeko(alusta);
-
-        assertEquals("11,9", man.toString());
+        assertEquals(true, man.tarkistaKuoleeko());
     }
 }

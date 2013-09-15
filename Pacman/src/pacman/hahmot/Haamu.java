@@ -10,12 +10,14 @@ public class Haamu {
     private int y;
     private Suunta alkuSuunta;
     private String nimi;
+    String tyyppi;
 
     public Haamu(int x, int y, Suunta suunta, String nimi) {
         this.x = x;
         this.y = y;
         this.alkuSuunta = suunta;
         this.nimi = nimi;
+        this.tyyppi = "vahva";
     }
 
     public void setX(int x) {
@@ -50,9 +52,14 @@ public class Haamu {
         alusta.getPeliruutu(x, y).setOnkoHaamu(true);
     }
 
-//    Tarkistetaan suunta, tarkistetaan olisiko seuraava liike seinän päällä, jos on valitaan randomilla uusi suunta
-//    ja kutsutaan uudestaan liiku metodia, jos seuraava liike ei ole seinän päällä liikutaan normaalisti.
-//    
+    /**
+     * Liiku metodi katsoo ensin, mikä on haamun suunta. 
+     * Seuraavaksi metodi tarkistaa onko seuraava ruutu johon ollaan liikkumassa seinä. 
+     * Jos ei ole, kutsutaan metodia joka varsinaisesti liikuttaa haamua eteenpäin. 
+     * Jos seuraava ruutu olisi seinä, kutsutaan metodia, joka arpoo uuden suunnan
+     * ja tämän jälkeen kutsuu uudestaan liiku metodia, että päästään
+     * liikkumaan.
+     */
     public void liiku(Pelialusta alusta) {
 
         if (this.alkuSuunta == Suunta.ALAS) {
@@ -60,44 +67,56 @@ public class Haamu {
                 arvoUusiSuunta(alusta);
                 liiku(alusta);
             }
-
-            this.x = this.x + 1;
-            alusta.getPeliruutu(x, y).setOnkoHaamu(true);
-            alusta.getPeliruutu(x - 1, y).setOnkoHaamu(false);
-
+            liikuAlas(alusta);
         } else if (this.alkuSuunta == Suunta.YLOS) {
             if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 0) {
                 arvoUusiSuunta(alusta);
                 liiku(alusta);
             }
-
-            this.x = this.x - 1;
-            alusta.getPeliruutu(x, x).setOnkoHaamu(true);
-            alusta.getPeliruutu(x + 1, y).setOnkoHaamu(false);
-
+            liikuYlos(alusta);
         } else if (this.alkuSuunta == Suunta.OIKEA) {
             if (alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 0) {
                 arvoUusiSuunta(alusta);
                 liiku(alusta);
             }
-
-            this.y = this.y + 1;
-            alusta.getPeliruutu(x, y).setOnkoHaamu(true);
-            alusta.getPeliruutu(x, y - 1).setOnkoHaamu(false);
-
+            liikuOikea(alusta);
         } else if (this.alkuSuunta == Suunta.VASEN) {
             if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 0) {
                 arvoUusiSuunta(alusta);
                 liiku(alusta);
             }
-
-            this.y = this.y - 1;
-            alusta.getPeliruutu(x, y).setOnkoHaamu(true);
-            alusta.getPeliruutu(x, y+1).setOnkoHaamu(false);
+            liikuVasen(alusta);
         }
+    }
 
-        liiku(alusta);
+    /**
+     * Haamun koordinaatit muuttuu, kun haamu liikkuu. Pelialusta tietää mihin
+     * ruutuun haamu liikkuu.
+     *
+     * @param alusta
+     */
+    public void liikuAlas(Pelialusta alusta) {
+        this.x = this.x + 1;
+        alusta.getPeliruutu(x, y).setOnkoHaamu(true);
+        alusta.getPeliruutu(x - 1, y).setOnkoHaamu(false);
+    }
 
+    public void liikuYlos(Pelialusta alusta) {
+        this.x = this.x - 1;
+        alusta.getPeliruutu(x, y).setOnkoHaamu(true);
+        alusta.getPeliruutu(x + 1, y).setOnkoHaamu(false);
+    }
+
+    public void liikuVasen(Pelialusta alusta) {
+        this.y = this.y - 1;
+        alusta.getPeliruutu(x, y).setOnkoHaamu(true);
+        alusta.getPeliruutu(x, y + 1).setOnkoHaamu(false);
+    }
+
+    public void liikuOikea(Pelialusta alusta) {
+        this.y = this.y + 1;
+        alusta.getPeliruutu(x, y).setOnkoHaamu(true);
+        alusta.getPeliruutu(x, y - 1).setOnkoHaamu(false);
     }
 
     public void arvoUusiSuunta(Pelialusta alusta) {

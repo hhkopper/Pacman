@@ -1,4 +1,4 @@
-package pacman.alusta;
+package pacman.gui;
 
 public interface Paivitettava {
     void paivita();

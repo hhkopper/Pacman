@@ -47,7 +47,7 @@ public class PelialustaTest {
     public void hakeeRuudunOikein() throws Exception {
         Pelialusta alusta = new Pelialusta(21,19);
         alusta.luoPelialusta();
-        alusta.rakennaSeinat();
+        alusta.rakennaSeinatJaLuoPisteet();
         String vastaus = alusta.getPeliruutu(0, 0).toString();
         assertEquals("(0,0), onko man: false, onko haamu: false, ruuduntyyppi: 0", vastaus);        
     }
