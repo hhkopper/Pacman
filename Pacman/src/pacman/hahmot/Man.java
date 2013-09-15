@@ -38,7 +38,7 @@ public class Man {
     public int getY() {
         return this.y;
     }
-    
+
     public int getElamat() {
         return elamat;
     }
@@ -50,8 +50,8 @@ public class Man {
             if (osuukoSeinaan()) {
                 this.y--;
                 return;
-            }           
-            alusta.getPeliruutu(x, y-1).setOnkoMan(false);
+            }
+            alusta.getPeliruutu(x, y - 1).setOnkoMan(false);
 
         } else if (this.suunta == Suunta.VASEN) {
             this.y = this.y - 1;
@@ -59,25 +59,25 @@ public class Man {
                 this.y++;
                 return;
             }
-            alusta.getPeliruutu(x, y+1).setOnkoMan(false);
-            
+            alusta.getPeliruutu(x, y + 1).setOnkoMan(false);
+
         } else if (this.suunta == Suunta.ALAS) {
             this.x = this.x + 1;
             if (osuukoSeinaan()) {
                 this.x--;
                 return;
             }
-            alusta.getPeliruutu(x-1, y).setOnkoMan(false);
-            
+            alusta.getPeliruutu(x - 1, y).setOnkoMan(false);
+
         } else if (this.suunta == Suunta.YLOS) {
             this.x = this.x - 1;
             if (osuukoSeinaan()) {
                 this.x++;
                 return;
             }
-            alusta.getPeliruutu(x+1, y).setOnkoMan(false);            
+            alusta.getPeliruutu(x + 1, y).setOnkoMan(false);
         }
-        
+
         alusta.getPeliruutu(x, y).setOnkoMan(true);
     }
 
@@ -88,22 +88,14 @@ public class Man {
         }
         return false;
     }
-    
-    public void tarkistaKuoleeko() {
-        if(alusta.getPeliruutu(x, y).getOnkoMan() == true && alusta.getPeliruutu(x, y).getOnkoHaamu() == true) {
-            kuole();   
-        }
-        
-    }
-    
-    public void kuole() {
+
+    public void palaaAlkuun() {
         alusta.getPeliruutu(x, y).setOnkoMan(false);
-            this.x = 11;
-            this.y = 9;
-            alusta.getPeliruutu(x, y).setOnkoMan(true);
-            elamat--;
+        this.x = 11;
+        this.y = 9;
+        alusta.getPeliruutu(x, y).setOnkoMan(true);
+        elamat--;
     }
-    
 
     public String toString() {
         return this.x + "," + this.y;

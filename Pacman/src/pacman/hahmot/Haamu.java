@@ -49,6 +49,14 @@ public class Haamu {
     public Suunta getSuunta() {
         return this.suunta;
     }
+    
+    public void setTyyppi(String tyyppi) {
+        this.tyyppi = tyyppi;
+    }
+    
+    public String getTyyppi() {
+        return this.tyyppi;
+    }
 
     public void luoHaamuAlustalle() {
         alusta.getPeliruutu(x, y).setOnkoHaamu(true);
@@ -147,11 +155,15 @@ public class Haamu {
         }
 
         Random arpoja = new Random();
-
         int arpaluku = arpoja.nextInt(mahdollisetSuunnat.size() - 1);
-
-        this.suunta = mahdollisetSuunnat.get(arpaluku);
-        
+        this.suunta = mahdollisetSuunnat.get(arpaluku);        
+    }
+    
+    public void palaaAlkuun() {
+        alusta.getPeliruutu(x, y).setOnkoHaamu(false);
+        this.x = 9;
+        this.y = 9;
+        alusta.getPeliruutu(x, y).setOnkoHaamu(true);
     }
 
     public String toString() {
