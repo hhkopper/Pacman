@@ -12,4 +12,18 @@ public class Hedelma {
         this.arvo = 100;
     }
     
+    public int getArvo() {
+        return this.arvo;
+    }
+    
+    public int getX() {
+        return this.x;
+    }
+    
+    public int getY() {
+        return this.y;
+    }
+    
+    
+    
 }

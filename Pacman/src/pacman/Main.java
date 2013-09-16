@@ -12,14 +12,30 @@ import pacman.peli.Pacman;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
-        Pelialusta alusta = new Pelialusta(21, 19);
-        alusta.luoPelialusta();
         
-        Haamu haamu = new Haamu(8,9,Suunta.OIKEA,"RED", alusta);
-        System.out.println(haamu);
-        haamu.liiku();
-        System.out.println(haamu);
+        Pacman pacman = new Pacman();
+        Kayttoliittyma kayttis = new Kayttoliittyma(pacman);
+        
+        SwingUtilities.invokeLater(kayttis);
+
+        while (kayttis.getPaivitettava() == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                System.out.println("Piirtoalustaa ei ole vielä luotu.");
+            }
+        }
+
+        pacman.setPaivitettava(kayttis.getPaivitettava());
+        pacman.start();
+
+//        Pelialusta alusta = new Pelialusta(21, 19);
+//        alusta.luoPelialusta();
+//        
+//        Haamu haamu = new Haamu(8,9,Suunta.OIKEA,"RED", alusta);
+//        System.out.println(haamu);
+//        haamu.liiku();
+//        System.out.println(haamu);
         
 //        Pelialusta alusta = new Pelialusta(21, 19);
 //        alusta.luoPelialusta();

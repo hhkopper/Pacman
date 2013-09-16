@@ -66,7 +66,7 @@ public class HaamuTest {
     
     @Test
     public void haamuLiikkuuOikeinOikealla() {
-        haamu.setX(7);
+        haamu.setY(7);
         haamu.setAlkuSuunta(Suunta.OIKEA);
         haamu.liiku();
         assertEquals("(7,10) Nimi: RED, OIKEA" + true + false, haamu.toString() + alusta.getPeliruutu(7, 10).getOnkoHaamu() + alusta.getPeliruutu(7, 9).getOnkoHaamu());
@@ -74,7 +74,7 @@ public class HaamuTest {
     
     @Test
     public void haamuLiikkuuOikeinVasemmalle() {
-        haamu.setX(7);
+        haamu.setY(7);
         haamu.setAlkuSuunta(Suunta.VASEN);
         haamu.liiku();
         assertEquals("(7,8) Nimi: RED, VASEN" + true + false, haamu.toString() + alusta.getPeliruutu(7, 8).getOnkoHaamu() + alusta.getPeliruutu(7, 9).getOnkoHaamu());

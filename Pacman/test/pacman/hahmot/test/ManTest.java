@@ -37,9 +37,9 @@ public class ManTest {
 
     @Before
     public void setUp() throws Exception {
-        alusta = new Pelialusta(10, 10);
+        alusta = new Pelialusta(21,19);
         alusta.luoPelialusta();
-        man = new Man(2, 2, Suunta.ALAS, alusta);
+        man = new Man(11, 9, Suunta.ALAS, alusta);
     }
 
     @After
@@ -48,22 +48,22 @@ public class ManTest {
 
     @Test
     public void manLuodaanOikein() {
-        assertEquals("2,2", man.toString());
+        assertEquals("11,9", man.toString());
     }
 
     @Test
-    public void manLiikkuuOikeinAlas() {
+    public void manEiLiikuAlasSeinanLapi() {
         man.luoManAlustalle();
         man.liiku();
-        assertEquals("3,2", man.toString());
+        assertEquals("11,9", man.toString());
     }
 
     @Test
-    public void manLiikkuuOikeinYlos() {
+    public void manEiLiikuYlosSeinanLapi() {
         man.setSuunta(Suunta.YLOS);
         man.luoManAlustalle();
         man.liiku();
-        assertEquals("1,2", man.toString());
+        assertEquals("11,9", man.toString());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ManTest {
         man.setSuunta(Suunta.VASEN);
         man.luoManAlustalle();
         man.liiku();
-        assertEquals("2,1", man.toString());
+        assertEquals("11,8", man.toString());
     }
 
     @Test
@@ -79,17 +79,17 @@ public class ManTest {
         man.setSuunta(Suunta.OIKEA);
         man.luoManAlustalle();
         man.liiku();
-        assertEquals("2,3", man.toString());
+        assertEquals("11,10", man.toString());
     }
 
-    @Test
-    public void manOsuukoSeinaanOikein() {
-        man.setSuunta(Suunta.OIKEA);
-        alusta.getPeliruutu(2, 3).setRuudunTyyppi(0);
-        man.luoManAlustalle();
-        man.liiku();
-        assertEquals("2,2", man.toString());
-    }
+//    @Test
+//    public void manOsuukoSeinaanOikein() {
+//        man.setSuunta(Suunta.OIKEA);
+//        alusta.getPeliruutu(2, 3).setRuudunTyyppi(0);
+//        man.luoManAlustalle();
+//        man.liiku();
+//        assertEquals("2,2", man.toString());
+//    }
 
 //    @Test
 //    public void kuoleekoMan() {
