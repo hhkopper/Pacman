@@ -33,14 +33,14 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             }
         }
         
-//        g.setColor(Color.CYAN);
-//        g.fillOval(peli.getHaamuLista().get(0).getX()*this.ruudunSivu, peli.getHaamuLista().get(0).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
-//        g.setColor(Color.MAGENTA);
-//        g.fillOval(peli.getHaamuLista().get(1).getX()*this.ruudunSivu, peli.getHaamuLista().get(1).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
-//        g.setColor(Color.GREEN);
-//        g.fillOval(peli.getHaamuLista().get(2).getX()*this.ruudunSivu, peli.getHaamuLista().get(2).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
-//        g.setColor(Color.RED);
-//        g.fillOval(peli.getHaamuLista().get(3).getX()*this.ruudunSivu, peli.getHaamuLista().get(3).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.setColor(Color.CYAN);
+        g.fillOval(peli.getHaamuLista().get(0).getX()*this.ruudunSivu, peli.getHaamuLista().get(0).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.setColor(Color.MAGENTA);
+        g.fillOval(peli.getHaamuLista().get(1).getX()*this.ruudunSivu, peli.getHaamuLista().get(1).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.setColor(Color.GREEN);
+        g.fillOval(peli.getHaamuLista().get(2).getX()*this.ruudunSivu, peli.getHaamuLista().get(2).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.setColor(Color.RED);
+        g.fillOval(peli.getHaamuLista().get(3).getX()*this.ruudunSivu, peli.getHaamuLista().get(3).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
     }
 
     @Override

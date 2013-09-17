@@ -33,6 +33,9 @@ public class Pacman extends Timer implements ActionListener {
         this.luoHaamut();
         laskuri = new Pistelaskuri();
         this.hedelmanPaikat = new ArrayList<Peliruutu>();
+        
+        addActionListener(this);
+        setInitialDelay(2000);
     }
 
     public void luoHaamut() {
@@ -101,7 +104,7 @@ public class Pacman extends Timer implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        this.pacman.liiku();
+        this.pacman.liiku();
         for (Haamu haamu : haamut) {
             haamu.liiku();
         }

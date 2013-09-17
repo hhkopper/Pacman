@@ -12,6 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import pacman.alusta.Pelialusta;
 import pacman.hahmot.Haamu;
+import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
 
 /**
