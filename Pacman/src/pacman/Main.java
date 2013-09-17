@@ -13,61 +13,34 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         
-//        Pacman pacman = new Pacman();
-//        Kayttoliittyma kayttis = new Kayttoliittyma(pacman);
-//        
-//        SwingUtilities.invokeLater(kayttis);
-//
-//        while (kayttis.getPaivitettava() == null) {
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException ex) {
-//                System.out.println("Piirtoalustaa ei ole vielä luotu.");
-//            }
-//        }
-//
-//        pacman.setPaivitettava(kayttis.getPaivitettava());
-//        pacman.start();
-
-        Pelialusta alusta = new Pelialusta(19,21);
-//        alusta.apu();
-        alusta.luoPelialusta();
-//        
-//        Haamu haamu = new Haamu(8,9,Suunta.OIKEA,"RED", alusta);
-//        System.out.println(haamu);
-//        haamu.liiku();
-//        System.out.println(haamu);
         
-//        Pelialusta alusta = new Pelialusta(21, 19);
-//        alusta.luoPelialusta();
-//
-//        Man man = new Man(2, 2, Suunta.ALAS);
-//        man.luoManAlustalle(alusta);
-//        System.out.println(alusta.getPeliruutu(2, 2).getOnkoMan());
-//        Haamu haamu = new Haamu(2, 2, Suunta.OIKEA, "punainen");
-//        haamu.luoHaamuAlustalle(alusta);
-//        System.out.println(alusta.getPeliruutu(2, 2).getOnkoHaamu());
-//
-//        man.tarkistaKuoleeko(alusta);
-//        System.out.println(man);
+        Pacman pacman = new Pacman();
+        Kayttoliittyma kayttis = new Kayttoliittyma(pacman);
+        
+        SwingUtilities.invokeLater(kayttis);
 
-
-
-
-
-//        Haamu haamu = new Haamu(8,9,Suunta.ALAS,"Red");
-//        System.out.println(haamu);
-//        haamu.liiku(alusta);
-//        System.out.println(haamu);
-//        alusta.rakennaSeinatJaLuoPisteet();
-//
-        for (int i = 0; i < alusta.getKorkeus(); i++) {
-            for (int j = 0; j < alusta.getLeveys(); j++) {
-                System.out.print(alusta.getPeliruutu(i, j).getRuudunTyyppi());
+        while (kayttis.getPaivitettava() == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                System.out.println("Piirtoalustaa ei ole vielä luotu.");
             }
-            System.out.println("");
         }
+
+        pacman.setPaivitettava(kayttis.getPaivitettava());
+        pacman.start();
+
+//        Pelialusta alusta = new Pelialusta(19,21);
+//        alusta.luoPelialusta();
 //        
+//
+//        for (int i = 0; i < alusta.getKorkeus(); i++) {
+//            for (int j = 0; j < alusta.getLeveys(); j++) {
+//                System.out.print(alusta.getPeliruutu(j, i).getRuudunTyyppi());
+//            }
+//            System.out.println("");
+//        }
+        
 //        Man pacman = new Man(11,9, Suunta.OIKEA, alusta);
 //        pacman.luoManAlustalle();
 //        

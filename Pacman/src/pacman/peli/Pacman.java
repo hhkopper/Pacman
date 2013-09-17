@@ -25,20 +25,21 @@ public class Pacman extends Timer implements ActionListener {
 
     public Pacman() throws Exception {
         super(1000, null);
-        alusta = new Pelialusta(21,19);
+        alusta = new Pelialusta(19,21);
         alusta.luoPelialusta();
-        pacman = new Man(11,9, Suunta.OIKEA, alusta);
+        pacman = new Man(9,11, Suunta.OIKEA, alusta);
         pacman.luoManAlustalle();
         haamut = new ArrayList<Haamu>();
+        this.luoHaamut();
         laskuri = new Pistelaskuri();
         this.hedelmanPaikat = new ArrayList<Peliruutu>();
     }
 
     public void luoHaamut() {
-        Haamu red = new Haamu(9, 9, Suunta.YLOS, "RED", alusta);
+        Haamu red = new Haamu(8, 9, Suunta.YLOS, "RED", alusta);
         Haamu green = new Haamu(9, 9, Suunta.YLOS, "GREEN", alusta);
-        Haamu blue = new Haamu(9, 9, Suunta.YLOS, "BLUE", alusta);
-        Haamu orange = new Haamu(9, 9, Suunta.YLOS, "ORANGE", alusta);
+        Haamu blue = new Haamu(10, 9, Suunta.YLOS, "BLUE", alusta);
+        Haamu orange = new Haamu(9, 8, Suunta.YLOS, "ORANGE", alusta);
 
         haamut.add(red);
         haamut.add(green);
@@ -49,6 +50,14 @@ public class Pacman extends Timer implements ActionListener {
     public Man getMan() {
         return this.pacman;
     } 
+    
+    public Pelialusta getAlusta() {
+        return this.alusta;
+    }
+    
+    public ArrayList<Haamu> getHaamuLista() {
+        return this.haamut;
+    }
 
     public void kuoleekoHaamuTaiMan() {
         for (Haamu haamu : haamut) {
@@ -92,7 +101,10 @@ public class Pacman extends Timer implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.pacman.liiku();
+//        this.pacman.liiku();
+        for (Haamu haamu : haamut) {
+            haamu.liiku();
+        }
         this.paivitettava.paivita();
         setDelay(1000);
     }

@@ -40,7 +40,7 @@ public class Pelialusta {
     public void luoPelialusta() throws Exception {
         for (int i = 0; i <= kor - 1; i++) {
             for (int j = 0; j <= lev - 1; j++) {
-                this.pelialusta[i][j] = new Peliruutu(i, j);
+                this.pelialusta[i][j] = new Peliruutu(j, i);
                 this.pelialusta[i][j].setRuudunTyyppi(1);
                 this.pelialusta[i][j].setOnkoMan(false);
                 this.pelialusta[i][j].setOnkoHaamu(false);
@@ -59,12 +59,6 @@ public class Pelialusta {
             for (int i = 0; i < 19; i++) {
                 if (lukija.nextInt() == 0) {
                     this.pelialusta[luku][i].setRuudunTyyppi(0);
-                } else {
-                    if (tarkistaEtteiHaamujenKarsinassa(luku, i) == true) {
-                    } else {
-//                        Pistepallo pallo = new Pistepallo(luku, i);
-                        this.pelialusta[luku][i].setOnkoPistepallo(true);
-                    }
                 }
             }
             luku++;
@@ -80,7 +74,7 @@ public class Pelialusta {
     }
 
     public Peliruutu getPeliruutu(int i, int j) {
-        return this.pelialusta[i][j];
+        return this.pelialusta[j][i];
     }
 
     public String toString() {

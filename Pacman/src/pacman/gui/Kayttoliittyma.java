@@ -1,4 +1,3 @@
-
 package pacman.gui;
 
 import java.awt.Container;

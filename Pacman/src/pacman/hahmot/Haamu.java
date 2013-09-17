@@ -13,7 +13,7 @@ public class Haamu {
     private String tyyppi;
     private Pelialusta alusta;
 
-    public Haamu(int y, int x, Suunta suunta, String nimi, Pelialusta alusta) {
+    public Haamu(int x, int y, Suunta suunta, String nimi, Pelialusta alusta) {
         this.y = y;
         this.x = x;
         this.suunta = suunta;
@@ -59,7 +59,7 @@ public class Haamu {
     }
 
     public void luoHaamuAlustalle() {
-        alusta.getPeliruutu(y,x).setOnkoHaamu(true);
+        alusta.getPeliruutu(x, y).setOnkoHaamu(true);
     }
 
     /**
@@ -71,7 +71,7 @@ public class Haamu {
      * liikkumaan.
      */
     public void liiku() {
-        if (alusta.getPeliruutu(y + this.suunta.getY(), x + this.suunta.getX()).getRuudunTyyppi() == 0) {
+        if (alusta.getPeliruutu(x + this.suunta.getX(), y + this.suunta.getY()).getRuudunTyyppi() == 0) {
             arvoUusiSuunta();
             liiku();
         } else {
@@ -83,24 +83,24 @@ public class Haamu {
 
         this.y = this.y + suunta.getY();
         this.x = this.x + suunta.getX();
-        alusta.getPeliruutu(y, x).setOnkoHaamu(true);
-        alusta.getPeliruutu(y - suunta.getY(), x - suunta.getX()).setOnkoHaamu(false);
+        alusta.getPeliruutu(x, y).setOnkoHaamu(true);
+        alusta.getPeliruutu(x - suunta.getX(), y - suunta.getY()).setOnkoHaamu(false);
     }
 
     public void arvoUusiSuunta() {
 
         ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
 
-        if (alusta.getPeliruutu(y, x + 1).getRuudunTyyppi() == 1) {
+        if (alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 1) {
             mahdollisetSuunnat.add(Suunta.OIKEA);
         }
-        if (alusta.getPeliruutu(y + 1, x).getRuudunTyyppi() == 1) {
+        if (alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 1) {
             mahdollisetSuunnat.add(Suunta.ALAS);
         }
-        if (alusta.getPeliruutu(y, x - 1).getRuudunTyyppi() == 1) {
+        if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 1) {
             mahdollisetSuunnat.add(Suunta.VASEN);
         }
-        if (alusta.getPeliruutu(y - 1, x).getRuudunTyyppi() == 1) {
+        if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 1) {
             mahdollisetSuunnat.add(Suunta.YLOS);
         }
 
@@ -110,13 +110,13 @@ public class Haamu {
     }
 
     public void palaaAlkuun() {
-        alusta.getPeliruutu(y, x).setOnkoHaamu(false);
+        alusta.getPeliruutu(x,y).setOnkoHaamu(false);
         this.y = 9;
         this.x = 9;
-        alusta.getPeliruutu(y, x).setOnkoHaamu(true);
+        alusta.getPeliruutu(x,y).setOnkoHaamu(true);
     }
 
     public String toString() {
-        return "(" + this.y + "," + this.x + ") Nimi: " + this.nimi + ", " + this.suunta;
+        return "(" + this.x + "," + this.y + ") Nimi: " + this.nimi + ", " + this.suunta;
     }
 }

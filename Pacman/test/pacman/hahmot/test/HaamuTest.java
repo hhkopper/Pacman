@@ -38,7 +38,7 @@ public class HaamuTest {
     public void setUp() throws Exception {
         alusta = new Pelialusta(19, 21);
         alusta.luoPelialusta();
-        haamu = new Haamu(8, 9, Suunta.ALAS, "RED", alusta);
+        haamu = new Haamu(9, 8, Suunta.ALAS, "RED", alusta);
         haamu.luoHaamuAlustalle();
     }
 
@@ -48,7 +48,7 @@ public class HaamuTest {
 
     @Test
     public void haamuLuodaanOikein() {
-        assertEquals("(8,9) Nimi: RED, ALAS", haamu.toString());
+        assertEquals("(9,8) Nimi: RED, ALAS", haamu.toString());
     }
 
     @Test
@@ -56,27 +56,26 @@ public class HaamuTest {
         haamu.liiku();
         assertEquals("(9,9) Nimi: RED, ALAS", haamu.toString());
         assertEquals(true, alusta.getPeliruutu(9, 9).getOnkoHaamu());
-        assertEquals(false, alusta.getPeliruutu(8, 9).getOnkoHaamu());
+        assertEquals(false, alusta.getPeliruutu(9, 8).getOnkoHaamu());
     }
 
     @Test
     public void haamuLiikkuuOikeinYlos() {
         haamu.setAlkuSuunta(Suunta.YLOS);
         haamu.liiku();
-        assertEquals("(7,9) Nimi: RED, YLOS", haamu.toString());
-        assertEquals(true, alusta.getPeliruutu(7, 9).getOnkoHaamu());
-        assertEquals(false, alusta.getPeliruutu(8, 9).getOnkoHaamu());
+        assertEquals("(9,7) Nimi: RED, YLOS", haamu.toString());
+        assertEquals(true, alusta.getPeliruutu(9, 7).getOnkoHaamu());
+        assertEquals(false, alusta.getPeliruutu(9, 8).getOnkoHaamu());
     }
-//
 
     @Test
     public void haamuLiikkuuOikeinOikealla() {
         haamu.setY(7);
         haamu.setAlkuSuunta(Suunta.OIKEA);
         haamu.liiku();
-        assertEquals("(7,10) Nimi: RED, OIKEA", haamu.toString());
-        assertEquals(true, alusta.getPeliruutu(7, 10).getOnkoHaamu());
-        assertEquals(false, alusta.getPeliruutu(7, 9).getOnkoHaamu());
+        assertEquals("(10,7) Nimi: RED, OIKEA", haamu.toString());
+        assertEquals(true, alusta.getPeliruutu(10, 7).getOnkoHaamu());
+        assertEquals(false, alusta.getPeliruutu(9, 7).getOnkoHaamu());
     }
 
     @Test
@@ -84,8 +83,8 @@ public class HaamuTest {
         haamu.setY(7);
         haamu.setAlkuSuunta(Suunta.VASEN);
         haamu.liiku();
-        assertEquals("(7,8) Nimi: RED, VASEN" , haamu.toString());
-        assertEquals(true, alusta.getPeliruutu(7, 8).getOnkoHaamu());
-        assertEquals(false, alusta.getPeliruutu(7, 9).getOnkoHaamu());
+        assertEquals("(8,7) Nimi: RED, VASEN" , haamu.toString());
+        assertEquals(true, alusta.getPeliruutu(8,7).getOnkoHaamu());
+        assertEquals(false, alusta.getPeliruutu(9,7).getOnkoHaamu());
     }
 }

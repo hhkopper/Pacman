@@ -10,10 +10,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import pacman.hahmot.Suunta;
 import pacman.alusta.Pelialusta;
 import pacman.hahmot.Haamu;
 import pacman.hahmot.Man;
+import pacman.hahmot.Suunta;
 
 /**
  *
@@ -39,7 +39,7 @@ public class ManTest {
     public void setUp() throws Exception {
         alusta = new Pelialusta(19, 21);
         alusta.luoPelialusta();
-        man = new Man(11, 9, Suunta.ALAS, alusta);
+        man = new Man(9, 11, Suunta.ALAS, alusta);
     }
 
     @After
@@ -48,14 +48,16 @@ public class ManTest {
 
     @Test
     public void manLuodaanOikein() {
-        assertEquals("11,9", man.toString());
+        assertEquals("9,11", man.toString());
     }
 
     @Test
     public void manEiLiikuAlasSeinanLapi() {
         man.luoManAlustalle();
         man.liiku();
-        assertEquals("11,9", man.toString());
+        assertEquals("9,11", man.toString());
+        assertEquals(true, alusta.getPeliruutu(9, 11).getOnkoMan());
+        assertEquals(false, alusta.getPeliruutu(9, 12).getOnkoMan());
     }
 
     @Test
@@ -63,16 +65,31 @@ public class ManTest {
         man.setSuunta(Suunta.YLOS);
         man.luoManAlustalle();
         man.liiku();
-        assertEquals("11,9", man.toString());
+        assertEquals("9,11", man.toString());
     }
 
+    @Test
+    public void manEiLiikuVasenSeinanLapi() {
+        man = new Man(6, 11, Suunta.VASEN, alusta);
+        man.liiku();
+        assertEquals("6,11", man.toString());
+    }
+
+    @Test
+    public void manEiLiikuOikeaSeinanLapi() {
+        man = new Man(12, 11, Suunta.OIKEA, alusta);
+        man.liiku();
+        assertEquals("12,11", man.toString());
+    }
 
     @Test
     public void manLiikkuuOikeinVasen() {
         man.setSuunta(Suunta.VASEN);
         man.luoManAlustalle();
         man.liiku();
-        assertEquals("11,8", man.toString());
+        assertEquals("8,11", man.toString());
+        assertEquals(true, alusta.getPeliruutu(8,11).getOnkoMan());
+        assertEquals(false, alusta.getPeliruutu(9, 11).getOnkoMan());
     }
 
     @Test
@@ -80,7 +97,7 @@ public class ManTest {
         man.setSuunta(Suunta.OIKEA);
         man.luoManAlustalle();
         man.liiku();
-        assertEquals("11,10", man.toString());
+        assertEquals("10,11", man.toString());
     }
 //
 ////    @Test

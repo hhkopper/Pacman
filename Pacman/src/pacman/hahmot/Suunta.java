@@ -2,15 +2,15 @@ package pacman.hahmot;
 
 public enum Suunta {
 
-    YLOS(-1, 0), 
-    OIKEA(0, 1), 
-    ALAS(1, 0), 
-    VASEN(0, -1);
+    YLOS(0, -1), 
+    OIKEA(1, 0), 
+    ALAS(0, 1), 
+    VASEN(-1, 0);
     
     private int x;
     private int y;
 
-    private Suunta(int y, int x) {
+    private Suunta(int x, int y) {
         this.x = x;
         this.y = y;
     }
