@@ -27,6 +27,10 @@ public class Man {
     public void luoManAlustalle() {
         alusta.getPeliruutu(x,y).setOnkoMan(true);
     }
+    
+    public Suunta getSuunta() {
+        return this.suunta;
+    }
 
     public void setSuunta(Suunta suunta) {
         this.suunta = suunta;
@@ -50,6 +54,10 @@ public class Man {
 
     public int getElamat() {
         return elamat;
+    }
+    
+    public void vahennaElama() {
+        this.elamat = this.elamat--;
     }
 
     public void liiku() {
@@ -75,8 +83,8 @@ public class Man {
 
     public void palaaAlkuun() {
         alusta.getPeliruutu(x,y).setOnkoMan(false);
-        this.x = 11;
-        this.y = 9;
+        this.x = 9;
+        this.y = 11;
         alusta.getPeliruutu(x,y).setOnkoMan(true);
         elamat--;
     }

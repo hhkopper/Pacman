@@ -12,7 +12,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
 
     public Piirtoalusta(Pacman peli) {
         this.peli = peli;
-        this.ruudunSivu = 38;
+        this.ruudunSivu = 30;
         super.setBackground(Color.BLACK);
     }
 
@@ -23,28 +23,32 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         g.fillOval(peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
 
         g.setColor(Color.BLUE);
-        
         for (int i = 0; i < peli.getAlusta().getKorkeus(); i++) {
             for (int j = 0; j < peli.getAlusta().getLeveys(); j++) {
-                if(peli.getAlusta().getPeliruutu(j, i).getRuudunTyyppi() == 0) {
-                    g.fillRect(peli.getAlusta().getPeliruutu(j,i).getX() * this.ruudunSivu, peli.getAlusta().getPeliruutu(j,i).getY() * this.ruudunSivu, 
+                if (peli.getAlusta().getPeliruutu(j, i).getRuudunTyyppi() == 0) {
+                    g.fillRect(peli.getAlusta().getPeliruutu(j, i).getX() * this.ruudunSivu, peli.getAlusta().getPeliruutu(j, i).getY() * this.ruudunSivu,
                             this.ruudunSivu, this.ruudunSivu);
+                } else if (peli.getAlusta().getPeliruutu(j, i).getOnkoPistepallo()) {
+                    g.fillOval(j * this.ruudunSivu, i * this.ruudunSivu, this.ruudunSivu / 2, this.ruudunSivu / 2);                    
                 }
             }
         }
-        
-        g.setColor(Color.CYAN);
-        g.fillOval(peli.getHaamuLista().get(0).getX()*this.ruudunSivu, peli.getHaamuLista().get(0).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
-        g.setColor(Color.MAGENTA);
-        g.fillOval(peli.getHaamuLista().get(1).getX()*this.ruudunSivu, peli.getHaamuLista().get(1).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
-        g.setColor(Color.GREEN);
-        g.fillOval(peli.getHaamuLista().get(2).getX()*this.ruudunSivu, peli.getHaamuLista().get(2).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
-        g.setColor(Color.RED);
-        g.fillOval(peli.getHaamuLista().get(3).getX()*this.ruudunSivu, peli.getHaamuLista().get(3).getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        varitaHaamut(g);
     }
 
     @Override
     public void paivita() {
         repaint();
+    }
+
+    public void varitaHaamut(Graphics g) {
+        g.setColor(Color.CYAN);
+        g.fillOval(peli.getHaamuLista().get(0).getX() * this.ruudunSivu, peli.getHaamuLista().get(0).getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.setColor(Color.MAGENTA);
+        g.fillOval(peli.getHaamuLista().get(1).getX() * this.ruudunSivu, peli.getHaamuLista().get(1).getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.setColor(Color.GREEN);
+        g.fillOval(peli.getHaamuLista().get(2).getX() * this.ruudunSivu, peli.getHaamuLista().get(2).getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.setColor(Color.RED);
+        g.fillOval(peli.getHaamuLista().get(3).getX() * this.ruudunSivu, peli.getHaamuLista().get(3).getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
     }
 }

@@ -40,6 +40,7 @@ public class ManTest {
         alusta = new Pelialusta(19, 21);
         alusta.luoPelialusta();
         man = new Man(9, 11, Suunta.ALAS, alusta);
+        man.luoManAlustalle();
     }
 
     @After
@@ -53,7 +54,6 @@ public class ManTest {
 
     @Test
     public void manEiLiikuAlasSeinanLapi() {
-        man.luoManAlustalle();
         man.liiku();
         assertEquals("9,11", man.toString());
         assertEquals(true, alusta.getPeliruutu(9, 11).getOnkoMan());
@@ -63,7 +63,6 @@ public class ManTest {
     @Test
     public void manEiLiikuYlosSeinanLapi() {
         man.setSuunta(Suunta.YLOS);
-        man.luoManAlustalle();
         man.liiku();
         assertEquals("9,11", man.toString());
     }
@@ -85,7 +84,6 @@ public class ManTest {
     @Test
     public void manLiikkuuOikeinVasen() {
         man.setSuunta(Suunta.VASEN);
-        man.luoManAlustalle();
         man.liiku();
         assertEquals("8,11", man.toString());
         assertEquals(true, alusta.getPeliruutu(8,11).getOnkoMan());
@@ -95,9 +93,28 @@ public class ManTest {
     @Test
     public void manLiikkuuOikeinOikea() {
         man.setSuunta(Suunta.OIKEA);
-        man.luoManAlustalle();
         man.liiku();
         assertEquals("10,11", man.toString());
+        assertEquals(true, alusta.getPeliruutu(10, 11).getOnkoMan());
+        assertEquals(false, alusta.getPeliruutu(9, 11).getOnkoMan());
+    }
+    
+    @Test
+    public void manLiikkuuOikeinAlas(){
+        man = new Man(6, 11, Suunta.ALAS, alusta);
+        man.liiku();
+        assertEquals("6,12", man.toString());
+        assertEquals(true, alusta.getPeliruutu(6, 12).getOnkoMan());
+        assertEquals(false, alusta.getPeliruutu(6, 11).getOnkoMan());        
+    }
+    
+    @Test
+    public void manLiikkuuOikeinYlos() {
+        man = new Man(6, 11, Suunta.YLOS, alusta);
+        man.liiku();
+        assertEquals("6,10", man.toString());
+        assertEquals(true, alusta.getPeliruutu(6, 10).getOnkoMan());
+        assertEquals(false, alusta.getPeliruutu(6, 11).getOnkoMan());
     }
 //
 ////    @Test

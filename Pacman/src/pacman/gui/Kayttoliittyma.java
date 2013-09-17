@@ -30,7 +30,7 @@ public class Kayttoliittyma implements Runnable {
     
     public void luoKomponentit(Container container) {
         container.add(piirtoalusta);
-        frame.addKeyListener(new Nappaimistonkuuntelija(this.peli.getMan()));
+        frame.addKeyListener(new Nappaimistonkuuntelija(this.peli.getMan(),peli));
     }
     
     public JFrame getFrame() {

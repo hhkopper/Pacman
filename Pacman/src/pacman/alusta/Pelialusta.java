@@ -20,21 +20,20 @@ public class Pelialusta {
         this.kor = kor;
         this.lev = lev;
         this.pelialusta = new Peliruutu[kor][lev];
-        
+
 //        korkeus tulee olla 21 ja leveys 19, ei vielä kovakoodata
     }
 
-    public void apu(){
-        System.out.println(pelialusta.length);
-        System.out.println(pelialusta[0].length);
-    }
-    
     public int getLeveys() {
         return this.lev;
     }
 
     public int getKorkeus() {
         return this.kor;
+    }
+
+    public Peliruutu getPeliruutu(int i, int j) {
+        return this.pelialusta[j][i];
     }
 
     public void luoPelialusta() throws Exception {
@@ -59,6 +58,11 @@ public class Pelialusta {
             for (int i = 0; i < 19; i++) {
                 if (lukija.nextInt() == 0) {
                     this.pelialusta[luku][i].setRuudunTyyppi(0);
+                } else {
+                    if (!tarkistaEtteiHaamujenKarsinassa(i, luku)) {
+                        this.pelialusta[luku][i].setOnkoPistepallo(true);
+                        Pistepallo pallo = new Pistepallo(i, luku);
+                    }
                 }
             }
             luku++;
@@ -66,15 +70,11 @@ public class Pelialusta {
         lukija.close();
     }
 
-    public boolean tarkistaEtteiHaamujenKarsinassa(int luku, int i) {
-        if (luku == 9 && i == 8 || luku == 9 && i == 9 || luku == 9 && i == 10 || luku == 8 && i == 9) {
+    public boolean tarkistaEtteiHaamujenKarsinassa(int x, int y) {
+        if (x == 8 && y == 9 || x == 9 && y == 9 || x == 10 && y == 9 || x == 9 && y == 8) {
             return true;
         }
         return false;
-    }
-
-    public Peliruutu getPeliruutu(int i, int j) {
-        return this.pelialusta[j][i];
     }
 
     public String toString() {

@@ -42,7 +42,7 @@ public class Haamu {
         return this.nimi;
     }
 
-    public void setAlkuSuunta(Suunta uusiSuunta) {
+    public void setSuunta(Suunta uusiSuunta) {
         this.suunta = uusiSuunta;
     }
 
