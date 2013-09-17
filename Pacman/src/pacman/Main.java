@@ -13,24 +13,25 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         
-        Pacman pacman = new Pacman();
-        Kayttoliittyma kayttis = new Kayttoliittyma(pacman);
-        
-        SwingUtilities.invokeLater(kayttis);
+//        Pacman pacman = new Pacman();
+//        Kayttoliittyma kayttis = new Kayttoliittyma(pacman);
+//        
+//        SwingUtilities.invokeLater(kayttis);
+//
+//        while (kayttis.getPaivitettava() == null) {
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException ex) {
+//                System.out.println("Piirtoalustaa ei ole vielä luotu.");
+//            }
+//        }
+//
+//        pacman.setPaivitettava(kayttis.getPaivitettava());
+//        pacman.start();
 
-        while (kayttis.getPaivitettava() == null) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                System.out.println("Piirtoalustaa ei ole vielä luotu.");
-            }
-        }
-
-        pacman.setPaivitettava(kayttis.getPaivitettava());
-        pacman.start();
-
-//        Pelialusta alusta = new Pelialusta(21, 19);
-//        alusta.luoPelialusta();
+        Pelialusta alusta = new Pelialusta(19,21);
+//        alusta.apu();
+        alusta.luoPelialusta();
 //        
 //        Haamu haamu = new Haamu(8,9,Suunta.OIKEA,"RED", alusta);
 //        System.out.println(haamu);
@@ -60,12 +61,12 @@ public class Main {
 //        System.out.println(haamu);
 //        alusta.rakennaSeinatJaLuoPisteet();
 //
-//        for (int i = 0; i < alusta.getKorkeus(); i++) {
-//            for (int j = 0; j < alusta.getLeveys(); j++) {
-//                System.out.print(alusta.getPeliruutu(i, j).getRuudunTyyppi());
-//            }
-//            System.out.println("");
-//        }
+        for (int i = 0; i < alusta.getKorkeus(); i++) {
+            for (int j = 0; j < alusta.getLeveys(); j++) {
+                System.out.print(alusta.getPeliruutu(i, j).getRuudunTyyppi());
+            }
+            System.out.println("");
+        }
 //        
 //        Man pacman = new Man(11,9, Suunta.OIKEA, alusta);
 //        pacman.luoManAlustalle();

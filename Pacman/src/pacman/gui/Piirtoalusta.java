@@ -20,7 +20,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.YELLOW);
-        g.fillOval(peli.getMan().getX()*this.ruudunSivu, peli.getMan().getY()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.fillOval(peli.getMan().getY()*this.ruudunSivu, peli.getMan().getX()*this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
     }
 
     @Override

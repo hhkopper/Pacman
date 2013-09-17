@@ -37,7 +37,7 @@ public class ManTest {
 
     @Before
     public void setUp() throws Exception {
-        alusta = new Pelialusta(21,19);
+        alusta = new Pelialusta(19, 21);
         alusta.luoPelialusta();
         man = new Man(11, 9, Suunta.ALAS, alusta);
     }
@@ -66,6 +66,7 @@ public class ManTest {
         assertEquals("11,9", man.toString());
     }
 
+
     @Test
     public void manLiikkuuOikeinVasen() {
         man.setSuunta(Suunta.VASEN);
@@ -81,22 +82,22 @@ public class ManTest {
         man.liiku();
         assertEquals("11,10", man.toString());
     }
-
-//    @Test
-//    public void manOsuukoSeinaanOikein() {
-//        man.setSuunta(Suunta.OIKEA);
-//        alusta.getPeliruutu(2, 3).setRuudunTyyppi(0);
-//        man.luoManAlustalle();
-//        man.liiku();
-//        assertEquals("2,2", man.toString());
-//    }
-
-//    @Test
-//    public void kuoleekoMan() {
-//        man.luoManAlustalle();
-//        Haamu haamu = new Haamu(2, 2, Suunta.OIKEA, "punainen");
-//        haamu.luoHaamuAlustalle(alusta);
 //
-//        assertEquals(true, man.tarkistaKuoleeko());
-//    }
+////    @Test
+////    public void manOsuukoSeinaanOikein() {
+////        man.setSuunta(Suunta.OIKEA);
+////        alusta.getPeliruutu(2, 3).setRuudunTyyppi(0);
+////        man.luoManAlustalle();
+////        man.liiku();
+////        assertEquals("2,2", man.toString());
+////    }
+//
+////    @Test
+////    public void kuoleekoMan() {
+////        man.luoManAlustalle();
+////        Haamu haamu = new Haamu(2, 2, Suunta.OIKEA, "punainen");
+////        haamu.luoHaamuAlustalle(alusta);
+////
+////        assertEquals(true, man.tarkistaKuoleeko());
+////    }
 }

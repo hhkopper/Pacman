@@ -27,7 +27,7 @@ public class Pacman extends Timer implements ActionListener {
         super(1000, null);
         alusta = new Pelialusta(21,19);
         alusta.luoPelialusta();
-        pacman = new Man(9, 11, Suunta.OIKEA, alusta);
+        pacman = new Man(11,9, Suunta.OIKEA, alusta);
         pacman.luoManAlustalle();
         haamut = new ArrayList<Haamu>();
         laskuri = new Pistelaskuri();

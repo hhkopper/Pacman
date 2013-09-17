@@ -10,34 +10,34 @@ import pacman.komponentit.Hedelma;
 
 public class Man {
 
-    private int x;
     private int y;
+    private int x;
     private Suunta suunta;
     private Pelialusta alusta;
     private int elamat;
 
-    public Man(int alkuX, int alkuY, Suunta alkuSuunta, Pelialusta alusta) {
-        this.x = alkuX;
-        this.y = alkuY;
+    public Man(int y, int x, Suunta alkuSuunta, Pelialusta alusta) {
+        this.y = y;
+        this.x = x;
         this.suunta = alkuSuunta;
         this.alusta = alusta;
         elamat = 3;
     }
 
     public void luoManAlustalle() {
-        alusta.getPeliruutu(x, y).setOnkoMan(true);
+        alusta.getPeliruutu(y,x).setOnkoMan(true);
     }
 
     public void setSuunta(Suunta suunta) {
         this.suunta = suunta;
     }
 
-    public int getX() {
-        return this.x;
-    }
-    
     public int getY() {
         return this.y;
+    }
+
+    public int getX() {
+        return this.x;
     }
 
     public int getElamat() {
@@ -45,45 +45,20 @@ public class Man {
     }
 
     public void liiku() {
+        this.x = this.x + this.suunta.getX();
+        this.y = this.y + this.suunta.getY();
 
-        if (this.suunta == Suunta.OIKEA) {
-            this.y = this.y + 1;
-            if (osuukoSeinaan()) {
-                this.y--;
-                return;
-            }
-            alusta.getPeliruutu(x, y - 1).setOnkoMan(false);
-
-        } else if (this.suunta == Suunta.VASEN) {
-            this.y = this.y - 1;
-            if (osuukoSeinaan()) {
-                this.y++;
-                return;
-            }
-            alusta.getPeliruutu(x, y + 1).setOnkoMan(false);
-
-        } else if (this.suunta == Suunta.ALAS) {
-            this.x = this.x + 1;
-            if (osuukoSeinaan()) {
-                this.x--;
-                return;
-            }
-            alusta.getPeliruutu(x - 1, y).setOnkoMan(false);
-
-        } else if (this.suunta == Suunta.YLOS) {
-            this.x = this.x - 1;
-            if (osuukoSeinaan()) {
-                this.x++;
-                return;
-            }
-            alusta.getPeliruutu(x + 1, y).setOnkoMan(false);
+        if (osuukoSeinaan()) {
+            this.x = this.x - this.suunta.getX();
+            this.y = this.y - this.suunta.getY();
+        } else {
+            alusta.getPeliruutu(y,x).setOnkoMan(true);
+            alusta.getPeliruutu(y - suunta.getY(),x - suunta.getX()).setOnkoMan(false);
         }
-
-        alusta.getPeliruutu(x, y).setOnkoMan(true);
     }
-
+    
     public boolean osuukoSeinaan() {
-        Peliruutu ruutu = alusta.getPeliruutu(x, y);
+        Peliruutu ruutu = alusta.getPeliruutu(y,x);
         if (ruutu.getRuudunTyyppi() == 0) {
             return true;
         }
@@ -91,19 +66,19 @@ public class Man {
     }
 
     public void palaaAlkuun() {
-        alusta.getPeliruutu(x, y).setOnkoMan(false);
-        this.x = 11;
-        this.y = 9;
-        alusta.getPeliruutu(x, y).setOnkoMan(true);
+        alusta.getPeliruutu(y,x).setOnkoMan(false);
+        this.y = 11;
+        this.x = 9;
+        alusta.getPeliruutu(y,x).setOnkoMan(true);
         elamat--;
     }
 
     public String toString() {
-        return this.x + "," + this.y;
+        return this.y + "," + this.x;
     }
-    
+
     public boolean osuuHedelmaan(Hedelma hedelma) {
-        if(this.x == hedelma.getX() && this.y == hedelma.getY()) {
+        if (this.x == hedelma.getX() && this.y == hedelma.getY()) {
             return true;
         } else {
             return false;

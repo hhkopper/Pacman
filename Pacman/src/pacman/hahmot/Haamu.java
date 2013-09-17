@@ -59,7 +59,7 @@ public class Haamu {
     }
 
     public void luoHaamuAlustalle() {
-        alusta.getPeliruutu(y, x).setOnkoHaamu(true);
+        alusta.getPeliruutu(y,x).setOnkoHaamu(true);
     }
 
     /**
@@ -84,7 +84,7 @@ public class Haamu {
         this.y = this.y + suunta.getY();
         this.x = this.x + suunta.getX();
         alusta.getPeliruutu(y, x).setOnkoHaamu(true);
-        alusta.getPeliruutu(y-suunta.getY(), x-suunta.getX()).setOnkoHaamu(false);
+        alusta.getPeliruutu(y - suunta.getY(), x - suunta.getX()).setOnkoHaamu(false);
     }
 
     public void arvoUusiSuunta() {

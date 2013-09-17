@@ -6,33 +6,40 @@ import java.awt.Graphics;
 import java.io.File;
 import java.util.Scanner;
 import javax.swing.JPanel;
+import org.omg.CORBA.INTERNAL;
 import pacman.peli.Pacman;
 import pacman.komponentit.Pistepallo;
 
 public class Pelialusta {
 
     private Peliruutu[][] pelialusta;
-    private int korkeus;
-    private int leveys;
+    private int kor;
+    private int lev;
 
-    public Pelialusta(int korkeus, int leveys) {
-        this.korkeus = korkeus;
-        this.leveys = leveys;
-        this.pelialusta = new Peliruutu[korkeus][leveys];
+    public Pelialusta(int lev, int kor) {
+        this.kor = kor;
+        this.lev = lev;
+        this.pelialusta = new Peliruutu[kor][lev];
+        
 //        korkeus tulee olla 21 ja leveys 19, ei vielä kovakoodata
     }
 
+    public void apu(){
+        System.out.println(pelialusta.length);
+        System.out.println(pelialusta[0].length);
+    }
+    
     public int getLeveys() {
-        return this.leveys;
+        return this.lev;
     }
 
     public int getKorkeus() {
-        return this.korkeus;
+        return this.kor;
     }
 
     public void luoPelialusta() throws Exception {
-        for (int i = 0; i <= korkeus - 1; i++) {
-            for (int j = 0; j <= leveys - 1; j++) {
+        for (int i = 0; i <= kor - 1; i++) {
+            for (int j = 0; j <= lev - 1; j++) {
                 this.pelialusta[i][j] = new Peliruutu(i, j);
                 this.pelialusta[i][j].setRuudunTyyppi(1);
                 this.pelialusta[i][j].setOnkoMan(false);
@@ -77,6 +84,6 @@ public class Pelialusta {
     }
 
     public String toString() {
-        return "Korkeus:" + this.korkeus + ", leveys:" + this.leveys;
+        return "Korkeus:" + this.kor + ", leveys:" + this.lev;
     }
 }
