@@ -73,7 +73,10 @@ public class Haamu {
     public void liiku() {
         if (alusta.getPeliruutu(x + this.suunta.getX(), y + this.suunta.getY()).getRuudunTyyppi() == 0) {
             arvoUusiSuunta();
-            liiku();
+            liikuSuunta();
+        } else if (katsoVoikoLiikkuaSivuille()) {
+            arvoUusiSuunta();
+            liikuSuunta();
         } else {
             liikuSuunta();
         }
@@ -110,13 +113,30 @@ public class Haamu {
     }
 
     public void palaaAlkuun() {
-        alusta.getPeliruutu(x,y).setOnkoHaamu(false);
+        alusta.getPeliruutu(x, y).setOnkoHaamu(false);
         this.y = 9;
         this.x = 9;
-        alusta.getPeliruutu(x,y).setOnkoHaamu(true);
+        alusta.getPeliruutu(x, y).setOnkoHaamu(true);
     }
 
     public String toString() {
         return "(" + this.x + "," + this.y + ") Nimi: " + this.nimi + ", " + this.suunta;
+    }
+
+    public boolean katsoVoikoLiikkuaSivuille() {
+        if (suunta == Suunta.VASEN || suunta == Suunta.OIKEA) {
+            if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 1) {
+                return true;
+            }
+        } else if (suunta == Suunta.ALAS || suunta == Suunta.YLOS) {
+            if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 1) {
+                return true;
+            }
+        }
+
+        return false;
+
+
+
     }
 }

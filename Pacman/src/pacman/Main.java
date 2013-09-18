@@ -2,10 +2,10 @@ package pacman;
 
 import javax.swing.SwingUtilities;
 import pacman.hahmot.Man;
-import pacman.hahmot.Suunta;
 import pacman.gui.Kayttoliittyma;
 import pacman.alusta.Pelialusta;
 import pacman.hahmot.Haamu;
+import pacman.hahmot.Suunta;
 import pacman.komponentit.Extrapistepallo;
 import pacman.peli.Pacman;
 
@@ -21,7 +21,7 @@ public class Main {
 
         while (kayttis.getPaivitettava() == null) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(0,5);
             } catch (InterruptedException ex) {
                 System.out.println("Piirtoalustaa ei ole vielä luotu.");
             }
@@ -32,6 +32,12 @@ public class Main {
 
 //        Pelialusta alusta = new Pelialusta(19,21);
 //        alusta.luoPelialusta();
+//        
+//        Haamu haamu = new Haamu(10, 9, Suunta.VASEN, "kaipio", alusta);
+//        haamu.liiku();
+//        System.out.println(haamu);
+//        haamu.liiku();
+//        System.out.println(haamu);
 //        
 //
 //        for (int i = 0; i < alusta.getKorkeus(); i++) {

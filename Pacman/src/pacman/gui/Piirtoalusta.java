@@ -29,7 +29,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
                     g.fillRect(peli.getAlusta().getPeliruutu(j, i).getX() * this.ruudunSivu, peli.getAlusta().getPeliruutu(j, i).getY() * this.ruudunSivu,
                             this.ruudunSivu, this.ruudunSivu);
                 } else if (peli.getAlusta().getPeliruutu(j, i).getOnkoPistepallo()) {
-                    g.fillOval(j * this.ruudunSivu, i * this.ruudunSivu, this.ruudunSivu / 2, this.ruudunSivu / 2);                    
+                    g.fillOval(j * this.ruudunSivu, i * this.ruudunSivu, this.ruudunSivu / 2, this.ruudunSivu / 2);
                 }
             }
         }

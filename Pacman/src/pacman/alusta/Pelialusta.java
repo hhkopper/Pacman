@@ -59,7 +59,7 @@ public class Pelialusta {
                 if (lukija.nextInt() == 0) {
                     this.pelialusta[luku][i].setRuudunTyyppi(0);
                 } else {
-                    if (!tarkistaEtteiHaamujenKarsinassa(i, luku)) {
+                    if (!tarkistaEtteiHaamujenKarsinassa(i, luku) && !tarkistaEttaOikeastiKaytavallaJaEiManinLahto(i, luku)) {
                         this.pelialusta[luku][i].setOnkoPistepallo(true);
                         Pistepallo pallo = new Pistepallo(i, luku);
                     }
@@ -75,6 +75,14 @@ public class Pelialusta {
             return true;
         }
         return false;
+    }
+    
+    public boolean tarkistaEttaOikeastiKaytavallaJaEiManinLahto(int x, int y) {
+        if ((y == 7 || y == 11) && (x == 0 || x == 1 || x == 2 || x == 16 || x == 17 || x == 18) || x == 9 && y == 11) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String toString() {
