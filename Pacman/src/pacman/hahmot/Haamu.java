@@ -12,6 +12,7 @@ public class Haamu {
     private String nimi;
     private String tyyppi;
     private Pelialusta alusta;
+    private ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
 
     public Haamu(int x, int y, Suunta suunta, String nimi, Pelialusta alusta) {
         this.y = y;
@@ -48,6 +49,10 @@ public class Haamu {
 
     public Suunta getSuunta() {
         return this.suunta;
+    }
+    
+    public ArrayList<Suunta> getSuuntaLista() {
+        return this.mahdollisetSuunnat;
     }
 
     public void setTyyppi(String tyyppi) {
@@ -92,19 +97,12 @@ public class Haamu {
 
     public void arvoUusiSuunta() {
 
-        ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
+        mahdollisetSuunnat = new ArrayList<Suunta>();
 
-        if (alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 1) {
-            mahdollisetSuunnat.add(Suunta.OIKEA);
-        }
-        if (alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 1) {
-            mahdollisetSuunnat.add(Suunta.ALAS);
-        }
-        if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 1) {
-            mahdollisetSuunnat.add(Suunta.VASEN);
-        }
-        if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 1) {
-            mahdollisetSuunnat.add(Suunta.YLOS);
+        for (Suunta s : Suunta.values()) {
+            if (alusta.getPeliruutu(x + s.getX(), y + s.getY()).getRuudunTyyppi() == 1) {
+                mahdollisetSuunnat.add(s);
+            }
         }
 
         Random arpoja = new Random();

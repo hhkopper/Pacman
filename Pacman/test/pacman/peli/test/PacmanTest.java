@@ -66,4 +66,12 @@ public class PacmanTest {
         
         assertEquals("(9,9) Nimi: RED, YLOS", pacman.getHaamuLista().get(0).toString());
     }
+    
+    @Test
+    public void syokoManPistepallonOikein() {
+        pacman.getMan().liiku();
+        pacman.manSyoPistepallo();
+        assertEquals(false, pacman.getAlusta().getPeliruutu(10, 11).getOnkoPistepallo());
+        assertEquals(10, pacman.getPisteet());
+    }
 }

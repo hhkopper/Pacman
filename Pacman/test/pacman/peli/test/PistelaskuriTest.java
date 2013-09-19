@@ -1,7 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
+package pacman.peli.test;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -9,15 +7,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import pacman.hahmot.Man;
+import pacman.peli.Pistelaskuri;
 
-/**
- *
- * @author hhkopper
- */
-public class PacmanTest {
+public class PistelaskuriTest {
+    private Pistelaskuri laskuri;
     
-    public PacmanTest() {
+    public PistelaskuriTest() {
     }
     
     @BeforeClass
@@ -30,17 +25,17 @@ public class PacmanTest {
     
     @Before
     public void setUp() {
+        laskuri = new Pistelaskuri();
     }
     
     @After
     public void tearDown() {
     }
     
-    
-    
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void kasvattaaPisteitaOikein() {
+        laskuri.kasvata(20);
+        assertEquals(20, laskuri.getPisteet());
+        
+    }
 }

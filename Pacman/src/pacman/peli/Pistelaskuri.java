@@ -4,7 +4,8 @@ public class Pistelaskuri {
 
     private int pisteet;
 
-    Pistelaskuri() {
+    public Pistelaskuri() {
+        pisteet = 0;
     }
 
     public int getPisteet() {
@@ -13,5 +14,5 @@ public class Pistelaskuri {
 
     public void kasvata(int arvo) {
         pisteet = pisteet + arvo;
-    }
+    }    
 }

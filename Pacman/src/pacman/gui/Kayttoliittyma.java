@@ -3,6 +3,7 @@ package pacman.gui;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import pacman.peli.Pacman;
 
@@ -13,14 +14,16 @@ public class Kayttoliittyma implements Runnable {
     
     public Kayttoliittyma(Pacman pacman) {
         this.peli = pacman;
-        this.piirtoalusta = new Piirtoalusta(peli);
+        this.piirtoalusta = new Piirtoalusta(peli, 30);
     }
 
     @Override
     public void run() {
         frame = new JFrame("Pacman");
-        frame.setPreferredSize(new Dimension(722, 798)); // 38 ruudun sivu        
+        frame.setPreferredSize(new Dimension(722, 660)); // 38 ruudun sivu        
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        Pistelaskuri paneeli = new Pistelaskuri(peli, 30);
         
         luoKomponentit(frame.getContentPane());
         

@@ -52,22 +52,29 @@ public class Pelialusta {
     public void rakennaSeinatJaLuoPisteet() throws Exception {
         File tiedosto = new File("Kentta");
         Scanner lukija = new Scanner(tiedosto);
-        int luku = 0;
+        int y = 0;
 
         while (lukija.hasNextLine()) {
-            for (int i = 0; i < 19; i++) {
-                if (lukija.nextInt() == 0) {
-                    this.pelialusta[luku][i].setRuudunTyyppi(0);
-                } else {
-                    if (!tarkistaEtteiHaamujenKarsinassa(i, luku) && !tarkistaEttaOikeastiKaytavallaJaEiManinLahto(i, luku)) {
-                        this.pelialusta[luku][i].setOnkoPistepallo(true);
-                        Pistepallo pallo = new Pistepallo(i, luku);
-                    }
-                }
+            for (int x = 0; x < 19; x++) {
+                asetaSeinatJaPistepallot(lukija, y, x);
             }
-            luku++;
+            y++;
         }
         lukija.close();
+    }
+
+    private void asetaPistepallot(int x, int y) {
+        if (!tarkistaEtteiHaamujenKarsinassa(x, y) && !tarkistaEttaOikeastiKaytavallaJaEiManinLahto(x, y)) {
+            this.pelialusta[y][x].setOnkoPistepallo(true);
+        }
+    }
+
+    private void asetaSeinatJaPistepallot(Scanner lukija, int y, int x) {
+        if (lukija.nextInt() == 0) {
+            this.pelialusta[y][x].setRuudunTyyppi(0);
+        } else {
+            asetaPistepallot(x, y);
+        }
     }
 
     public boolean tarkistaEtteiHaamujenKarsinassa(int x, int y) {
@@ -76,7 +83,7 @@ public class Pelialusta {
         }
         return false;
     }
-    
+
     public boolean tarkistaEttaOikeastiKaytavallaJaEiManinLahto(int x, int y) {
         if ((y == 7 || y == 11) && (x == 0 || x == 1 || x == 2 || x == 16 || x == 17 || x == 18) || x == 9 && y == 11) {
             return true;

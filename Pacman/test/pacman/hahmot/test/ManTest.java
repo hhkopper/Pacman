@@ -116,22 +116,5 @@ public class ManTest {
         assertEquals(true, alusta.getPeliruutu(6, 10).getOnkoMan());
         assertEquals(false, alusta.getPeliruutu(6, 11).getOnkoMan());
     }
-//
-////    @Test
-////    public void manOsuukoSeinaanOikein() {
-////        man.setSuunta(Suunta.OIKEA);
-////        alusta.getPeliruutu(2, 3).setRuudunTyyppi(0);
-////        man.luoManAlustalle();
-////        man.liiku();
-////        assertEquals("2,2", man.toString());
-////    }
-//
-////    @Test
-////    public void kuoleekoMan() {
-////        man.luoManAlustalle();
-////        Haamu haamu = new Haamu(2, 2, Suunta.OIKEA, "punainen");
-////        haamu.luoHaamuAlustalle(alusta);
-////
-////        assertEquals(true, man.tarkistaKuoleeko());
-////    }
+
 }
