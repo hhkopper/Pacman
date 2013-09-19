@@ -13,23 +13,23 @@ import pacman.komponentit.Pistepallo;
 public class Pelialusta {
 
     private Peliruutu[][] pelialusta;
-    private int kor;
-    private int lev;
+    private int korkeus;
+    private int leveys;
 
-    public Pelialusta(int lev, int kor) {
-        this.kor = kor;
-        this.lev = lev;
-        this.pelialusta = new Peliruutu[kor][lev];
+    public Pelialusta(int leveys, int korkeus) {
+        this.korkeus = korkeus;
+        this.leveys = leveys;
+        this.pelialusta = new Peliruutu[korkeus][leveys];
 
 //        korkeus tulee olla 21 ja leveys 19, ei vielä kovakoodata
     }
 
     public int getLeveys() {
-        return this.lev;
+        return this.leveys;
     }
 
     public int getKorkeus() {
-        return this.kor;
+        return this.korkeus;
     }
 
     public Peliruutu getPeliruutu(int i, int j) {
@@ -37,8 +37,8 @@ public class Pelialusta {
     }
 
     public void luoPelialusta() throws Exception {
-        for (int i = 0; i <= kor - 1; i++) {
-            for (int j = 0; j <= lev - 1; j++) {
+        for (int i = 0; i <= korkeus - 1; i++) {
+            for (int j = 0; j <= leveys - 1; j++) {
                 this.pelialusta[i][j] = new Peliruutu(j, i);
                 this.pelialusta[i][j].setRuudunTyyppi(1);
                 this.pelialusta[i][j].setOnkoMan(false);
@@ -93,6 +93,6 @@ public class Pelialusta {
     }
 
     public String toString() {
-        return "Korkeus:" + this.kor + ", leveys:" + this.lev;
+        return "Korkeus:" + this.korkeus + ", leveys:" + this.leveys;
     }
 }

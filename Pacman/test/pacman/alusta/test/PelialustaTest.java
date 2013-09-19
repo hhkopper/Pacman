@@ -42,13 +42,14 @@ public class PelialustaTest {
     
     @Test
     public void alustaLuodaan() {
-        assertEquals("Korkeus:21, leveys:19", alusta.toString());
+        assertEquals(21, alusta.getKorkeus());
+        assertEquals(19, alusta.getLeveys());
     }
     
     @Test
     public void hakeeRuudunOikein() throws Exception {
-        String vastaus = alusta.getPeliruutu(0, 0).toString();
-        assertEquals("(0,0), onko man: false, onko haamu: false, ruuduntyyppi: 0", vastaus);        
+        assertEquals(0, alusta.getPeliruutu(0, 9).getX());
+        assertEquals(9, alusta.getPeliruutu(0, 9).getY());
     }
     
     @Test

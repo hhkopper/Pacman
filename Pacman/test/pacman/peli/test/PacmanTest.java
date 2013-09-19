@@ -44,11 +44,11 @@ public class PacmanTest {
         pacman.getHaamuLista().get(0).setX(9);
         pacman.getHaamuLista().get(0).setY(8);
         pacman.getMan().liiku();
-        pacman.getHaamuLista().get(0).liiku();
-        
+        pacman.getHaamuLista().get(0).liiku();        
         pacman.kuoleekoHaamuTaiMan();
         
-        assertEquals("9,11", pacman.getMan().toString());
+        assertEquals(9, pacman.getMan().getX());
+        assertEquals(11, pacman.getMan().getY());
     }
     
     @Test
@@ -60,11 +60,11 @@ public class PacmanTest {
         pacman.getHaamuLista().get(0).setX(9);
         pacman.getHaamuLista().get(0).setY(8);
         pacman.getMan().liiku();
-        pacman.getHaamuLista().get(0).liiku();
-        
+        pacman.getHaamuLista().get(0).liiku();        
         pacman.kuoleekoHaamuTaiMan();
         
-        assertEquals("(9,9) Nimi: RED, YLOS", pacman.getHaamuLista().get(0).toString());
+        assertEquals(9,pacman.getHaamuLista().get(0).getX());
+        assertEquals(9,pacman.getHaamuLista().get(0).getY());
     }
     
     @Test
