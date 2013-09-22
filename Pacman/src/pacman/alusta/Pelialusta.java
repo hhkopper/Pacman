@@ -43,7 +43,7 @@ public class Pelialusta {
                 this.pelialusta[i][j].setRuudunTyyppi(1);
                 this.pelialusta[i][j].setOnkoMan(false);
                 this.pelialusta[i][j].setOnkoHaamu(false);
-                this.pelialusta[i][j].setOnkoPistepallo(false);
+                this.pelialusta[i][j].setOnkoPallo(false);
             }
         }
         rakennaSeinatJaLuoPisteet();
@@ -64,8 +64,12 @@ public class Pelialusta {
     }
 
     private void asetaPistepallot(int x, int y) {
-        if (!tarkistaEtteiHaamujenKarsinassa(x, y) && !tarkistaEttaOikeastiKaytavallaJaEiManinLahto(x, y)) {
-            this.pelialusta[y][x].setOnkoPistepallo(true);
+        if (x == 1 && y == 5 || x == 17 && y ==5 || x ==1 & y== 13 || x == 17 && y == 13) {
+            this.pelialusta[y][x].setOnkoExtraPallo(true);
+        } else {
+            if (!tarkistaEtteiHaamujenKarsinassa(x, y) && !tarkistaEttaOikeastiKaytavallaJaEiManinLahto(x, y)) {
+                this.pelialusta[y][x].setOnkoPallo(true);
+            }
         }
     }
 

@@ -71,7 +71,7 @@ public class PacmanTest {
     public void syokoManPistepallonOikein() {
         pacman.getMan().liiku();
         pacman.manSyoPistepallo();
-        assertEquals(false, pacman.getAlusta().getPeliruutu(10, 11).getOnkoPistepallo());
-        assertEquals(10, pacman.getPisteet());
+        assertEquals(false, pacman.getAlusta().getPeliruutu(10, 11).getOnkoPallo());
+        assertEquals(20, pacman.getPisteet());
     }
 }

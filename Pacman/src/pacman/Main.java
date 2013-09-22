@@ -32,7 +32,7 @@ public class Main {
 
 //        Pelialusta alusta = new Pelialusta(19,21);
 //        alusta.luoPelialusta();
-//        
+////        
 //        Haamu haamu = new Haamu(10, 9, Suunta.VASEN, "kaipio", alusta);
 //        haamu.liiku();
 //        System.out.println(haamu);

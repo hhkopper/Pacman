@@ -11,7 +11,6 @@ import pacman.gui.Paivitettava;
 import pacman.hahmot.Haamu;
 import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
-import pacman.komponentit.Hedelma;
 
 public class Pacman extends Timer implements ActionListener {
 
@@ -42,15 +41,15 @@ public class Pacman extends Timer implements ActionListener {
     }
 
     public void luoHaamut() {
-        Haamu red = new Haamu(8, 9, Suunta.YLOS, "RED", alusta);
-        Haamu green = new Haamu(9, 9, Suunta.YLOS, "GREEN", alusta);
-        Haamu blue = new Haamu(10, 9, Suunta.YLOS, "BLUE", alusta);
-        Haamu orange = new Haamu(9, 8, Suunta.YLOS, "ORANGE", alusta);
+        Haamu red = new Haamu(8, 9, Suunta.YLOS,"red", alusta);
+        Haamu green = new Haamu(9, 9, Suunta.YLOS,"green", alusta);
+        Haamu cyan = new Haamu(10, 9, Suunta.YLOS,"cyan", alusta);
+        Haamu magenta = new Haamu(9, 8, Suunta.YLOS,"magenta", alusta);
 
         haamut.add(red);
         haamut.add(green);
-        haamut.add(blue);
-        haamut.add(orange);
+        haamut.add(cyan);
+        haamut.add(magenta);
     }
 
     public Man getMan() {
@@ -59,6 +58,10 @@ public class Pacman extends Timer implements ActionListener {
 
     public Pelialusta getAlusta() {
         return this.alusta;
+    }
+
+    public Pistelaskuri getLaskuri() {
+        return this.laskuri;
     }
 
     public ArrayList<Haamu> getHaamuLista() {
@@ -70,16 +73,26 @@ public class Pacman extends Timer implements ActionListener {
     }
 
     public void manSyoPistepallo() {
-        if (alusta.getPeliruutu(man.getX(), man.getY()).getOnkoPistepallo()) {
-            alusta.getPeliruutu(man.getX(), man.getY()).setOnkoPistepallo(false);
-            laskuri.kasvata(10);
+        if (alusta.getPeliruutu(man.getX(), man.getY()).getOnkoPallo()) {
+            alusta.getPeliruutu(man.getX(), man.getY()).setOnkoPallo(false);
+            laskuri.kasvata(20);
+        } else if (alusta.getPeliruutu(man.getX(), man.getY()).getOnkoExtraPallo()) {
+            alusta.getPeliruutu(man.getX(), man.getY()).setOnkoExtraPallo(false);
+            laskuri.kasvata(50);
+            heikennaHaamut();
+        }
+    }
+
+    public void heikennaHaamut() {
+        for (Haamu haamu : haamut) {
+            haamu.setTyyppi("heikko");
         }
     }
 
     public void asetaSeina() {
         for (int y = 8; y < 11; y++) {
             for (int x = 8; x < 11; x++) {
-                if (alusta.getPeliruutu(x, y).getOnkoHaamu()) {
+                if (alusta.getPeliruutu(x, y).getOnkoHaamu() || alusta.getPeliruutu(x, y).getOnkoMan()) {
                     alusta.getPeliruutu(9, 8).setRuudunTyyppi(1);
                     return;
                 }
@@ -93,7 +106,8 @@ public class Pacman extends Timer implements ActionListener {
             if (alusta.getPeliruutu(haamu.getX(), haamu.getY()).getOnkoMan()) {
                 if (haamu.getTyyppi().equals("heikko")) {
                     haamu.palaaAlkuun();
-                    laskuri.kasvata(200);
+                    haamu.setTyyppi("vahva");
+                    laskuri.kasvata(80);
                 } else {
                     man.palaaAlkuun();
                     man.vahennaElama();
@@ -106,42 +120,36 @@ public class Pacman extends Timer implements ActionListener {
         return this.hedelmanPaikka;
     }
 
-//    public void arvoHedelma() {
-//
-//
-//        while (true) {
-//            if (manOsuuHedelmaan()) {
-//                alusta.getPeliruutu(man.getX(), man.getY()).setOnkoHedelma(false);
-//                etsiHedelmanPaikat();
-//                int luku = arpoja.nextInt(this.hedelmanPaikat.size());
-//                this.hedelmanPaikka = this.hedelmanPaikat.get(luku);
-//                this.hedelmanPaikat.get(luku).setOnkoHedelma(true);
-//            } else {
-//                break;
-//            }
-//        }
-//
-//
-//    }
-//
-//    private void etsiHedelmanPaikat() {
-//        for (int y = 0; y < alusta.getKorkeus(); y++) {
-//            for (int x = 0; x < alusta.getLeveys(); x++) {
-//                if (onkoHedelmanpaikka(x, y)) {
-//                    Peliruutu ruutu = new Peliruutu(x, y);
-//                    this.hedelmanPaikat.add(ruutu);
-//                }
-//            }
-//        }
-//    }
-//
-//    public boolean manOsuuHedelmaan() {
-//        if (man.getX() == this.hedelmanPaikka.getX() && man.getY() == this.hedelmanPaikka.getY()) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    public void arvoHedelma() {
+        etsiHedelmanPaikat();
+        int luku = arpoja.nextInt(this.hedelmanPaikat.size());
+        this.hedelmanPaikka = this.hedelmanPaikat.get(luku);
+        this.hedelmanPaikka.setOnkoHedelma(true);
+    }
+
+    private void etsiHedelmanPaikat() {
+        for (int y = 0; y < alusta.getKorkeus(); y++) {
+            for (int x = 0; x < alusta.getLeveys(); x++) {
+                if (onkoHedelmanpaikka(x, y)) {
+                    Peliruutu ruutu = new Peliruutu(x, y);
+                    this.hedelmanPaikat.add(ruutu);
+                }
+            }
+        }
+    }
+
+    public boolean manOsuuHedelmaan() {
+        if (man.getX() == this.hedelmanPaikka.getX() && man.getY() == this.hedelmanPaikka.getY()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean onkoHedelmanpaikka(int x, int y) {
+        return alusta.getPeliruutu(x, y).getRuudunTyyppi() == 1 && !alusta.tarkistaEttaOikeastiKaytavallaJaEiManinLahto(x, y) && !alusta.tarkistaEtteiHaamujenKarsinassa(x, y)
+                && !alusta.getPeliruutu(x, y).getOnkoPallo();
+    }
 
     public void setPaivitettava(Paivitettava paivitettava) {
         this.paivitettava = paivitettava;
@@ -150,32 +158,42 @@ public class Pacman extends Timer implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         for (Haamu haamu : haamut) {
-            haamu.setTyyppi("heikko");
-        }
-        for (Haamu haamu : haamut) {
             haamu.liiku();
         }
         kuoleekoHaamuTaiMan();
         this.man.liiku();
         manSyoPistepallo();
         kuoleekoHaamuTaiMan();
+
         if (man.getElamat() == 0) {
             jatkuu = false;
         }
-//        if(laskuri.getPisteet()> 100) {
-//            arvoHedelma();
-//        }
+
+        if (laskuri.getPisteet() > 400) {
+            if (onkoHedelma()) {
+                if (manOsuuHedelmaan()) {
+                    laskuri.kasvata(100);
+                    arvoHedelma();
+                }
+            } else {
+                arvoHedelma();
+            }
+        }
+
         asetaSeina();
         this.paivitettava.paivita();
-        setDelay(1000);
+        setDelay(300);
 
         if (!jatkuu) {
             this.stop();
         }
     }
 
-    private boolean onkoHedelmanpaikka(int x, int y) {
-        return alusta.getPeliruutu(x, y).getRuudunTyyppi() == 1 && !alusta.tarkistaEttaOikeastiKaytavallaJaEiManinLahto(x, y) && !alusta.tarkistaEtteiHaamujenKarsinassa(x, y)
-                && !alusta.getPeliruutu(x, y).getOnkoPistepallo();
+    public boolean onkoHedelma() {
+        if (this.hedelmanPaikka != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

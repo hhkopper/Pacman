@@ -54,9 +54,9 @@ public class PelialustaTest {
     
     @Test
     public void eiLaitaPistepalloaMinneSeEiKuulu() {
-        assertEquals(alusta.getPeliruutu(0, 7).getOnkoPistepallo(), false);
-        assertEquals(alusta.getPeliruutu(9, 11).getOnkoPistepallo(), false);
-        assertEquals(alusta.getPeliruutu(9, 9).getOnkoPistepallo(), false);
-        assertEquals(alusta.getPeliruutu(17, 7).getOnkoPistepallo(), false);
+        assertEquals(alusta.getPeliruutu(0, 7).getOnkoPallo(), false);
+        assertEquals(alusta.getPeliruutu(9, 11).getOnkoPallo(), false);
+        assertEquals(alusta.getPeliruutu(9, 9).getOnkoPallo(), false);
+        assertEquals(alusta.getPeliruutu(17, 7).getOnkoPallo(), false);
     }
 }

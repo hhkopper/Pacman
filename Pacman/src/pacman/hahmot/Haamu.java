@@ -1,5 +1,6 @@
 package pacman.hahmot;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 import pacman.alusta.Pelialusta;
@@ -9,8 +10,8 @@ public class Haamu {
     private int y;
     private int x;
     private Suunta suunta;
-    private String nimi;
     private String tyyppi;
+    private String nimi;
     private Pelialusta alusta;
     private ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
 
@@ -18,8 +19,8 @@ public class Haamu {
         this.y = y;
         this.x = x;
         this.suunta = suunta;
-        this.nimi = nimi;
         this.tyyppi = "vahva";
+        this.nimi = nimi;
         this.alusta = alusta;
     }
 
@@ -42,6 +43,7 @@ public class Haamu {
     public String getNimi() {
         return this.nimi;
     }
+    
 
     public void setSuunta(Suunta uusiSuunta) {
         this.suunta = uusiSuunta;

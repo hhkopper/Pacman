@@ -7,7 +7,8 @@ public class Peliruutu {
     private int ruudunTyyppi;
     private boolean onkoMan;
     private boolean onkoHaamu;
-    private boolean onkoPistepallo;
+    private boolean onkoPallo;
+    private boolean onkoExtraPallo;
     private boolean onkoHedelma;
 
     public Peliruutu(int x, int y) {
@@ -56,12 +57,20 @@ public class Peliruutu {
         return this.onkoHedelma;
     }
 
-    public void setOnkoPistepallo(boolean arvo) {
-        this.onkoPistepallo = arvo;
+    public void setOnkoPallo(boolean arvo) {
+        this.onkoPallo = arvo;
     }
     
-    public boolean getOnkoPistepallo() {
-        return this.onkoPistepallo;
+    public boolean getOnkoPallo() {
+        return this.onkoPallo;
+    }
+    
+    public void setOnkoExtraPallo(boolean arvo) {
+        this.onkoExtraPallo = arvo;
+    }
+    
+    public boolean getOnkoExtraPallo() {
+        return this.onkoExtraPallo;
     }
 
     @Override

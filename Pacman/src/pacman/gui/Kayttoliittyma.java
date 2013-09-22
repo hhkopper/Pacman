@@ -23,8 +23,6 @@ public class Kayttoliittyma implements Runnable {
         frame.setPreferredSize(new Dimension(722, 660)); // 38 ruudun sivu        
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        Pistelaskuri paneeli = new Pistelaskuri(peli, 30);
-        
         luoKomponentit(frame.getContentPane());
         
         frame.pack();
