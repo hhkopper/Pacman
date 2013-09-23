@@ -21,7 +21,6 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         piirraMan(g);
-//        g.setColor(Color.BLUE);
         for (int y = 0; y < peli.getAlusta().getKorkeus(); y++) {
             for (int x = 0; x < peli.getAlusta().getLeveys(); x++) {
                 piirraSeinatJaPallot(x, y, g);
@@ -30,6 +29,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         varitaHaamut(g);
         piirraPisteet(g);
         piirraHedelma(g);
+        piirraElamat(g);
     }
 
     @Override
@@ -43,20 +43,44 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             if (haamu.getTyyppi().equals("vahva")) {
                 if (haamu.getNimi().equals("red")) {
                     g.setColor(Color.RED);
-                    g.fillOval(haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+                    piirraHaamu(g, haamu);
                 } else if (haamu.getNimi().equals("green")) {
                     g.setColor(Color.GREEN);
-                    g.fillOval(haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+                    piirraHaamu(g, haamu);
                 } else if (haamu.getNimi().equals("magenta")) {
                     g.setColor(Color.MAGENTA);
-                    g.fillOval(haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+                    piirraHaamu(g, haamu);
                 } else if (haamu.getNimi().equals("cyan")) {
                     g.setColor(Color.CYAN);
-                    g.fillOval(haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+                    piirraHaamu(g, haamu);
                 }
             } else {
-                    piirraHeikotHaamut(g, haamu);
+                piirraHeikotHaamut(g, haamu);
             }
+        }
+    }
+
+    private void piirraHeikotHaamut(Graphics g, Haamu haamu) {
+        g.setColor(Color.BLUE);
+        piirraHaamu(g, haamu);
+    }
+
+    private void piirraHaamu(Graphics g, Haamu haamu) {
+        g.fillOval(haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+    }
+
+    private void piirraMan(Graphics g) {
+        g.setColor(Color.YELLOW);
+        g.fillOval(peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+    }
+
+    private void piirraSeinatJaPallot(int x, int y, Graphics g) {
+        if (peli.getAlusta().getPeliruutu(x, y).getRuudunTyyppi() == 0) {
+            piirraSeinat(g, x, y);
+        } else if (peli.getAlusta().getPeliruutu(x, y).getOnkoPallo()) {
+            piirraPistepallot(g, x, y);
+        } else if (peli.getAlusta().getPeliruutu(x, y).getOnkoExtraPallo()) {
+            piirraExtraPallo(g, x, y);
         }
     }
 
@@ -66,9 +90,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         g.fillOval((x * this.ruudunSivu) + luku, (y * this.ruudunSivu) + luku, this.ruudunSivu / 3, this.ruudunSivu / 3);
     }
 
-    private void piirraMan(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.fillOval(peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+    private void piirraExtraPallo(Graphics g, int x, int y) {
+        int luku = this.ruudunSivu / 5;
+        g.setColor(Color.yellow);
+        g.fillOval((x * this.ruudunSivu) + luku, (y * this.ruudunSivu) + luku, this.ruudunSivu / 2, this.ruudunSivu / 2);
     }
 
     private void piirraSeinat(Graphics g, int x, int y) {
@@ -77,26 +102,16 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
                 this.ruudunSivu, this.ruudunSivu);
     }
 
-    private void piirraSeinatJaPallot(int x, int y, Graphics g) {
-        if (peli.getAlusta().getPeliruutu(x, y).getRuudunTyyppi() == 0) {
-            piirraSeinat(g, x, y);
-        } else if (peli.getAlusta().getPeliruutu(x, y).getOnkoPallo()) {
-            piirraPistepallot(g, x, y);
-        } else if (peli.getAlusta().getPeliruutu(x, y).getOnkoExtraPallo()) {
-            int luku = this.ruudunSivu / 5;
-            g.setColor(Color.yellow);
-            g.fillOval((x * this.ruudunSivu) + luku, (y * this.ruudunSivu) + luku, this.ruudunSivu / 2, this.ruudunSivu / 2);
-        }
-    }
-
     private void piirraPisteet(Graphics g) {
         g.setColor(Color.GREEN);
         g.drawString(Integer.toString(peli.getPisteet()), 600, 30);
     }
-
-    private void piirraHeikotHaamut(Graphics g, Haamu haamu) {
-        g.setColor(Color.BLUE);
-        g.fillOval(haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+    
+    private void piirraElamat(Graphics g) {
+        for (int i = 0; i < peli.getMan().getElamat(); i++) {
+            g.setColor(Color.red);
+            g.drawOval(600+(i*this.ruudunSivu), 60+this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        }
     }
 
     private void piirraHedelma(Graphics g) {

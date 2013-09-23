@@ -14,6 +14,7 @@ public class Haamu {
     private String nimi;
     private Pelialusta alusta;
     private ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
+    private int heikkous;
 
     public Haamu(int x, int y, Suunta suunta, String nimi, Pelialusta alusta) {
         this.y = y;
@@ -63,6 +64,18 @@ public class Haamu {
 
     public String getTyyppi() {
         return this.tyyppi;
+    }
+    
+    public int getHeikkous() {
+        return this.heikkous;
+    }
+    
+    public void setHeikkous(int arvo) {
+        this.heikkous = arvo;
+    }
+     
+    public void vahennaHeikkous() {
+        this.heikkous = this.heikkous-1;
     }
 
     public void luoHaamuAlustalle() {
