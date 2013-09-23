@@ -104,7 +104,7 @@ public class Pacman extends Timer implements ActionListener {
         for (int y = 8; y < 11; y++) {
             for (int x = 8; x < 11; x++) {
                 if (alusta.getPeliruutu(x, y).getOnkoHaamu() || alusta.getPeliruutu(x, y).getOnkoMan()) {
-                    alusta.getPeliruutu(9, 8).setRuudunTyyppi(1);
+                    alusta.getPeliruutu(9, 8).setRuudunTyyppi(3);
                     return;
                 }
             }
@@ -130,23 +130,30 @@ public class Pacman extends Timer implements ActionListener {
     public Peliruutu getHedelmanPaikka() {
         return this.hedelmanPaikka;
     }
+    
+    public ArrayList<Peliruutu> getHedelmanPaikat() {
+        return this.hedelmanPaikat;
+    }
 
     public void arvoHedelma() {
         etsiHedelmanPaikat();
         int luku = arpoja.nextInt(this.hedelmanPaikat.size());
         this.hedelmanPaikka = this.hedelmanPaikat.get(luku);
-        this.hedelmanPaikka.setOnkoHedelma(true);
     }
 
-    private void etsiHedelmanPaikat() {
+    public void etsiHedelmanPaikat() {
         for (int y = 0; y < alusta.getKorkeus(); y++) {
             for (int x = 0; x < alusta.getLeveys(); x++) {
-                if (onkoHedelmanpaikka(x, y)) {
+                if (onkoHedelmanPaikka(x, y)) {
                     Peliruutu ruutu = new Peliruutu(x, y);
                     this.hedelmanPaikat.add(ruutu);
                 }
             }
         }
+    }
+    
+    private boolean onkoHedelmanPaikka(int x, int y) {
+        return alusta.getPeliruutu(x, y).getRuudunTyyppi() == 1 && !alusta.getPeliruutu(x, y).getOnkoPallo() && !alusta.getPeliruutu(x, y).getOnkoExtraPallo();
     }
 
     public boolean manOsuuHedelmaan() {
@@ -157,12 +164,8 @@ public class Pacman extends Timer implements ActionListener {
         }
     }
 
-    private boolean onkoHedelmanpaikka(int x, int y) {
-        return alusta.getPeliruutu(x, y).getRuudunTyyppi() == 1 && !alusta.tarkistaEttaOikeastiKaytavallaJaEiManinLahto(x, y) && !alusta.tarkistaEtteiHaamujenKarsinassa(x, y)
-                && !alusta.getPeliruutu(x, y).getOnkoPallo();
-    }
 
-    public boolean onkoHedelma() {
+    public boolean onkoHedelmaAlustalla() {
         if (this.hedelmanPaikka != null) {
             return true;
         } else {
@@ -206,7 +209,7 @@ public class Pacman extends Timer implements ActionListener {
         
 
         if (laskuri.getPisteet() > 400) {
-            if (onkoHedelma()) {
+            if (onkoHedelmaAlustalla()) {
                 if (manOsuuHedelmaan()) {
                     laskuri.kasvata(100);
                     arvoHedelma();
@@ -233,4 +236,6 @@ public class Pacman extends Timer implements ActionListener {
             }
         }
     }
+
+    
 }

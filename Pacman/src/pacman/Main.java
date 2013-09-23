@@ -44,7 +44,7 @@ public class Main {
 //            for (int j = 0; j < alusta.getLeveys(); j++) {
 //                System.out.print(alusta.getPeliruutu(j, i).getRuudunTyyppi());
 //            }
-//            System.out.println("");
+////            System.out.println("");
 //        }
         
 //        Man pacman = new Man(11,9, Suunta.OIKEA, alusta);

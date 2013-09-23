@@ -2,6 +2,9 @@ package pacman.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;

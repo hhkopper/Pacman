@@ -1,14 +1,6 @@
 package pacman.alusta;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.io.File;
 import java.util.Scanner;
-import javax.swing.JPanel;
-import org.omg.CORBA.INTERNAL;
-import pacman.peli.Pacman;
-import pacman.komponentit.Pistepallo;
 
 public class Pelialusta {
 
@@ -50,8 +42,7 @@ public class Pelialusta {
     }
 
     public void rakennaSeinatJaLuoPisteet() throws Exception {
-        File tiedosto = new File("Kentta");
-        Scanner lukija = new Scanner(tiedosto);
+        Scanner lukija = new Scanner(this.getClass().getResourceAsStream("Kentta"));
         int y = 0;
 
         while (lukija.hasNextLine()) {
@@ -63,37 +54,20 @@ public class Pelialusta {
         lukija.close();
     }
 
-    private void asetaPistepallot(int x, int y) {
-        if (x == 1 && y == 5 || x == 17 && y ==5 || x ==1 & y== 13 || x == 17 && y == 13) {
-            this.pelialusta[y][x].setOnkoExtraPallo(true);
-        } else {
-            if (!tarkistaEtteiHaamujenKarsinassa(x, y) && !tarkistaEttaOikeastiKaytavallaJaEiManinLahto(x, y)) {
-                this.pelialusta[y][x].setOnkoPallo(true);
-            }
-        }
-    }
-
     private void asetaSeinatJaPistepallot(Scanner lukija, int y, int x) {
-        if (lukija.nextInt() == 0) {
+        int arvo =lukija.nextInt();
+        
+        if (arvo == 0) {
             this.pelialusta[y][x].setRuudunTyyppi(0);
+        } else if(arvo == 2) {
+            this.pelialusta[y][x].setRuudunTyyppi(2);
+            this.pelialusta[y][x].setOnkoExtraPallo(true);
+        } else if(arvo == 1) {
+            this.pelialusta[y][x].setOnkoPallo(true);
         } else {
-            asetaPistepallot(x, y);
+            this.pelialusta[y][x].setRuudunTyyppi(3);
         }
-    }
-
-    public boolean tarkistaEtteiHaamujenKarsinassa(int x, int y) {
-        if (x == 8 && y == 9 || x == 9 && y == 9 || x == 10 && y == 9 || x == 9 && y == 8) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean tarkistaEttaOikeastiKaytavallaJaEiManinLahto(int x, int y) {
-        if ((y == 7 || y == 11) && (x == 0 || x == 1 || x == 2 || x == 16 || x == 17 || x == 18) || x == 9 && y == 11) {
-            return true;
-        } else {
-            return false;
-        }
+        
     }
 
     public String toString() {

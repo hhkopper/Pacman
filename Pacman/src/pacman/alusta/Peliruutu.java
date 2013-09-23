@@ -9,7 +9,6 @@ public class Peliruutu {
     private boolean onkoHaamu;
     private boolean onkoPallo;
     private boolean onkoExtraPallo;
-    private boolean onkoHedelma;
 
     public Peliruutu(int x, int y) {
         this.x = x;
@@ -47,14 +46,6 @@ public class Peliruutu {
 
     public boolean getOnkoHaamu() {
         return this.onkoHaamu;
-    }
-    
-    public void setOnkoHedelma(boolean arvo) {
-        this.onkoHedelma = arvo;
-    }
-    
-    public boolean getOnkoHedelma() {
-        return this.onkoHedelma;
     }
 
     public void setOnkoPallo(boolean arvo) {

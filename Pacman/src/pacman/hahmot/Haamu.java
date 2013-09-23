@@ -1,6 +1,5 @@
 package pacman.hahmot;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 import pacman.alusta.Pelialusta;
@@ -115,7 +114,7 @@ public class Haamu {
         mahdollisetSuunnat = new ArrayList<Suunta>();
 
         for (Suunta s : Suunta.values()) {
-            if (alusta.getPeliruutu(x + s.getX(), y + s.getY()).getRuudunTyyppi() == 1) {
+            if (alusta.getPeliruutu(x + s.getX(), y + s.getY()).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x + s.getX(), y + s.getY()).getRuudunTyyppi() == 3) {
                 mahdollisetSuunnat.add(s);
             }
         }
