@@ -137,18 +137,16 @@ public class Haamu {
 
     public boolean katsoVoikoLiikkuaSivuille() {
         if (suunta == Suunta.VASEN || suunta == Suunta.OIKEA) {
-            if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 1) {
+            if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 1 ||
+                    alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 3 || alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 3) {
                 return true;
             }
         } else if (suunta == Suunta.ALAS || suunta == Suunta.YLOS) {
-            if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 1) {
+            if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 1 ||
+                    alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 3 || alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 3) {
                 return true;
             }
         }
-
         return false;
-
-
-
     }
 }

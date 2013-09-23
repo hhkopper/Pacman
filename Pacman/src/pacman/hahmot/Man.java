@@ -6,7 +6,6 @@ package pacman.hahmot;
 
 import pacman.alusta.Pelialusta;
 import pacman.alusta.Peliruutu;
-import pacman.komponentit.Hedelma;
 
 public class Man {
 
@@ -91,13 +90,5 @@ public class Man {
 
     public String toString() {
         return this.x + "," + this.y;
-    }
-
-    public boolean osuuHedelmaan(Hedelma hedelma) {
-        if (this.y == hedelma.getX() && this.x == hedelma.getY()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

@@ -2,9 +2,8 @@ package pacman.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;
@@ -13,11 +12,13 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
 
     private Pacman peli;
     private int ruudunSivu;
+    private JFrame frame;
 
-    public Piirtoalusta(Pacman peli, int sivu) {
+    public Piirtoalusta(Pacman peli, int sivu, JFrame frame) {
         this.peli = peli;
         this.ruudunSivu = sivu;
         super.setBackground(Color.BLACK);
+        this.frame = frame;
     }
 
     @Override
@@ -73,8 +74,11 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     private void piirraMan(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.fillOval(peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+
+        ImageIcon kuva = new ImageIcon(this.getClass().getResource("pacman.png"));
+        g.drawImage(kuva.getImage(), peli.getMan().getX()*this.ruudunSivu, peli.getMan().getY()*this.ruudunSivu, frame);
+//        g.setColor(Color.YELLOW);
+//        g.fillOval(peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
     }
 
     private void piirraSeinatJaPallot(int x, int y, Graphics g) {
@@ -109,18 +113,18 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         g.setColor(Color.GREEN);
         g.drawString(Integer.toString(peli.getPisteet()), 600, 30);
     }
-    
+
     private void piirraElamat(Graphics g) {
         for (int i = 0; i < peli.getMan().getElamat(); i++) {
-            g.setColor(Color.red);
-            g.drawOval(600+(i*this.ruudunSivu), 60+this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+            ImageIcon kuva = new ImageIcon(this.getClass().getResource("sydan.png"));
+            g.drawImage(kuva.getImage(), 580 + (i * (kuva.getIconWidth()+2)), 60 + kuva.getIconHeight(), frame);
         }
     }
 
     private void piirraHedelma(Graphics g) {
         if (peli.getPisteet() > 400) {
-            g.setColor(Color.PINK);
-            g.fillOval(peli.getHedelmanPaikka().getX() * this.ruudunSivu, peli.getHedelmanPaikka().getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+            ImageIcon kuva = new ImageIcon(this.getClass().getResource("kirsikka.png"));
+            g.drawImage(kuva.getImage(), peli.getHedelmanPaikka().getX() * this.ruudunSivu, peli.getHedelmanPaikka().getY() * this.ruudunSivu, frame);
         }
     }
 }

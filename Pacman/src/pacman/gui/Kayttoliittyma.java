@@ -13,7 +13,7 @@ public class Kayttoliittyma implements Runnable {
     
     public Kayttoliittyma(Pacman pacman) {
         this.peli = pacman;
-        this.piirtoalusta = new Piirtoalusta(peli, 30);
+        this.piirtoalusta = new Piirtoalusta(peli, 30, frame);
     }
 
     @Override

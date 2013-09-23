@@ -1,12 +1,7 @@
 package pacman;
 
 import javax.swing.SwingUtilities;
-import pacman.hahmot.Man;
 import pacman.gui.Kayttoliittyma;
-import pacman.alusta.Pelialusta;
-import pacman.hahmot.Haamu;
-import pacman.hahmot.Suunta;
-import pacman.komponentit.Extrapistepallo;
 import pacman.peli.Pacman;
 
 public class Main {

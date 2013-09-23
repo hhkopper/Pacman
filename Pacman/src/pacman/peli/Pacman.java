@@ -198,7 +198,6 @@ public class Pacman extends Timer implements ActionListener {
                     haamu.setTyyppi("vahva");
                 } else {
                     haamu.vahennaHeikkous();
-                    System.out.println(haamu.getHeikkous());
                 }
             }
         }

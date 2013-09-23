@@ -28,6 +28,12 @@ public class Pelialusta {
         return this.pelialusta[j][i];
     }
 
+    /**
+     * Luodaan pelialusta, joka puodostuu peliruuduista.
+     * Alustetaan jokaiselle ruudulle alustava tieto.
+     * 
+     * @throws Exception
+     */
     public void luoPelialusta() throws Exception {
         for (int i = 0; i <= korkeus - 1; i++) {
             for (int j = 0; j <= leveys - 1; j++) {
@@ -41,6 +47,11 @@ public class Pelialusta {
         rakennaSeinatJaLuoPisteet();
     }
 
+    /**
+     * Käydään läpi tekstitiedosto kenttä
+     * 
+     * @throws Exception
+     */
     public void rakennaSeinatJaLuoPisteet() throws Exception {
         Scanner lukija = new Scanner(this.getClass().getResourceAsStream("Kentta"));
         int y = 0;
@@ -54,6 +65,14 @@ public class Pelialusta {
         lukija.close();
     }
 
+    
+    /**
+     * Luetaan Kentta tiedostosta arvo ja sen perusteella annetaan Pelialusta peliruuduille tarvittavat tiedot.
+     * x ja y kertovat käsiteltävän peliruudun koordinaatit.
+     * @param Scanner lukija
+     * @param int y
+     * @param int x
+     */
     private void asetaSeinatJaPistepallot(Scanner lukija, int y, int x) {
         int arvo =lukija.nextInt();
         
@@ -70,6 +89,7 @@ public class Pelialusta {
         
     }
 
+    @Override
     public String toString() {
         return "Korkeus:" + this.korkeus + ", leveys:" + this.leveys;
     }
