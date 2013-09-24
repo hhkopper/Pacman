@@ -8,11 +8,11 @@ import pacman.peli.Pacman;
 
 public class Nappaimistonkuuntelija implements KeyListener {
 
-    private Man pacman;
+    private Man man;
     private Pacman peli;
 
     public Nappaimistonkuuntelija(Man pacman, Pacman peli) {
-        this.pacman = pacman;
+        this.man = pacman;
         this.peli = peli;
     }
 
@@ -20,20 +20,25 @@ public class Nappaimistonkuuntelija implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * Muutetaan manin suuntaa painamalla nuolinäppäimiä, tarkistetaan onko uudessa suunnassa seinä.     * 
+     * 
+     * @param e
+     */
     @Override
     public void keyPressed(KeyEvent e) {
-        Suunta vanhaSuunta = pacman.getSuunta();
+        Suunta vanhaSuunta = man.getSuunta();
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            this.pacman.setSuunta(Suunta.VASEN);
+            this.man.setSuunta(Suunta.VASEN);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            this.pacman.setSuunta(Suunta.OIKEA);
+            this.man.setSuunta(Suunta.OIKEA);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            this.pacman.setSuunta(Suunta.YLOS);
+            this.man.setSuunta(Suunta.YLOS);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            this.pacman.setSuunta(Suunta.ALAS);
+            this.man.setSuunta(Suunta.ALAS);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         }
     }
@@ -42,15 +47,27 @@ public class Nappaimistonkuuntelija implements KeyListener {
     public void keyReleased(KeyEvent e) {
     }
 
+    /**
+     *
+     * Tarkistetaan onko uudessa suunnassa vastassa seinä, jos on muutetaan suunnaksi vanha suunta, joka oli ennen kuin painettiin nuolinäppäintä.
+     * 
+     * @param suunta kertoo vanhan suunnan
+     */
     public void tarkistaOnkoSuunnassaSeina(Suunta suunta) {
         if (onkoSuunnassaSeina()) {
-                this.pacman.setSuunta(suunta);
+                this.man.setSuunta(suunta);
             }
     }
+    /**
+     *
+     * Katsotaan onko seuraava ruutu, johon man on liikkumassa, seinä. Jos on palautetaan true jos ei palautetaan false.
+     * 
+     * @return
+     */
     public boolean onkoSuunnassaSeina() {
-        Suunta suunta = pacman.getSuunta();
-        int x = pacman.getX();
-        int y = pacman.getY();
+        Suunta suunta = man.getSuunta();
+        int x = man.getX();
+        int y = man.getY();
 
         if (peli.getAlusta().getPeliruutu(x + suunta.getX(), y + suunta.getY()).getRuudunTyyppi() == 0) {
             return true;
