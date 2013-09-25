@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;
 
+/**
+ * Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät.
+ *
+ * @author Hanna
+ */
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
     private Pacman peli;
@@ -21,9 +26,14 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         this.frame = frame;
     }
 
+    /**
+     * Piirtää pelialustan ja sen komponentit.
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         piirraMan(g);
         for (int y = 0; y < peli.getAlusta().getKorkeus(); y++) {
             for (int x = 0; x < peli.getAlusta().getLeveys(); x++) {
@@ -34,13 +44,31 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         piirraPisteet(g);
         piirraHedelma(g);
         piirraElamat(g);
+
+        if (!peli.getJatkuu()) {
+            g.setColor(Color.RED);
+            if (peli.getTilanne()) {
+                g.drawString("Voitit! Onneksi olkoon!", 255, 320);
+            } else {
+                g.drawString("Hävisit...", 255, 300);
+            }
+        }
     }
 
+    /**
+     * Piirtää uudelleen kentän
+     */
+    
     @Override
     public void paivita() {
         repaint();
     }
 
+    /**
+     * Värittää jokaisen haamun omalla värillään, kun haamut ovat vahvoja. Värittää haamut sinisiksi, kun ovat heikkoja.
+     * 
+     * @param g
+     */
     public void varitaHaamut(Graphics g) {
 
         for (Haamu haamu : peli.getHaamuLista()) {
@@ -76,9 +104,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     private void piirraMan(Graphics g) {
 
         ImageIcon kuva = new ImageIcon(this.getClass().getResource("pacman.png"));
-        g.drawImage(kuva.getImage(), peli.getMan().getX()*this.ruudunSivu, peli.getMan().getY()*this.ruudunSivu, frame);
-//        g.setColor(Color.YELLOW);
-//        g.fillOval(peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        g.drawImage(kuva.getImage(), peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, frame);
     }
 
     private void piirraSeinatJaPallot(int x, int y, Graphics g) {
@@ -117,7 +143,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     private void piirraElamat(Graphics g) {
         for (int i = 0; i < peli.getMan().getElamat(); i++) {
             ImageIcon kuva = new ImageIcon(this.getClass().getResource("sydan.png"));
-            g.drawImage(kuva.getImage(), 580 + (i * (kuva.getIconWidth()+2)), 60 + kuva.getIconHeight(), frame);
+            g.drawImage(kuva.getImage(), 580 + (i * (kuva.getIconWidth() + 2)), 60 + kuva.getIconHeight(), frame);
         }
     }
 

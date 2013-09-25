@@ -6,13 +6,18 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import pacman.peli.Pacman;
 
+/**
+ * Pacmanin käyttöliittymä
+ * 
+ * @author Hanna
+ */
 public class Kayttoliittyma implements Runnable {
     private JFrame frame;
     private Piirtoalusta piirtoalusta;
     private Pacman peli;
     
-    public Kayttoliittyma(Pacman pacman) {
-        this.peli = pacman;
+    public Kayttoliittyma(Pacman peli) {
+        this.peli = peli;
         this.piirtoalusta = new Piirtoalusta(peli, 30, frame);
     }
 

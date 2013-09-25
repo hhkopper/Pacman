@@ -6,6 +6,11 @@ import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
 import pacman.peli.Pacman;
 
+/**
+ * Pacmanin näppäimistönkuuntelija, joka muuttaa manin suuntaa pelaajan näppäimistönpainallusten mukaisesti.
+ * 
+ * @author Hanna
+ */
 public class Nappaimistonkuuntelija implements KeyListener {
 
     private Man man;

@@ -2,6 +2,11 @@ package pacman.alusta;
 
 import java.util.Scanner;
 
+/**
+ * Pelialusta luokassa luodaan pelialusta.
+ * 
+ * @author Hanna
+ */
 public class Pelialusta {
 
     private Peliruutu[][] pelialusta;
@@ -12,8 +17,6 @@ public class Pelialusta {
         this.korkeus = korkeus;
         this.leveys = leveys;
         this.pelialusta = new Peliruutu[korkeus][leveys];
-
-//        korkeus tulee olla 21 ja leveys 19, ei vielä kovakoodata
     }
 
     public int getLeveys() {
@@ -87,10 +90,5 @@ public class Pelialusta {
             this.pelialusta[y][x].setRuudunTyyppi(3);
         }
         
-    }
-
-    @Override
-    public String toString() {
-        return "Korkeus:" + this.korkeus + ", leveys:" + this.leveys;
     }
 }

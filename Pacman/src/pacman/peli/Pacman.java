@@ -12,6 +12,12 @@ import pacman.hahmot.Haamu;
 import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
 
+/**
+ *
+ * Pacman luokan avulla säädellään pelin kulkua ja luokka sisältää pelin kannalta olennaiset toiminnot.
+ * 
+ * @author Hanna
+ */
 public class Pacman extends Timer implements ActionListener {
 
     private Man man;
@@ -42,6 +48,9 @@ public class Pacman extends Timer implements ActionListener {
         setInitialDelay(2000);
     }
 
+    /**
+     * Luodaan haamut pelialustalle omaan karsinaan.
+     */
     public void luoHaamut() {
         Haamu red = new Haamu(8, 9, Suunta.YLOS, "red", alusta);
         Haamu green = new Haamu(9, 9, Suunta.YLOS, "green", alusta);
@@ -82,6 +91,9 @@ public class Pacman extends Timer implements ActionListener {
         return this.jatkuu;
     }
     
+    /**
+     * Man syö pistepallon kentältä ja kasvatetaan pistemäärää.
+     */
     public void manSyoPistepallo() {
         if (alusta.getPeliruutu(man.getX(), man.getY()).getOnkoPallo()) {
             alusta.getPeliruutu(man.getX(), man.getY()).setOnkoPallo(false);
@@ -93,6 +105,9 @@ public class Pacman extends Timer implements ActionListener {
         }
     }
 
+    /**
+     * Asetetaan haamujen tyypiksi heikko, jolloin man pystyy syömään haamuja.
+     */
     public void heikennaHaamut() {
         for (Haamu haamu : haamut) {
             haamu.setTyyppi("heikko");
@@ -100,6 +115,11 @@ public class Pacman extends Timer implements ActionListener {
         }
     }
 
+    /**
+     * Kun kaikki haamut ovat poistuneet karsinastaan asetetaan karsinan suuaukolle seinä, etteivät haamut mene sinne takaisin.
+     * Seinä kuitenkin lähtee pois, kun haamu palaa lähtöpaikkaan etteivät haamut jää jumiin.
+     * Tarkistetaan myös, että man ei ole karsinassa.
+     */
     public void asetaSeina() {
         for (int y = 8; y < 11; y++) {
             for (int x = 8; x < 11; x++) {
@@ -112,6 +132,9 @@ public class Pacman extends Timer implements ActionListener {
         alusta.getPeliruutu(9, 8).setRuudunTyyppi(0);
     }
 
+    /**
+     * Katsotaan kuoleeko haamu tai man, kun ne osuvat samaan ruutuun.
+     */
     public void kuoleekoHaamuTaiMan() {
         for (Haamu haamu : haamut) {
             if (alusta.getPeliruutu(haamu.getX(), haamu.getY()).getOnkoMan()) {
@@ -141,6 +164,10 @@ public class Pacman extends Timer implements ActionListener {
         this.hedelmanPaikka = this.hedelmanPaikat.get(luku);
     }
 
+    /**
+     * Käydään pelikenttä läpi ja katsotaan kaikki mahdolliset paikat mihin hedelmän voisi asettaa.
+     * Paikaksi käy sellainen, jossa ei ole enää pistepalloa.
+     */
     public void etsiHedelmanPaikat() {
         for (int y = 0; y < alusta.getKorkeus(); y++) {
             for (int x = 0; x < alusta.getLeveys(); x++) {
@@ -156,6 +183,10 @@ public class Pacman extends Timer implements ActionListener {
         return alusta.getPeliruutu(x, y).getRuudunTyyppi() == 1 && !alusta.getPeliruutu(x, y).getOnkoPallo() && !alusta.getPeliruutu(x, y).getOnkoExtraPallo();
     }
 
+    /**
+     * Katsotaan ovatko hedelmä ja man samassa ruudussa.
+     * @return palauttaa boolean arvon
+     */
     public boolean manOsuuHedelmaan() {
         if (man.getX() == this.hedelmanPaikka.getX() && man.getY() == this.hedelmanPaikka.getY()) {
             return true;
@@ -165,6 +196,10 @@ public class Pacman extends Timer implements ActionListener {
     }
 
 
+    /**
+     * Katsotaan onko hedelmä jo kentällä.
+     * @return
+     */
     public boolean onkoHedelmaAlustalla() {
         if (this.hedelmanPaikka != null) {
             return true;
@@ -173,6 +208,10 @@ public class Pacman extends Timer implements ActionListener {
         }
     }
 
+    /**
+     * Käydään kenttä läpi ja katsotaan onko jälellä enää pistepalloja.
+     * Jos pistepallot on kaikki kerätty, jatkuu arvo asetetaan falseksi ja tilanne asetetaan trueksi, joka tarkoittaa, että peli päättyy ja peli on voitettu.
+     */
     public void paattyykoPeli() {
         for (int y = 0; y < alusta.getKorkeus(); y++) {
             for (int x = 0; x < alusta.getLeveys(); x++) {
@@ -228,11 +267,7 @@ public class Pacman extends Timer implements ActionListener {
 
         if (!jatkuu) {
             this.stop();
-            if (tilanne) {
-                System.out.println("Voitit! Onneksi olkoon");
-            } else {
-                System.out.println("Hävisit! Ensikerralla paremmin");
-            }
+            
         }
     }
 

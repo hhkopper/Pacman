@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 import pacman.alusta.Pelialusta;
 
+/**
+ *
+ * Haamu luokka kuvaa kentällä vapaasti liikkuvia Manin vihollisia.
+ * Haamun tehtävä on tietää minne se voi liikkua ja milloin.
+ * Haamu luokan avulla myös asetetaan haamuille haluttuja ominaisuuksia.
+ * 
+ * @author Hanna
+ */
 public class Haamu {
 
     private int y;
@@ -129,10 +137,6 @@ public class Haamu {
         this.y = 9;
         this.x = 9;
         alusta.getPeliruutu(x, y).setOnkoHaamu(true);
-    }
-
-    public String toString() {
-        return "(" + this.x + "," + this.y + ") Nimi: " + this.nimi + ", " + this.suunta;
     }
 
     public boolean katsoVoikoLiikkuaSivuille() {

@@ -1,5 +1,11 @@
 package pacman.alusta;
 
+/**
+ *
+ * Peliruutu tietää kaiken tärkeän tiedon mitä ruudussa tapahtuu ja ketä ja mitä se sisältää.
+ * 
+ * @author Hanna
+ */
 public class Peliruutu {
 
     private int x;

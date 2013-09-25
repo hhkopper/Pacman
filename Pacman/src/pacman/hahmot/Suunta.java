@@ -1,5 +1,10 @@
 package pacman.hahmot;
 
+/**
+ * Määrittelee haamujen ja manin liikkumissuunnat.
+ * 
+ * @author Hanna
+ */
 public enum Suunta {
 
     YLOS(0, -1), 

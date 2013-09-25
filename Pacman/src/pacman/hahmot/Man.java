@@ -1,12 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pacman.hahmot;
 
 import pacman.alusta.Pelialusta;
 import pacman.alusta.Peliruutu;
 
+/**
+ * Man luokka kuvaa pelin päähahmoa jota pelaaja liikuttaa kentällä. 
+ * Manin tehtävä on liikuttaa itseään kentällä ja tietää minne voi liikkua.
+ * Man myös tietää omat elämänsä ja osaa vähentää niitä, kun man kuolee.
+ * 
+ * @author Hanna
+ */
 public class Man {
 
     private int x;
@@ -86,9 +89,5 @@ public class Man {
         this.y = 11;
         alusta.getPeliruutu(x,y).setOnkoMan(true);
         elamat--;
-    }
-
-    public String toString() {
-        return this.x + "," + this.y;
     }
 }
