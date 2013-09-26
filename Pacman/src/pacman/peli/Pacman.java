@@ -31,7 +31,7 @@ public class Pacman extends Timer implements ActionListener {
     private boolean jatkuu;
     private boolean tilanne;
 
-    public Pacman() throws Exception {
+    public Pacman(){
         super(1000, null);
         alusta = new Pelialusta(19, 21);
         alusta.luoPelialusta();

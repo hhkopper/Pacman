@@ -37,7 +37,7 @@ public class Pelialusta {
      * 
      * @throws Exception
      */
-    public void luoPelialusta() throws Exception {
+    public void luoPelialusta() {
         for (int i = 0; i <= korkeus - 1; i++) {
             for (int j = 0; j <= leveys - 1; j++) {
                 this.pelialusta[i][j] = new Peliruutu(j, i);
@@ -55,7 +55,7 @@ public class Pelialusta {
      * 
      * @throws Exception
      */
-    public void rakennaSeinatJaLuoPisteet() throws Exception {
+    public void rakennaSeinatJaLuoPisteet() {
         Scanner lukija = new Scanner(this.getClass().getResourceAsStream("Kentta"));
         int y = 0;
 

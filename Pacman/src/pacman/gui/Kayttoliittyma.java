@@ -8,17 +8,20 @@ import pacman.peli.Pacman;
 
 /**
  * Pacmanin käyttöliittymä
- * 
+ *
  * @author Hanna
  */
 public class Kayttoliittyma implements Runnable {
+
     private JFrame frame;
     private Piirtoalusta piirtoalusta;
     private Pacman peli;
-    
+    private Nappaimistonkuuntelija nappaimistonkuuntelija;
+
     public Kayttoliittyma(Pacman peli) {
         this.peli = peli;
         this.piirtoalusta = new Piirtoalusta(peli, 30, frame);
+        this.nappaimistonkuuntelija = new Nappaimistonkuuntelija(this, peli);
     }
 
     @Override
@@ -26,25 +29,31 @@ public class Kayttoliittyma implements Runnable {
         frame = new JFrame("Pacman");
         frame.setPreferredSize(new Dimension(722, 660)); // 38 ruudun sivu        
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
+
         luoKomponentit(frame.getContentPane());
-        
+
         frame.pack();
         frame.setVisible(true);
     }
-    
+
     public void luoKomponentit(Container container) {
         container.add(piirtoalusta);
-        frame.addKeyListener(new Nappaimistonkuuntelija(this.peli.getMan(),peli));
+        frame.addKeyListener(nappaimistonkuuntelija);
     }
-    
+
     public JFrame getFrame() {
         return frame;
     }
-    
+
     public Paivitettava getPaivitettava() {
         return piirtoalusta;
     }
-    
-    
+
+    public void uusiPeli(){
+        this.peli = new Pacman();
+        this.piirtoalusta.setPeli(peli);
+        this.nappaimistonkuuntelija.setPeli(peli);
+        peli.setPaivitettava(this.getPaivitettava());
+        peli.start();
+    }
 }

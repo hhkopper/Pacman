@@ -2,6 +2,8 @@ package pacman.gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
 import pacman.peli.Pacman;
@@ -13,12 +15,12 @@ import pacman.peli.Pacman;
  */
 public class Nappaimistonkuuntelija implements KeyListener {
 
-    private Man man;
     private Pacman peli;
+    private Kayttoliittyma kayttis;
 
-    public Nappaimistonkuuntelija(Man pacman, Pacman peli) {
-        this.man = pacman;
+    public Nappaimistonkuuntelija(Kayttoliittyma kayttis,Pacman peli) {
         this.peli = peli;
+        this.kayttis = kayttis;
     }
 
     @Override
@@ -32,24 +34,35 @@ public class Nappaimistonkuuntelija implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        Suunta vanhaSuunta = man.getSuunta();
+        Suunta vanhaSuunta = peli.getMan().getSuunta();
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            this.man.setSuunta(Suunta.VASEN);
+            peli.getMan().setSuunta(Suunta.VASEN);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            this.man.setSuunta(Suunta.OIKEA);
+            peli.getMan().setSuunta(Suunta.OIKEA);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            this.man.setSuunta(Suunta.YLOS);
+            peli.getMan().setSuunta(Suunta.YLOS);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            this.man.setSuunta(Suunta.ALAS);
+            peli.getMan().setSuunta(Suunta.ALAS);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
+        }
+        
+        if(peli.getJatkuu() == false) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                System.out.println("tulee tänne");
+                this.kayttis.uusiPeli();
+            }
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+    
+    public void setPeli(Pacman peli) {
+        this.peli = peli;
     }
 
     /**
@@ -60,7 +73,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
      */
     public void tarkistaOnkoSuunnassaSeina(Suunta suunta) {
         if (onkoSuunnassaSeina()) {
-                this.man.setSuunta(suunta);
+                peli.getMan().setSuunta(suunta);
             }
     }
     /**
@@ -70,9 +83,9 @@ public class Nappaimistonkuuntelija implements KeyListener {
      * @return
      */
     public boolean onkoSuunnassaSeina() {
-        Suunta suunta = man.getSuunta();
-        int x = man.getX();
-        int y = man.getY();
+        Suunta suunta = peli.getMan().getSuunta();
+        int x = peli.getMan().getX();
+        int y = peli.getMan().getY();
 
         if (peli.getAlusta().getPeliruutu(x + suunta.getX(), y + suunta.getY()).getRuudunTyyppi() == 0) {
             return true;

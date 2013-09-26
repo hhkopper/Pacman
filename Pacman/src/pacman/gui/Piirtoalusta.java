@@ -93,6 +93,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         }
     }
     
+    public void setPeli(Pacman peli) {
+        this.peli = peli;
+    }
+    
     private void piirraHeikotHaamut(Graphics g, Haamu haamu) {
         g.setColor(Color.BLUE);
         piirraHaamu(g, haamu);
