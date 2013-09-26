@@ -78,10 +78,10 @@ public class Pacman extends Timer implements ActionListener {
     public ArrayList<Haamu> getHaamuLista() {
         return this.haamut;
     }
-
-    public int getPisteet() {
-        return laskuri.getPisteet();
-    }
+//
+//    public int getPisteet() {
+//        return laskuri.getPisteet();
+//    }
     
     public boolean getTilanne() {
         return this.tilanne;
