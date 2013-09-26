@@ -29,7 +29,7 @@ public class Pacman extends Timer implements ActionListener {
     private Paivitettava paivitettava;
     private Peliruutu hedelmanPaikka;
     private boolean jatkuu;
-    private boolean tilanne;
+    private int tilanne;
 
     public Pacman() throws Exception {
         super(1000, null);
@@ -42,7 +42,7 @@ public class Pacman extends Timer implements ActionListener {
         laskuri = new Pistelaskuri();
         this.hedelmanPaikat = new ArrayList<Peliruutu>();
         this.jatkuu = true;
-        this.tilanne = false;
+        this.tilanne = 0;
 
         addActionListener(this);
         setInitialDelay(2000);
@@ -78,12 +78,8 @@ public class Pacman extends Timer implements ActionListener {
     public ArrayList<Haamu> getHaamuLista() {
         return this.haamut;
     }
-//
-//    public int getPisteet() {
-//        return laskuri.getPisteet();
-//    }
     
-    public boolean getTilanne() {
+    public int getTilanne() {
         return this.tilanne;
     }
     
@@ -212,7 +208,7 @@ public class Pacman extends Timer implements ActionListener {
      * Käydään kenttä läpi ja katsotaan onko jälellä enää pistepalloja.
      * Jos pistepallot on kaikki kerätty, jatkuu arvo asetetaan falseksi ja tilanne asetetaan trueksi, joka tarkoittaa, että peli päättyy ja peli on voitettu.
      */
-    public void paattyykoPeli() {
+    public void paattyykoPeliVoittoon() {
         for (int y = 0; y < alusta.getKorkeus(); y++) {
             for (int x = 0; x < alusta.getLeveys(); x++) {
                 if (alusta.getPeliruutu(x, y).getOnkoPallo() || alusta.getPeliruutu(x, y).getOnkoExtraPallo()) {
@@ -221,7 +217,7 @@ public class Pacman extends Timer implements ActionListener {
             }
         }
         this.jatkuu = false;
-        this.tilanne = true;
+        this.tilanne = 1;
     }
 
     public void setPaivitettava(Paivitettava paivitettava) {
@@ -259,9 +255,10 @@ public class Pacman extends Timer implements ActionListener {
         
         if (man.getElamat() == 0) {
             jatkuu = false;
+            this.tilanne = 2;
         }
         asetaSeina();
-        paattyykoPeli();
+        paattyykoPeliVoittoon();
         this.paivitettava.paivita();
         setDelay(300);
 

@@ -34,6 +34,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         if (peli.getJatkuu()) {
             piirraMan(g);
             for (int y = 0; y < peli.getAlusta().getKorkeus(); y++) {
@@ -47,12 +48,13 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             piirraElamat(g);
         } else {
             g.setColor(Color.RED);
-            if (peli.getTilanne()) {
+            if (peli.getTilanne() == 1) {
                 g.drawString("Voitit! Onneksi olkoon!", 255, 320);
-            } else {
+            } else if(peli.getTilanne() == 2) {
                 g.drawString("Hävisit...", 255, 300);
             }
             g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 255, 330);
+            g.drawString("Paina ENTER aloittaaksesi uuden pelin", 255, 360);
         }
     }
 
