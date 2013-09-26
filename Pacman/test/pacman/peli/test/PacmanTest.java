@@ -70,7 +70,7 @@ public class PacmanTest {
         pacman.getMan().liiku();
         pacman.manSyoPistepallo();
         assertEquals(false, pacman.getAlusta().getPeliruutu(10, 11).getOnkoPallo());
-        assertEquals(20, pacman.getPisteet());
+        assertEquals(20, pacman.getLaskuri().getPisteet());
     }
 
     @Test

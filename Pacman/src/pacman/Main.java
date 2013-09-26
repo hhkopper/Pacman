@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {        
         
-        Pacman pacman = new Pacman();
-        Kayttoliittyma kayttis = new Kayttoliittyma(pacman);
+        Pacman peli = new Pacman();
+        Kayttoliittyma kayttis = new Kayttoliittyma(peli);
         
         SwingUtilities.invokeLater(kayttis);
 
@@ -21,8 +21,8 @@ public class Main {
             }
         }
 
-        pacman.setPaivitettava(kayttis.getPaivitettava());
-        pacman.start();
+        peli.setPaivitettava(kayttis.getPaivitettava());
+        peli.start();
 
     }
 }
