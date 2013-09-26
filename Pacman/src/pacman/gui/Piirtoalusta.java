@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;
@@ -54,19 +53,6 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
                 g.drawString("Hävisit...", 255, 300);
             }
             g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 255, 330);
-            if (peli.getHighscore().tarkistaOnkoEnnatys(peli.getLaskuri().getPisteet())) {
-                String nimi = "";
-
-                int i = -1;
-                while (i < 0) {
-                    nimi = JOptionPane.showInputDialog("New highscore! Please enter your name");
-                    if (nimi.length() > 0) {
-                        i++;
-                    }
-                }
-                g.drawString(peli.getHighscore().tulostaEnnatys(), 255, 390);
-            }
-            g.drawString("Paras tulos :", 255, 360);
             g.drawString("Paina ENTER aloittaaksesi uuden pelin", 255, 400);
         }
     }
