@@ -2,15 +2,13 @@ package pacman.gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
 import pacman.peli.Pacman;
 
 /**
- * Pacmanin näppäimistönkuuntelija, joka muuttaa manin suuntaa pelaajan näppäimistönpainallusten mukaisesti.
- * 
+ * Pacmanin näppäimistönkuuntelija, joka muuttaa manin suuntaa pelaajan
+ * näppäimistönpainallusten mukaisesti.
+ *
  * @author Hanna
  */
 public class Nappaimistonkuuntelija implements KeyListener {
@@ -18,7 +16,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
     private Pacman peli;
     private Kayttoliittyma kayttis;
 
-    public Nappaimistonkuuntelija(Kayttoliittyma kayttis,Pacman peli) {
+    public Nappaimistonkuuntelija(Kayttoliittyma kayttis, Pacman peli) {
         this.peli = peli;
         this.kayttis = kayttis;
     }
@@ -28,8 +26,9 @@ public class Nappaimistonkuuntelija implements KeyListener {
     }
 
     /**
-     * Muutetaan manin suuntaa painamalla nuolinäppäimiä, tarkistetaan onko uudessa suunnassa seinä.     * 
-     * 
+     * Muutetaan manin suuntaa painamalla nuolinäppäimiä, tarkistetaan onko
+     * uudessa suunnassa seinä. *
+     *
      * @param e
      */
     @Override
@@ -48,10 +47,9 @@ public class Nappaimistonkuuntelija implements KeyListener {
             peli.getMan().setSuunta(Suunta.ALAS);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         }
-        
-        if(peli.getJatkuu() == false) {
-            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-                System.out.println("tulee tänne");
+
+        if (peli.getJatkuu() == false) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 this.kayttis.uusiPeli();
             }
         }
@@ -60,26 +58,29 @@ public class Nappaimistonkuuntelija implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
     }
-    
+
     public void setPeli(Pacman peli) {
         this.peli = peli;
     }
 
     /**
      *
-     * Tarkistetaan onko uudessa suunnassa vastassa seinä, jos on muutetaan suunnaksi vanha suunta, joka oli ennen kuin painettiin nuolinäppäintä.
-     * 
+     * Tarkistetaan onko uudessa suunnassa vastassa seinä, jos on muutetaan
+     * suunnaksi vanha suunta, joka oli ennen kuin painettiin nuolinäppäintä.
+     *
      * @param suunta kertoo vanhan suunnan
      */
     public void tarkistaOnkoSuunnassaSeina(Suunta suunta) {
         if (onkoSuunnassaSeina()) {
-                peli.getMan().setSuunta(suunta);
-            }
+            peli.getMan().setSuunta(suunta);
+        }
     }
+
     /**
      *
-     * Katsotaan onko seuraava ruutu, johon man on liikkumassa, seinä. Jos on palautetaan true jos ei palautetaan false.
-     * 
+     * Katsotaan onko seuraava ruutu, johon man on liikkumassa, seinä. Jos on
+     * palautetaan true jos ei palautetaan false.
+     *
      * @return
      */
     public boolean onkoSuunnassaSeina() {
@@ -93,6 +94,4 @@ public class Nappaimistonkuuntelija implements KeyListener {
             return false;
         }
     }
-    
-    
 }

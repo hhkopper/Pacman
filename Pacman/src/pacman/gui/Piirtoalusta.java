@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;
@@ -14,11 +15,11 @@ import pacman.peli.Pacman;
  * @author Hanna
  */
 public class Piirtoalusta extends JPanel implements Paivitettava {
-    
+
     private Pacman peli;
     private int ruudunSivu;
     private JFrame frame;
-    
+
     public Piirtoalusta(Pacman peli, int sivu, JFrame frame) {
         this.peli = peli;
         this.ruudunSivu = sivu;
@@ -48,11 +49,25 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         } else {
             g.setColor(Color.RED);
             if (peli.getTilanne()) {
-                g.drawString("Voitit! Onneksi olkoon!", 255, 320);
+                g.drawString("Voitit! Onneksi olkoon!", 255, 300);
             } else {
                 g.drawString("Hävisit...", 255, 300);
             }
             g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 255, 330);
+            if (peli.getHighscore().tarkistaOnkoEnnatys(peli.getLaskuri().getPisteet())) {
+                String nimi = "";
+
+                int i = -1;
+                while (i < 0) {
+                    nimi = JOptionPane.showInputDialog("New highscore! Please enter your name");
+                    if (nimi.length() > 0) {
+                        i++;
+                    }
+                }
+                g.drawString(peli.getHighscore().tulostaEnnatys(), 255, 390);
+            }
+            g.drawString("Paras tulos :", 255, 360);
+            g.drawString("Paina ENTER aloittaaksesi uuden pelin", 255, 400);
         }
     }
 
@@ -71,7 +86,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * @param g
      */
     public void varitaHaamut(Graphics g) {
-        
+
         for (Haamu haamu : peli.getHaamuLista()) {
             if (haamu.getTyyppi().equals("vahva")) {
                 if (haamu.getNimi().equals("red")) {
@@ -92,26 +107,26 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             }
         }
     }
-    
+
     public void setPeli(Pacman peli) {
         this.peli = peli;
     }
-    
+
     private void piirraHeikotHaamut(Graphics g, Haamu haamu) {
         g.setColor(Color.BLUE);
         piirraHaamu(g, haamu);
     }
-    
+
     private void piirraHaamu(Graphics g, Haamu haamu) {
         g.fillOval(haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
     }
-    
+
     private void piirraMan(Graphics g) {
-        
+
         ImageIcon kuva = new ImageIcon(this.getClass().getResource("pacman.png"));
         g.drawImage(kuva.getImage(), peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, frame);
     }
-    
+
     private void piirraSeinatJaPallot(int x, int y, Graphics g) {
         if (peli.getAlusta().getPeliruutu(x, y).getRuudunTyyppi() == 0) {
             piirraSeinat(g, x, y);
@@ -121,37 +136,37 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             piirraExtraPallo(g, x, y);
         }
     }
-    
+
     private void piirraPistepallot(Graphics g, int x, int y) {
         int luku = this.ruudunSivu / 3;
         g.setColor(Color.yellow);
         g.fillOval((x * this.ruudunSivu) + luku, (y * this.ruudunSivu) + luku, this.ruudunSivu / 3, this.ruudunSivu / 3);
     }
-    
+
     private void piirraExtraPallo(Graphics g, int x, int y) {
         int luku = this.ruudunSivu / 5;
         g.setColor(Color.yellow);
         g.fillOval((x * this.ruudunSivu) + luku, (y * this.ruudunSivu) + luku, this.ruudunSivu / 2, this.ruudunSivu / 2);
     }
-    
+
     private void piirraSeinat(Graphics g, int x, int y) {
         g.setColor(Color.BLUE);
         g.fillRect(peli.getAlusta().getPeliruutu(x, y).getX() * this.ruudunSivu, peli.getAlusta().getPeliruutu(x, y).getY() * this.ruudunSivu,
                 this.ruudunSivu, this.ruudunSivu);
     }
-    
+
     private void piirraPisteet(Graphics g) {
         g.setColor(Color.GREEN);
         g.drawString(Integer.toString(peli.getLaskuri().getPisteet()), 600, 30);
     }
-    
+
     private void piirraElamat(Graphics g) {
         for (int i = 0; i < peli.getMan().getElamat(); i++) {
             ImageIcon kuva = new ImageIcon(this.getClass().getResource("sydan.png"));
             g.drawImage(kuva.getImage(), 580 + (i * (kuva.getIconWidth() + 2)), 60 + kuva.getIconHeight(), frame);
         }
     }
-    
+
     private void piirraHedelma(Graphics g) {
         if (peli.getLaskuri().getPisteet() > 400) {
             ImageIcon kuva = new ImageIcon(this.getClass().getResource("kirsikka.png"));

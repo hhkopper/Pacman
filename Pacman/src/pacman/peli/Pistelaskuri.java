@@ -1,5 +1,7 @@
 package pacman.peli;
 
+import java.util.Scanner;
+
 /**
  * Pistelaskuri luokan avulla seurataan pelin aikana kertyviä pisteitä.
  * 
@@ -25,6 +27,5 @@ public class Pistelaskuri {
     public void kasvata(int arvo) {
         pisteet = pisteet + arvo;
     }
-    
     
 }
