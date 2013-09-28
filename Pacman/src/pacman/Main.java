@@ -6,7 +6,7 @@ import pacman.peli.Pacman;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {        
+    public static void main(String[] args) throws Exception {  
         
         Pacman peli = new Pacman();
         Kayttoliittyma kayttis = new Kayttoliittyma(peli);

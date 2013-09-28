@@ -13,9 +13,20 @@ import pacman.peli.Pacman;
  */
 public class Nappaimistonkuuntelija implements KeyListener {
 
+    /**
+     * Peli johon nappaimistonkuuntelija liittyy ja jonka kautta päästään käsiksi manin liikkumiseen.
+     */
     private Pacman peli;
+    /**
+     * Käyttoliittymä, jonka kautta päästään käynnistämään uusipeli.
+     */
     private Kayttoliittyma kayttis;
 
+    /**
+     * Kunstruktorissa asetetaan nappaimistonkuuntelijalle tarvittavat arvot.
+     * @param kayttis
+     * @param peli
+     */
     public Nappaimistonkuuntelija(Kayttoliittyma kayttis, Pacman peli) {
         this.peli = peli;
         this.kayttis = kayttis;
@@ -27,8 +38,8 @@ public class Nappaimistonkuuntelija implements KeyListener {
 
     /**
      * Muutetaan manin suuntaa painamalla nuolinäppäimiä, tarkistetaan onko
-     * uudessa suunnassa seinä. *
-     *
+     * uudessa suunnassa seinä.
+     * Painamalla enter, kun peli on päättynyt saadaan käynnistettyä uusi peli.
      * @param e
      */
     @Override
@@ -77,11 +88,9 @@ public class Nappaimistonkuuntelija implements KeyListener {
     }
 
     /**
-     *
      * Katsotaan onko seuraava ruutu, johon man on liikkumassa, seinä. Jos on
      * palautetaan true jos ei palautetaan false.
-     *
-     * @return
+     * @return palautetaan boolean arvo.
      */
     public boolean onkoSuunnassaSeina() {
         Suunta suunta = peli.getMan().getSuunta();

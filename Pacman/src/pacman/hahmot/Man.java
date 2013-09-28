@@ -18,6 +18,13 @@ public class Man {
     private Pelialusta alusta;
     private int elamat;
 
+    /**
+     * Konstruktorissa annetaan Manille tarvittavat arvot ja asetetaan elämien määräksi kolme.
+     * @param x
+     * @param y
+     * @param alkuSuunta
+     * @param alusta
+     */
     public Man(int x, int y, Suunta alkuSuunta, Pelialusta alusta) {
         this.x = x;
         this.y = y;
@@ -26,6 +33,9 @@ public class Man {
         elamat = 3;
     }
 
+    /**
+     * Kerrotaan alustalle, missä ruudussa Man on.
+     */
     public void luoManAlustalle() {
         alusta.getPeliruutu(x,y).setOnkoMan(true);
     }
@@ -58,10 +68,17 @@ public class Man {
         return elamat;
     }
     
+    /**
+     * Vähennetään elämien määrää yhdellä.
+     */
     public void vahennaElama() {
         this.elamat = this.elamat--;
     }
 
+    /**
+     * Muutetaan koordinaatteja ja kerrotaan alustalle mistä ruudusta mihin ruutuun Man liikkuu.
+     * Jos seuraava ruutu on seinä mihin ollaan liikkumassa Man jää paikalleen.
+     */
     public void liiku() {
         this.y = this.y + this.suunta.getY();
         this.x = this.x + this.suunta.getX();
@@ -75,6 +92,10 @@ public class Man {
         }
     }
     
+    /**
+     * Tarkistetaan onko ruudyn tyyppi seinä vai ei (0 vai joku muu).
+     * @return palauttaa boolean arvon true, jos osuu seinään, false, jos ei.
+     */
     public boolean osuukoSeinaan() {
         Peliruutu ruutu = alusta.getPeliruutu(x,y);
         if (ruutu.getRuudunTyyppi() == 0) {
@@ -83,6 +104,9 @@ public class Man {
         return false;
     }
 
+    /**
+     * Asetetaan Manin koordinaateiksi sen lähtöruutu
+     */
     public void palaaAlkuun() {
         alusta.getPeliruutu(x,y).setOnkoMan(false);
         this.x = 9;

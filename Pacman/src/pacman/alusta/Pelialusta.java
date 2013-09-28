@@ -9,10 +9,19 @@ import java.util.Scanner;
  */
 public class Pelialusta {
 
+    /**
+     * Pelialusta muodostetaan kaksiulotteisesta Peliruutu taulukosta.
+     */
     private Peliruutu[][] pelialusta;
     private int korkeus;
     private int leveys;
 
+    /**
+     * Konstruktorissa annetaan tarvittavat arvot pelialustalle.
+     * Luodaan pelialusta, joka muodostuu peliruuduista. 
+     * @param leveys
+     * @param korkeus
+     */
     public Pelialusta(int leveys, int korkeus) {
         this.korkeus = korkeus;
         this.leveys = leveys;
@@ -35,7 +44,6 @@ public class Pelialusta {
      * Luodaan pelialusta, joka puodostuu peliruuduista.
      * Alustetaan jokaiselle ruudulle alustava tieto.
      * 
-     * @throws Exception
      */
     public void luoPelialusta() {
         for (int i = 0; i <= korkeus - 1; i++) {
@@ -53,7 +61,6 @@ public class Pelialusta {
     /**
      * Käydään läpi tekstitiedosto kenttä
      * 
-     * @throws Exception
      */
     public void rakennaSeinatJaLuoPisteet() {
         Scanner lukija = new Scanner(this.getClass().getResourceAsStream("Kentta"));

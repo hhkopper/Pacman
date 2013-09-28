@@ -1,9 +1,11 @@
 package pacman.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;
@@ -15,15 +17,26 @@ import pacman.peli.Pacman;
  */
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
+    /**
+     * Peli, jonka kautta päästään käsiksi tarvittaviin elementteihin.
+     */
     private Pacman peli;
     private int ruudunSivu;
     private JFrame frame;
+    private String nimi;
 
+    /**
+     * Konstruktorissa asetetaan kaikki tarvittavat arvot piirtoalustalle.
+     * @param peli
+     * @param sivu
+     * @param frame
+     */
     public Piirtoalusta(Pacman peli, int sivu, JFrame frame) {
         this.peli = peli;
         this.ruudunSivu = sivu;
         super.setBackground(Color.BLACK);
         this.frame = frame;
+        this.nimi = "";
     }
 
     /**
@@ -47,13 +60,26 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             piirraElamat(g);
         } else {
             g.setColor(Color.RED);
-            if (peli.getTilanne()) {
-                g.drawString("Voitit! Onneksi olkoon!", 255, 300);
-            } else {
-                g.drawString("Hävisit...", 255, 300);
+            Font peliFontti = new Font("Candara", Font.BOLD, 25);
+            g.setFont(peliFontti);
+            piirretaanTilanne(g);
+
+            if (peli.getHighscore().tarkistaOnkoEnnatys(peli.getPisteet())) {
+                g.setColor(Color.GREEN);
+                g.drawString("Uusi ennätys!", 200, 360);
+//                int b = -1;
+//                while(b < 0) {
+//                    nimi = JOptionPane.showInputDialog("Uusi ennatys! Kirjoita nimesi: ");
+//                    if(nimi.length() > 0) {
+//                        b++;
+//                    }
+//                }
+//                
             }
-            g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 255, 330);
-            g.drawString("Paina ENTER aloittaaksesi uuden pelin", 255, 400);
+            g.drawString("Ennätyspisteet: " + peli.getHighscore().tulostaEnnatys(nimi, peli.getPisteet()).toString(), 200, 390);
+            g.setColor(Color.RED);
+            g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 200, 330);
+            g.drawString("Paina ENTER aloittaaksesi uuden pelin", 80, 500);
         }
     }
 
@@ -157,6 +183,14 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         if (peli.getLaskuri().getPisteet() > 400) {
             ImageIcon kuva = new ImageIcon(this.getClass().getResource("kirsikka.png"));
             g.drawImage(kuva.getImage(), peli.getHedelmanPaikka().getX() * this.ruudunSivu, peli.getHedelmanPaikka().getY() * this.ruudunSivu, frame);
+        }
+    }
+
+    private void piirretaanTilanne(Graphics g) {
+        if (peli.getTilanne()) {
+            g.drawString("Voitit! Onneksi olkoon!", 200, 300);
+        } else {
+            g.drawString("Hävisit...", 200, 300);
         }
     }
 }

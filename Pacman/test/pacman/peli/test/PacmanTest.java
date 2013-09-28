@@ -78,31 +78,32 @@ public class PacmanTest {
         for (Haamu haamu : pacman.getHaamuLista()) {
             haamu.setTyyppi("heikko");
             haamu.setHeikkous(30);
+            assertEquals("heikko", haamu.getTyyppi());
             assertEquals(30, haamu.getHeikkous());
         }
     }
-    
+
     @Test
     public void rakennetaankoSeinaOikein1() {
-        assertEquals(3, pacman.getAlusta().getPeliruutu(9, 8).getRuudunTyyppi());        
+        assertEquals(3, pacman.getAlusta().getPeliruutu(9, 8).getRuudunTyyppi());
     }
-    
+
     @Test
-    public void rakennetaankoSeinaOikein2() {        
+    public void rakennetaankoSeinaOikein2() {
         for (Haamu haamu : pacman.getHaamuLista()) {
             haamu.setX(1);
             haamu.setY(1);
         }
-        pacman.asetaSeina();        
+        pacman.asetaSeina();
         assertEquals(0, pacman.getAlusta().getPeliruutu(9, 8).getRuudunTyyppi());
     }
-    
+
     @Test
     public void EiAsetaHedelmaaKunEiTarpeeksiPisteita() {
         pacman.getLaskuri().kasvata(200);
         assertEquals(null, pacman.getHedelmanPaikka());
     }
-    
+
     @Test
     public void asettaaHedelmanKunTarpeeksiPisteitaJaTarkistaaOnkoHedelmaAlustalla() {
         pacman.getMan().liiku();
@@ -114,7 +115,7 @@ public class PacmanTest {
         assertEquals(11, pacman.getHedelmanPaikka().getY());
         assertEquals(true, pacman.onkoHedelmaAlustalla());
     }
-    
+
     @Test
     public void manOsuuOikeinHedelmaan() {
         pacman.getMan().liiku();
@@ -126,7 +127,7 @@ public class PacmanTest {
         pacman.getMan().liiku();
         assertEquals(true, pacman.manOsuuHedelmaan());
     }
-    
+
     @Test
     public void loytaaKaikkiHedelmanPaikat() {
         pacman.getMan().liiku();
@@ -134,12 +135,26 @@ public class PacmanTest {
         pacman.getMan().liiku();
         pacman.manSyoPistepallo();
         pacman.getMan().liiku();
-        pacman.manSyoPistepallo();        
+        pacman.manSyoPistepallo();
         pacman.etsiHedelmanPaikat();
-        
-        assertEquals(3, pacman.getHedelmanPaikat().size());        
+
+        assertEquals(3, pacman.getHedelmanPaikat().size());
     }
 
-    
-    
+    @Test
+    public void paattyykoPeliOikein() {
+        for (int y = 0; y < pacman.getAlusta().getKorkeus(); y++) {
+            for (int x = 0; x < pacman.getAlusta().getLeveys(); x++) {
+                if (pacman.getAlusta().getPeliruutu(x, y).getOnkoPallo()) {
+                    pacman.getAlusta().getPeliruutu(x, y).setOnkoPallo(false);
+                } else if(pacman.getAlusta().getPeliruutu(x, y).getOnkoExtraPallo()) {
+                    pacman.getAlusta().getPeliruutu(x, y).setOnkoExtraPallo(false);
+                }
+            }
+        }
+        pacman.paattyykoPeli();
+        
+        assertEquals(true, pacman.getTilanne());
+        assertEquals(false, pacman.getJatkuu());
+    }
 }

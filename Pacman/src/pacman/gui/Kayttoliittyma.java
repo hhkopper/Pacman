@@ -36,6 +36,10 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
 
+    /**
+     * Luodaan komponentit frameen ja lisätään näppäimistönkuuntelija.
+     * @param container
+     */
     public void luoKomponentit(Container container) {
         container.add(piirtoalusta);
         frame.addKeyListener(nappaimistonkuuntelija);
@@ -49,6 +53,9 @@ public class Kayttoliittyma implements Runnable {
         return piirtoalusta;
     }
 
+    /**
+     * Luodaan ja käynnitetään uusi peli.
+     */
     public void uusiPeli(){
         this.peli = new Pacman();
         this.piirtoalusta.setPeli(peli);
