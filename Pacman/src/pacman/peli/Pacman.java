@@ -305,7 +305,7 @@ public class Pacman extends Timer implements ActionListener {
         luoHedelma();
         asetaSeina();
         paattyykoPeli();
-        if (man.getElamat() == 0) {
+        if (man.getElamat() < 0) {
             jatkuu = false;
         }
 

@@ -59,7 +59,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         }
 
-        if (peli.getJatkuu() == false) {
+        if (!peli.getJatkuu()) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 this.kayttis.uusiPeli();
             }

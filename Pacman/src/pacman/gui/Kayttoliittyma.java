@@ -57,9 +57,9 @@ public class Kayttoliittyma implements Runnable {
      * Luodaan ja käynnitetään uusi peli.
      */
     public void uusiPeli(){
-        this.peli = new Pacman();
-        this.piirtoalusta.setPeli(peli);
-        this.nappaimistonkuuntelija.setPeli(peli);
+        peli = new Pacman();
+        piirtoalusta.setPeli(peli);
+        nappaimistonkuuntelija.setPeli(peli);
         peli.setPaivitettava(this.getPaivitettava());
         peli.start();
     }
