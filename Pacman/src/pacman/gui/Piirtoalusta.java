@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;
@@ -24,19 +23,22 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     private int ruudunSivu;
     private JFrame frame;
     private String nimi;
+    private Kayttoliittyma kayttis;
 
     /**
      * Konstruktorissa asetetaan kaikki tarvittavat arvot piirtoalustalle.
+     *
      * @param peli
      * @param sivu
      * @param frame
      */
-    public Piirtoalusta(Pacman peli, int sivu, JFrame frame) {
+    public Piirtoalusta(Pacman peli, int sivu, JFrame frame, Kayttoliittyma kayttis) {
         this.peli = peli;
         this.ruudunSivu = sivu;
         super.setBackground(Color.BLACK);
         this.frame = frame;
         this.nimi = "";
+        this.kayttis = kayttis;
     }
 
     /**
@@ -64,19 +66,11 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             g.setFont(peliFontti);
             piirretaanTilanne(g);
 
-            if (peli.getHighscore().tarkistaOnkoEnnatys(peli.getPisteet())) {
-                g.setColor(Color.GREEN);
-                g.drawString("Uusi ennätys!", 200, 360);
-//                int b = -1;
-//                while(b < 0) {
-//                    nimi = JOptionPane.showInputDialog("Uusi ennatys! Kirjoita nimesi: ");
-//                    if(nimi.length() > 0) {
-//                        b++;
-//                    }
-//                }
-//                
+            if (kayttis.getHighscore().tarkistaOnkoEnnatys(peli.getPisteet())) {
+                kayttis.highscoreNimi();        
             }
-            g.drawString("Ennätyspisteet: " + peli.getHighscore().tulostaEnnatys(nimi, peli.getPisteet()).toString(), 200, 390);
+            
+            g.drawString("Ennätyspisteet: " + kayttis.getHighscore().tulostaParas(), 200, 390);
             g.setColor(Color.RED);
             g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 200, 330);
             g.drawString("Paina ENTER aloittaaksesi uuden pelin", 80, 500);
