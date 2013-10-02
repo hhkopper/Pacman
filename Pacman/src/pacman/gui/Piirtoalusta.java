@@ -1,8 +1,12 @@
 package pacman.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,15 +14,15 @@ import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;
 
 /**
- * Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät.
- *
- * @author Hanna
- */
+* Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät.
+*
+* @author Hanna
+*/
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
     /**
-     * Peli, jonka kautta päästään käsiksi tarvittaviin elementteihin.
-     */
+* Peli, jonka kautta päästään käsiksi tarvittaviin elementteihin.
+*/
     private Pacman peli;
     private int ruudunSivu;
     private JFrame frame;
@@ -26,12 +30,12 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     private Kayttoliittyma kayttis;
 
     /**
-     * Konstruktorissa asetetaan kaikki tarvittavat arvot piirtoalustalle.
-     *
-     * @param peli
-     * @param sivu
-     * @param frame
-     */
+* Konstruktorissa asetetaan kaikki tarvittavat arvot piirtoalustalle.
+*
+* @param peli
+* @param sivu
+* @param frame
+*/
     public Piirtoalusta(Pacman peli, int sivu, JFrame frame, Kayttoliittyma kayttis) {
         this.peli = peli;
         this.ruudunSivu = sivu;
@@ -42,24 +46,15 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     /**
-     * Piirtää pelialustan ja sen komponentit.
-     *
-     * @param g
-     */
+* Piirtää pelialustan ja sen komponentit.
+*
+* @param g
+*/
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (peli.getJatkuu()) {
-            piirraMan(g);
-            for (int y = 0; y < peli.getAlusta().getKorkeus(); y++) {
-                for (int x = 0; x < peli.getAlusta().getLeveys(); x++) {
-                    piirraSeinatJaPallot(x, y, g);
-                }
-            }
-            varitaHaamut(g);
-            piirraPisteet(g);
-            piirraHedelma(g);
-            piirraElamat(g);
+            peliKaynnissa(g);
         } else {
             g.setColor(Color.RED);
             Font peliFontti = new Font("Candara", Font.BOLD, 25);
@@ -67,10 +62,14 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             piirretaanTilanne(g);
 
             if (kayttis.getHighscore().tarkistaOnkoEnnatys(peli.getPisteet())) {
-                kayttis.highscoreNimi();        
+                System.out.println("tanne");
+                kayttis.getHighscore().lisaaEnnatys(peli.getPisteet());
             }
-            
-            g.drawString("Ennätyspisteet: " + kayttis.getHighscore().tulostaParas(), 200, 390);
+            try {
+                g.drawString("Ennätyspisteet: " + kayttis.getHighscore().tulostaParas(), 200, 390);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Piirtoalusta.class.getName()).log(Level.SEVERE, null, ex);
+            }
             g.setColor(Color.RED);
             g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 200, 330);
             g.drawString("Paina ENTER aloittaaksesi uuden pelin", 80, 500);
@@ -78,19 +77,19 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     /**
-     * Piirtää uudelleen kentän
-     */
+* Piirtää uudelleen kentän
+*/
     @Override
     public void paivita() {
         repaint();
     }
 
     /**
-     * Värittää jokaisen haamun omalla värillään, kun haamut ovat vahvoja.
-     * Värittää haamut sinisiksi, kun ovat heikkoja.
-     *
-     * @param g
-     */
+* Värittää jokaisen haamun omalla värillään, kun haamut ovat vahvoja.
+* Värittää haamut sinisiksi, kun ovat heikkoja.
+*
+* @param g
+*/
     public void varitaHaamut(Graphics g) {
 
         for (Haamu haamu : peli.getHaamuLista()) {
@@ -187,4 +186,18 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             g.drawString("Hävisit...", 200, 300);
         }
     }
+
+    private void peliKaynnissa(Graphics g) {
+        piirraMan(g);
+        for (int y = 0; y < peli.getAlusta().getKorkeus(); y++) {
+            for (int x = 0; x < peli.getAlusta().getLeveys(); x++) {
+                piirraSeinatJaPallot(x, y, g);
+            }
+        }
+        varitaHaamut(g);
+        piirraPisteet(g);
+        piirraHedelma(g);
+        piirraElamat(g);
+    }
+    
 }

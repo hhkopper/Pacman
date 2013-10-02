@@ -2,7 +2,10 @@ package pacman.gui;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
@@ -11,10 +14,10 @@ import pacman.peli.Highscore;
 import pacman.peli.Pacman;
 
 /**
- * Pacmanin käyttöliittymä
- *
- * @author Hanna
- */
+* Pacmanin käyttöliittymä
+*
+* @author Hanna
+*/
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
@@ -28,14 +31,18 @@ public class Kayttoliittyma implements Runnable {
         this.peli = peli;
         this.piirtoalusta = new Piirtoalusta(peli, 30, frame, this);
         this.nappaimistonkuuntelija = new Nappaimistonkuuntelija(this, peli);
-        this.highscore = new Highscore();
+        try {
+            this.highscore = new Highscore();
+        } catch (IOException ex) {
+            Logger.getLogger(Kayttoliittyma.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.ikkuna = false;
     }
 
     @Override
     public void run() {
         frame = new JFrame("Pacman");
-        frame.setPreferredSize(new Dimension(722, 660)); // 38 ruudun sivu        
+        frame.setPreferredSize(new Dimension(722, 660)); // 38 ruudun sivu
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(frame.getContentPane());
@@ -45,10 +52,10 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Luodaan komponentit frameen ja lisätään näppäimistönkuuntelija.
-     *
-     * @param container
-     */
+* Luodaan komponentit frameen ja lisätään näppäimistönkuuntelija.
+*
+* @param container
+*/
     public void luoKomponentit(Container container) {
         container.add(piirtoalusta);
         frame.addKeyListener(nappaimistonkuuntelija);
@@ -63,8 +70,8 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Luodaan ja käynnitetään uusi peli.
-     */
+* Luodaan ja käynnitetään uusi peli.
+*/
     public void uusiPeli() {
         peli = new Pacman();
         piirtoalusta.setPeli(peli);
@@ -73,24 +80,24 @@ public class Kayttoliittyma implements Runnable {
         peli.start();
     }
 
-    public void highscoreNimi() {
-        if (this.ikkuna) {
-            return;
-        }
-        this.ikkuna = true;
-        int b = -1;
-        String nimi = "";
-        while (b < 0) {
-            nimi = JOptionPane.showInputDialog("Uusi ennatys! Kirjoita nimesi: ");
-            if (nimi.length() > 0) {
-                b++;
-            }
-        }
-        
-        this.ikkuna = false;        
-        this.highscore.lisaaEnnatys(nimi, peli.getPisteet());
-        this.piirtoalusta.paivita();
-    }
+//    public void highscoreNimi() {
+//        if (this.ikkuna) {
+//            return;
+//        }
+//        this.ikkuna = true;
+//        int b = -1;
+//        String nimi = "";
+//        while (b < 0) {
+//            nimi = JOptionPane.showInputDialog("Uusi ennatys! Kirjoita nimesi: ");
+//            if (nimi.length() > 0) {
+//                b++;
+//            }
+//        }
+//        
+//        this.ikkuna = false;
+//        this.highscore.lisaaEnnatys(nimi, peli.getPisteet());
+//        this.piirtoalusta.paivita();
+//    }
     
       public Highscore getHighscore() {
         return this.highscore;
