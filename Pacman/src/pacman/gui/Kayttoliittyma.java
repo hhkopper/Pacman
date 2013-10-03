@@ -1,23 +1,24 @@
 package pacman.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.Event;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 import javax.swing.WindowConstants;
-import pacman.peli.Ennatys;
 import pacman.peli.Highscore;
 import pacman.peli.Pacman;
 
 /**
-* Pacmanin käyttöliittymä
-*
+ * Pacmanin käyttöliittymä
+ * 
 * @author Hanna
-*/
+ */
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
@@ -31,12 +32,9 @@ public class Kayttoliittyma implements Runnable {
         this.peli = peli;
         this.piirtoalusta = new Piirtoalusta(peli, 30, frame, this);
         this.nappaimistonkuuntelija = new Nappaimistonkuuntelija(this, peli);
-        try {
-            this.highscore = new Highscore();
-        } catch (IOException ex) {
-            Logger.getLogger(Kayttoliittyma.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.highscore = new Highscore(this);
         this.ikkuna = false;
+
     }
 
     @Override
@@ -52,11 +50,11 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-* Luodaan komponentit frameen ja lisätään näppäimistönkuuntelija.
-*
+     * Luodaan komponentit frameen ja lisätään näppäimistönkuuntelija.
+     *     
 * @param container
-*/
-    public void luoKomponentit(Container container) {
+     */
+    private void luoKomponentit(Container container) {
         container.add(piirtoalusta);
         frame.addKeyListener(nappaimistonkuuntelija);
     }
@@ -70,8 +68,8 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-* Luodaan ja käynnitetään uusi peli.
-*/
+     * Luodaan ja käynnitetään uusi peli.
+     */
     public void uusiPeli() {
         peli = new Pacman();
         piirtoalusta.setPeli(peli);
@@ -80,26 +78,38 @@ public class Kayttoliittyma implements Runnable {
         peli.start();
     }
 
-//    public void highscoreNimi() {
-//        if (this.ikkuna) {
-//            return;
-//        }
-//        this.ikkuna = true;
-//        int b = -1;
-//        String nimi = "";
-//        while (b < 0) {
-//            nimi = JOptionPane.showInputDialog("Uusi ennatys! Kirjoita nimesi: ");
-//            if (nimi.length() > 0) {
-//                b++;
-//            }
-//        }
-//        
-//        this.ikkuna = false;
-//        this.highscore.lisaaEnnatys(nimi, peli.getPisteet());
-//        this.piirtoalusta.paivita();
-//    }
-    
-      public Highscore getHighscore() {
+    public Highscore getHighscore() {
         return this.highscore;
+    }
+
+    public void virheilmoitus(String virhe) {
+        peli.stop();
+        if (!ikkuna) {
+            ikkuna = true;
+            JFrame virheFrame = new JFrame("Virheilmoitus");
+            virheFrame.setPreferredSize(new Dimension(400, 200));
+
+            luoVirheenKomponentit(virheFrame.getContentPane(), virhe);
+
+            virheFrame.pack();
+            virheFrame.setVisible(true);
+        }
+
+    }
+
+    private void luoVirheenKomponentit(Container container, String virhe) {
+        container.setLayout(new BorderLayout());
+        JButton ok = new JButton("OK");
+        JLabel teksti = new JLabel(virhe);
+        container.add(teksti);
+        container.add(ok, BorderLayout.SOUTH);
+        ok.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                frame.dispatchEvent(new WindowEvent(frame, Event.WINDOW_DESTROY));
+            }
+        });
+        
     }
 }

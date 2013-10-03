@@ -1,7 +1,6 @@
 package pacman.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
@@ -14,15 +13,15 @@ import pacman.hahmot.Haamu;
 import pacman.peli.Pacman;
 
 /**
-* Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät.
-*
+ * Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät.
+ * 
 * @author Hanna
-*/
+ */
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
     /**
-* Peli, jonka kautta päästään käsiksi tarvittaviin elementteihin.
-*/
+     * Peli, jonka kautta päästään käsiksi tarvittaviin elementteihin.
+     */
     private Pacman peli;
     private int ruudunSivu;
     private JFrame frame;
@@ -30,12 +29,12 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     private Kayttoliittyma kayttis;
 
     /**
-* Konstruktorissa asetetaan kaikki tarvittavat arvot piirtoalustalle.
-*
+     * Konstruktorissa asetetaan kaikki tarvittavat arvot piirtoalustalle.
+     *     
 * @param peli
-* @param sivu
-* @param frame
-*/
+     * @param sivu
+     * @param frame
+     */
     public Piirtoalusta(Pacman peli, int sivu, JFrame frame, Kayttoliittyma kayttis) {
         this.peli = peli;
         this.ruudunSivu = sivu;
@@ -46,10 +45,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     /**
-* Piirtää pelialustan ja sen komponentit.
-*
+     * Piirtää pelialustan ja sen komponentit.
+     *     
 * @param g
-*/
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -62,14 +61,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             piirretaanTilanne(g);
 
             if (kayttis.getHighscore().tarkistaOnkoEnnatys(peli.getPisteet())) {
-                System.out.println("tanne");
-                kayttis.getHighscore().lisaaEnnatys(peli.getPisteet());
+                kayttis.getHighscore().kirjaaEnnatys(peli.getPisteet());
             }
-            try {
-                g.drawString("Ennätyspisteet: " + kayttis.getHighscore().tulostaParas(), 200, 390);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Piirtoalusta.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            g.drawString("Ennätyspisteet: " + kayttis.getHighscore().tulostaParas(), 200, 390);
+
             g.setColor(Color.RED);
             g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 200, 330);
             g.drawString("Paina ENTER aloittaaksesi uuden pelin", 80, 500);
@@ -77,19 +72,19 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     /**
-* Piirtää uudelleen kentän
-*/
+     * Piirtää uudelleen kentän
+     */
     @Override
     public void paivita() {
         repaint();
     }
 
     /**
-* Värittää jokaisen haamun omalla värillään, kun haamut ovat vahvoja.
-* Värittää haamut sinisiksi, kun ovat heikkoja.
-*
+     * Värittää jokaisen haamun omalla värillään, kun haamut ovat vahvoja.
+     * Värittää haamut sinisiksi, kun ovat heikkoja.
+     *     
 * @param g
-*/
+     */
     public void varitaHaamut(Graphics g) {
 
         for (Haamu haamu : peli.getHaamuLista()) {
@@ -199,5 +194,4 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         piirraHedelma(g);
         piirraElamat(g);
     }
-    
 }

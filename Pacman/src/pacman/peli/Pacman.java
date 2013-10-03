@@ -50,7 +50,6 @@ public class Pacman extends Timer implements ActionListener {
      * Boolean arvo kertoo onko peli voitettu (true) vai hävitty (false).
      */
     private boolean tilanne;
-//    private Highscore highscore;
 
     /**
      * Konstruktorissa luodaan pelialusta ja kaikki komponentit sille, luodaan
@@ -68,10 +67,13 @@ public class Pacman extends Timer implements ActionListener {
         this.hedelmanPaikat = new ArrayList<Peliruutu>();
         this.jatkuu = true;
         this.tilanne = false;
-//        this.highscore = new Highscore();
 
         addActionListener(this);
         setInitialDelay(2000);
+    }    
+    
+    public void setPaivitettava(Paivitettava paivitettava) {
+        this.paivitettava = paivitettava;
     }
 
     public Man getMan() {
@@ -289,9 +291,6 @@ public class Pacman extends Timer implements ActionListener {
         this.tilanne = true;
     }
 
-    public void setPaivitettava(Paivitettava paivitettava) {
-        this.paivitettava = paivitettava;
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
