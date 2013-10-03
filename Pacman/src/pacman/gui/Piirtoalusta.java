@@ -3,9 +3,6 @@ package pacman.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -53,21 +50,9 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (peli.getJatkuu()) {
-            peliKaynnissa(g);
+            piirraPeliKaynnissa(g);
         } else {
-            g.setColor(Color.RED);
-            Font peliFontti = new Font("Candara", Font.BOLD, 25);
-            g.setFont(peliFontti);
-            piirretaanTilanne(g);
-
-            if (kayttis.getHighscore().tarkistaOnkoEnnatys(peli.getPisteet())) {
-                kayttis.getHighscore().kirjaaEnnatys(peli.getPisteet());
-            }
-            g.drawString("Ennätyspisteet: " + kayttis.getHighscore().tulostaParas(), 200, 390);
-
-            g.setColor(Color.RED);
-            g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 200, 330);
-            g.drawString("Paina ENTER aloittaaksesi uuden pelin", 80, 500);
+            piirraPeliPaattynyt(g);
         }
     }
 
@@ -182,7 +167,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         }
     }
 
-    private void peliKaynnissa(Graphics g) {
+    private void piirraPeliKaynnissa(Graphics g) {
         piirraMan(g);
         for (int y = 0; y < peli.getAlusta().getKorkeus(); y++) {
             for (int x = 0; x < peli.getAlusta().getLeveys(); x++) {
@@ -193,5 +178,23 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         piirraPisteet(g);
         piirraHedelma(g);
         piirraElamat(g);
+    }
+
+    private void onkoEnnatys() {
+        if (kayttis.getHighscore().tarkistaOnkoEnnatys(peli.getPisteet())) {
+            kayttis.getHighscore().kirjaaEnnatys(peli.getPisteet());
+        }
+    }
+
+    private void piirraPeliPaattynyt(Graphics g) {
+        g.setColor(Color.RED);
+        Font peliFontti = new Font("Candara", Font.BOLD, 25);
+        g.setFont(peliFontti);
+        piirretaanTilanne(g);
+        g.setColor(Color.RED);
+        g.drawString("Pisteesi: " + peli.getLaskuri().getPisteet(), 200, 330);
+        onkoEnnatys();
+        g.drawString("Ennätyspisteet: " + kayttis.getHighscore().getParas(), 200, 390);
+        g.drawString("Paina ENTER aloittaaksesi uuden pelin", 80, 500);
     }
 }

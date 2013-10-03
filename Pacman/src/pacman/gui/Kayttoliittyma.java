@@ -82,12 +82,18 @@ public class Kayttoliittyma implements Runnable {
         return this.highscore;
     }
 
+    /**
+     * Muodostaa uuden ikkunan, jossa kerrotaan parametrina saatu virheilmoitus.
+     * Ok nappia painamalla peli sulkeutuu kokonaa.
+     *
+     * @param virhe
+     */
     public void virheilmoitus(String virhe) {
         peli.stop();
         if (!ikkuna) {
             ikkuna = true;
             JFrame virheFrame = new JFrame("Virheilmoitus");
-            virheFrame.setPreferredSize(new Dimension(400, 200));
+            virheFrame.setPreferredSize(new Dimension(300, 100));
 
             luoVirheenKomponentit(virheFrame.getContentPane(), virhe);
 
@@ -97,6 +103,12 @@ public class Kayttoliittyma implements Runnable {
 
     }
 
+    /**
+     * Luodaan komponentit virheilmoitus frameen.
+     *     
+     * @param container
+     * @param virhe
+     */
     private void luoVirheenKomponentit(Container container, String virhe) {
         container.setLayout(new BorderLayout());
         JButton ok = new JButton("OK");
@@ -110,6 +122,6 @@ public class Kayttoliittyma implements Runnable {
                 frame.dispatchEvent(new WindowEvent(frame, Event.WINDOW_DESTROY));
             }
         });
-        
+
     }
 }

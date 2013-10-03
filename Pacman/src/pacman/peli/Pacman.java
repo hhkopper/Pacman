@@ -70,8 +70,8 @@ public class Pacman extends Timer implements ActionListener {
 
         addActionListener(this);
         setInitialDelay(2000);
-    }    
-    
+    }
+
     public void setPaivitettava(Paivitettava paivitettava) {
         this.paivitettava = paivitettava;
     }
@@ -291,31 +291,32 @@ public class Pacman extends Timer implements ActionListener {
         this.tilanne = true;
     }
 
-
+    /**
+     * Suoritetaan pelin toiminnot yhdeltä peli kierrokselta.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
-
-        if (!jatkuu) {
-            this.stop();
-        } else {
-            for (Haamu haamu : haamut) {
-                haamu.liiku();
-                haamuHeikostaVahvaksi(haamu);
-            }
-            kuoleekoHaamuTaiMan();
-            this.man.liiku();
-            kuoleekoHaamuTaiMan();
-            manSyoPistepallo();
-
-            luoHedelma();
-            asetaSeina();
-            paattyykoPeli();
-            if (man.getElamat() < 1) {
-                jatkuu = false;
-            }
+        for (Haamu haamu : haamut) {
+            haamu.liiku();
+            haamuHeikostaVahvaksi(haamu);
         }
+        kuoleekoHaamuTaiMan();
+        this.man.liiku();
+        kuoleekoHaamuTaiMan();
+        manSyoPistepallo();
+        luoHedelma();
+        asetaSeina();
+        paattyykoPeli();
+        if (man.getElamat() <= 0) {
+            jatkuu = false;
+        }   
         this.paivitettava.paivita();
         setDelay(300);
+        
+        if (!jatkuu) {
+            this.stop();
+        }
     }
 }
