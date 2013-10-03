@@ -2,12 +2,11 @@ package pacman.hahmot.test;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import pacman.alusta.Pelialusta;
-import pacman.hahmot.Haamu;
 import pacman.hahmot.Man;
 import pacman.hahmot.Suunta;
 
@@ -118,5 +117,13 @@ public class ManTest {
         assertEquals(10, man.getY());
         assertEquals(true, alusta.getPeliruutu(6, 10).getOnkoMan());
         assertEquals(false, alusta.getPeliruutu(6, 11).getOnkoMan());
+    }
+    
+    @Test
+    public void manPalaaAlkuunOikein() {
+        man = new Man(1, 1, Suunta.YLOS, alusta);
+        man.palaaAlkuun();
+        assertEquals(9, man.getX());
+        assertEquals(11, man.getY());
     }
 }

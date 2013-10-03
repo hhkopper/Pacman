@@ -6,10 +6,10 @@ package pacman.alusta.test;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import pacman.alusta.Pelialusta;
 
 /**
@@ -31,7 +31,7 @@ public class PelialustaTest {
     }
     
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         alusta = new Pelialusta(19,21);
         alusta.luoPelialusta();
     }
@@ -47,7 +47,7 @@ public class PelialustaTest {
     }
     
     @Test
-    public void hakeeRuudunOikein() throws Exception {
+    public void hakeeRuudunOikein() {
         assertEquals(0, alusta.getPeliruutu(0, 9).getX());
         assertEquals(9, alusta.getPeliruutu(0, 9).getY());
     }
@@ -58,5 +58,10 @@ public class PelialustaTest {
         assertEquals(alusta.getPeliruutu(9, 11).getOnkoPallo(), false);
         assertEquals(alusta.getPeliruutu(9, 9).getOnkoPallo(), false);
         assertEquals(alusta.getPeliruutu(17, 7).getOnkoPallo(), false);
+    }
+    
+    @Test
+    public void laittaaEkstraPistepallonOikeaanPaikkaan() {
+        assertEquals(true, alusta.getPeliruutu(1, 5).getOnkoExtraPallo());
     }
 }
