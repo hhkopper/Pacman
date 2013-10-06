@@ -39,7 +39,7 @@ public class Highscore {
      * Konstruktorissa luodaan ennätystiedosto ja annetaan muuttujille
      * tarvittavat arvot.
      *
-     * @param kayttis
+     * @param kayttis kayttoliittyma, jonka kautta päästään käsiksi virheilmoitukseen.
      */
     public Highscore(Kayttoliittyma kayttis) {
         this.ennatyslista = new File("ennatykset");
@@ -91,7 +91,7 @@ public class Highscore {
 
     /**
      * FileWriter kirjoittaa uudet pisteet ennätystiedostoon.
-     * @param pisteet
+     * @param pisteet pelaajan pistemäärä, joka on todettu uudeksi ennätykseksi.
      */
     public void kirjaaEnnatys(int pisteet) {
         try {

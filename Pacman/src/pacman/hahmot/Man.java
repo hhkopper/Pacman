@@ -4,7 +4,7 @@ import pacman.alusta.Pelialusta;
 import pacman.alusta.Peliruutu;
 
 /**
- * Man luokka kuvaa pelin päähahmoa jota pelaaja liikuttaa kentällä. 
+ * Man luokka kuvaa pelin päähahmoa, jota pelaaja liikuttaa kentällä. 
  * Manin tehtävä on liikuttaa itseään kentällä ja tietää minne voi liikkua.
  * Man myös tietää omat elämänsä ja osaa vähentää niitä, kun man kuolee.
  * 
@@ -20,15 +20,15 @@ public class Man {
 
     /**
      * Konstruktorissa annetaan Manille tarvittavat arvot ja asetetaan elämien määräksi kolme.
-     * @param x
-     * @param y
-     * @param alkuSuunta
-     * @param alusta
+     * @param x koordinaatti X
+     * @param y koordinaatti Y
+     * @param suunta Suunta johon man liikkuu.
+     * @param alusta alusta, jolle man luodaan.
      */
-    public Man(int x, int y, Suunta alkuSuunta, Pelialusta alusta) {
+    public Man(int x, int y, Suunta suunta, Pelialusta alusta) {
         this.x = x;
         this.y = y;
-        this.suunta = alkuSuunta;
+        this.suunta = suunta;
         this.alusta = alusta;
         elamat = 3;
     }

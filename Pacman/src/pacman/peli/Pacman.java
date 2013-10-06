@@ -36,6 +36,9 @@ public class Pacman extends Timer implements ActionListener {
      * Kaikki mahdolliset peliruudut johon voi asettaa hedelman.
      */
     private ArrayList<Peliruutu> hedelmanPaikat;
+    /**
+     * Paivitettavan avulla voidaan kutsua Piirtoalustan, joka toteuttaa rajapinnan paivitettava, metodia paivita.
+     */
     private Paivitettava paivitettava;
     /**
      * Kertoo missä ruudussa hedelma sijaitsee
@@ -104,9 +107,6 @@ public class Pacman extends Timer implements ActionListener {
         return this.jatkuu;
     }
 
-//    public Highscore getHighscore() {
-//        return this.highscore;
-//    }
     public Peliruutu getHedelmanPaikka() {
         return this.hedelmanPaikka;
     }
@@ -226,6 +226,12 @@ public class Pacman extends Timer implements ActionListener {
         }
     }
 
+    /**
+     * Katsotaan, onko koordinaateissa sijaitseva ruutu sopiva hedelmän paikaksi.
+     * @param x koordinaatti X
+     * @param y koordinaatti Y
+     * @return palauttaa boolean arvon
+     */
     private boolean onkoHedelmanPaikka(int x, int y) {
         return alusta.getPeliruutu(x, y).getRuudunTyyppi() == 1 && !alusta.getPeliruutu(x, y).getOnkoPallo() && !alusta.getPeliruutu(x, y).getOnkoExtraPallo();
     }

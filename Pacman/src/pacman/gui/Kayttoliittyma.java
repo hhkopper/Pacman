@@ -28,6 +28,10 @@ public class Kayttoliittyma implements Runnable {
     private Highscore highscore;
     private boolean ikkuna;
 
+    /**
+     * Konstruktorissa annetaan kaikille tarvitteville muuttujille arvot.
+     * @param peli
+     */
     public Kayttoliittyma(Pacman peli) {
         this.peli = peli;
         this.piirtoalusta = new Piirtoalusta(peli, 30, frame, this);

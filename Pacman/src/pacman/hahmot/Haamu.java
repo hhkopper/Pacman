@@ -6,10 +6,10 @@ import pacman.alusta.Pelialusta;
 
 /**
  *
- * Haamu luokka kuvaa kentällä vapaasti liikkuvia Manin vihollisia.
- * Haamun tehtävä on tietää minne se voi liikkua ja milloin.
- * Haamu luokan avulla myös asetetaan haamuille haluttuja ominaisuuksia.
- * 
+ * Haamu luokka kuvaa kentällä vapaasti liikkuvia Manin vihollisia. Haamun
+ * tehtävä on tietää minne se voi liikkua ja milloin. Haamu luokan avulla myös
+ * asetetaan haamuille haluttuja ominaisuuksia.
+ *
  * @author Hanna
  */
 public class Haamu {
@@ -22,7 +22,8 @@ public class Haamu {
      */
     private String tyyppi;
     /**
-     * Nimen perusteella osataan antaa oikea väri haamuille haamujen muuttuessa heikosta vahvaksi.
+     * Nimen perusteella osataan antaa oikea väri haamuille haamujen muuttuessa
+     * heikosta vahvaksi.
      */
     private String nimi;
     /**
@@ -34,18 +35,19 @@ public class Haamu {
      */
     private ArrayList<Suunta> mahdollisetSuunnat = new ArrayList<Suunta>();
     /**
-     * Kertoo kuinka monen suorituskierroksen ajan haamu on vielä tyyppiä heikko.
+     * Kertoo kuinka monen suorituskierroksen ajan haamu on vielä tyyppiä
+     * heikko.
      */
     private int heikkous;
 
     /**
-     * Konstruktorissa Haamulle asetetaan tarvittavat arvot, jotka saadaan parametrina. 
-     * Haamun tyypiksi asetetaan aluksi vahva.
-     * @param x 
-     * @param nimi
-     * @param suunta 
-     * @param y 
-     * @param alusta  
+     * Konstruktorissa Haamulle asetetaan tarvittavat arvot, jotka saadaan
+     * parametrina. Haamun tyypiksi asetetaan aluksi vahva.
+     * @param x koordinaatti X
+     * @param y koordinaatti Y
+     * @param nimi haamun nimi, jonka avulla tunnistetaan väri.
+     * @param suunta Suunta, johon haamu liikkuu.
+     * @param alusta alusta, jolle haamu luodaan.
      */
     public Haamu(int x, int y, Suunta suunta, String nimi, Pelialusta alusta) {
         this.y = y;
@@ -75,7 +77,6 @@ public class Haamu {
     public String getNimi() {
         return this.nimi;
     }
-    
 
     public void setSuunta(Suunta uusiSuunta) {
         this.suunta = uusiSuunta;
@@ -84,7 +85,7 @@ public class Haamu {
     public Suunta getSuunta() {
         return this.suunta;
     }
-    
+
     public ArrayList<Suunta> getSuuntaLista() {
         return this.mahdollisetSuunnat;
     }
@@ -96,15 +97,15 @@ public class Haamu {
     public String getTyyppi() {
         return this.tyyppi;
     }
-    
+
     public int getHeikkous() {
         return this.heikkous;
     }
-    
+
     public void setHeikkous(int arvo) {
         this.heikkous = arvo;
     }
-     
+
     /**
      * Vahennetaan heikkoutta yhdellä.
      */
@@ -120,10 +121,11 @@ public class Haamu {
     }
 
     /**
-     * Jos haamun seuraava ruutu olisi seinä arvotaan uusi suunta, minkä jälkeen liikutaan tähän suuntaa.
-     * Liiku metodi myös tarkistaa, pääseekö ruudusta jossa haamu on myös muualle kuin samaan suuntaan jatkamalla tai peruuttamalla.
-     * Jos muuallekin pääsee arvotaan uusi suunta ja liikutaan sinne.
-     * Muissa tapauksissa liikutaan suuntaan, joka haamulla on suuntana.
+     * Jos haamun seuraava ruutu olisi seinä arvotaan uusi suunta, minkä jälkeen
+     * liikutaan tähän suuntaa. Liiku metodi myös tarkistaa, pääseekö ruudusta
+     * jossa haamu on myös muualle kuin samaan suuntaan jatkamalla tai
+     * peruuttamalla. Jos muuallekin pääsee arvotaan uusi suunta ja liikutaan
+     * sinne. Muissa tapauksissa liikutaan suuntaan, joka haamulla on suuntana.
      */
     public void liiku() {
         if (alusta.getPeliruutu(x + this.suunta.getX(), y + this.suunta.getY()).getRuudunTyyppi() == 0) {
@@ -138,7 +140,9 @@ public class Haamu {
     }
 
     /**
-     * Liikutaan suuntaan, joka haamulla on suuntana. Muutetaan haamun koordinaatteja ja kerrotaan pelialustalle mistä ruudusta mihin ruutuun haamu siirtyy.
+     * Liikutaan suuntaan, joka haamulla on suuntana. Muutetaan haamun
+     * koordinaatteja ja kerrotaan pelialustalle mistä ruudusta mihin ruutuun
+     * haamu siirtyy.
      */
     public void liikuSuunta() {
 
@@ -149,9 +153,10 @@ public class Haamu {
     }
 
     /**
-     * Kerätään listalle kaikki mahdolliset suunnat, johon haamu pystyy liikkumaan.
-     * Arvotaan listan perusteella numero, joka kertoo mistä indeksistä valitaan uusi suunta.
-     * Arvottu suunta asetaan haamulle uudeksi suunnaksi.
+     * Kerätään listalle kaikki mahdolliset suunnat, johon haamu pystyy
+     * liikkumaan. Arvotaan listan perusteella numero, joka kertoo mistä
+     * indeksistä valitaan uusi suunta. Arvottu suunta asetaan haamulle uudeksi
+     * suunnaksi.
      */
     public void arvoUusiSuunta() {
 
@@ -179,18 +184,20 @@ public class Haamu {
     }
 
     /**
-     * Tarkistetaan voiko ruudusta, jossa haamu on, liikkua muualle kuin eteenpäin tai taaksepäin.
+     * Tarkistetaan voiko ruudusta, jossa haamu on, liikkua muualle kuin
+     * eteenpäin tai taaksepäin.
+     *
      * @return palauttaa boolean arvon true jos pystyy false jos ei.
      */
     public boolean katsoVoikoLiikkuaSivuille() {
         if (suunta == Suunta.VASEN || suunta == Suunta.OIKEA) {
-            if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 1 ||
-                    alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 3 || alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 3) {
+            if (alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 1
+                    || alusta.getPeliruutu(x, y - 1).getRuudunTyyppi() == 3 || alusta.getPeliruutu(x, y + 1).getRuudunTyyppi() == 3) {
                 return true;
             }
         } else if (suunta == Suunta.ALAS || suunta == Suunta.YLOS) {
-            if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 1 ||
-                    alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 3 || alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 3) {
+            if (alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 1 || alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 1
+                    || alusta.getPeliruutu(x - 1, y).getRuudunTyyppi() == 3 || alusta.getPeliruutu(x + 1, y).getRuudunTyyppi() == 3) {
                 return true;
             }
         }
