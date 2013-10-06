@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pacman.hahmot.Haamu;
+import pacman.hahmot.Suunta;
 import pacman.peli.Pacman;
 
 /**
@@ -107,9 +108,20 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     private void piirraMan(Graphics g) {
+        if (peli.getMan().getSuunta() == Suunta.OIKEA) {
+            ImageIcon kuva = new ImageIcon(this.getClass().getResource("pacmanOikea.png"));
+            piirraManinKuva( g, kuva);
+        } else if (peli.getMan().getSuunta() == Suunta.VASEN) {
+            ImageIcon kuva = new ImageIcon(this.getClass().getResource("pacmanVasen.png"));
+            piirraManinKuva( g, kuva);
+        } else if (peli.getMan().getSuunta() == Suunta.YLOS) {
+            ImageIcon kuva = new ImageIcon(this.getClass().getResource("pacmanYlos.png"));
+            piirraManinKuva( g, kuva);
+        } else if (peli.getMan().getSuunta() == Suunta.ALAS) {
+            ImageIcon kuva = new ImageIcon(this.getClass().getResource("pacmanAlas.png"));
+            piirraManinKuva( g, kuva);
+        }
 
-        ImageIcon kuva = new ImageIcon(this.getClass().getResource("pacman.png"));
-        g.drawImage(kuva.getImage(), peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, frame);
     }
 
     private void piirraSeinatJaPallot(int x, int y, Graphics g) {
@@ -196,5 +208,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         onkoEnnatys();
         g.drawString("Ennätyspisteet: " + kayttis.getHighscore().getParas(), 200, 390);
         g.drawString("Paina ENTER aloittaaksesi uuden pelin", 80, 500);
+        paivita();
+    }
+
+    private void piirraManinKuva(Graphics g, ImageIcon kuva) {
+        g.drawImage(kuva.getImage(), peli.getMan().getX() * this.ruudunSivu, peli.getMan().getY() * this.ruudunSivu, frame);
     }
 }
