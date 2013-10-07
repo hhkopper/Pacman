@@ -3,7 +3,6 @@ package pacman.gui;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import pacman.hahmot.Suunta;
-import pacman.peli.Pacman;
 
 /**
  * Pacmanin näppäimistönkuuntelija, joka muuttaa manin suuntaa pelaajan
@@ -14,10 +13,6 @@ import pacman.peli.Pacman;
 public class Nappaimistonkuuntelija implements KeyListener {
 
     /**
-     * Peli johon nappaimistonkuuntelija liittyy ja jonka kautta päästään käsiksi manin liikkumiseen.
-     */
-    private Pacman peli;
-    /**
      * Käyttoliittymä, jonka kautta päästään käynnistämään uusipeli.
      */
     private Kayttoliittyma kayttis;
@@ -25,10 +20,8 @@ public class Nappaimistonkuuntelija implements KeyListener {
     /**
      * Kunstruktorissa asetetaan nappaimistonkuuntelijalle tarvittavat arvot.
      * @param kayttis
-     * @param peli
      */
-    public Nappaimistonkuuntelija(Kayttoliittyma kayttis, Pacman peli) {
-        this.peli = peli;
+    public Nappaimistonkuuntelija(Kayttoliittyma kayttis) {
         this.kayttis = kayttis;
     }
 
@@ -44,22 +37,22 @@ public class Nappaimistonkuuntelija implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        Suunta vanhaSuunta = peli.getMan().getSuunta();
+        Suunta vanhaSuunta = kayttis.getPeli().getMan().getSuunta();
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            peli.getMan().setSuunta(Suunta.VASEN);
+            kayttis.getPeli().getMan().setSuunta(Suunta.VASEN);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            peli.getMan().setSuunta(Suunta.OIKEA);
+            kayttis.getPeli().getMan().setSuunta(Suunta.OIKEA);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            peli.getMan().setSuunta(Suunta.YLOS);
+            kayttis.getPeli().getMan().setSuunta(Suunta.YLOS);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            peli.getMan().setSuunta(Suunta.ALAS);
+            kayttis.getPeli().getMan().setSuunta(Suunta.ALAS);
             tarkistaOnkoSuunnassaSeina(vanhaSuunta);
         }
 
-        if (!peli.getJatkuu()) {
+        if (!kayttis.getPeli().getJatkuu()) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 this.kayttis.uusiPeli();
             }
@@ -68,10 +61,6 @@ public class Nappaimistonkuuntelija implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-    }
-
-    public void setPeli(Pacman peli) {
-        this.peli = peli;
     }
 
     /**
@@ -83,7 +72,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
      */
     public void tarkistaOnkoSuunnassaSeina(Suunta suunta) {
         if (onkoSuunnassaSeina()) {
-            peli.getMan().setSuunta(suunta);
+            kayttis.getPeli().getMan().setSuunta(suunta);
         }
     }
 
@@ -93,11 +82,11 @@ public class Nappaimistonkuuntelija implements KeyListener {
      * @return palautetaan boolean arvo.
      */
     public boolean onkoSuunnassaSeina() {
-        Suunta suunta = peli.getMan().getSuunta();
-        int x = peli.getMan().getX();
-        int y = peli.getMan().getY();
+        Suunta suunta = kayttis.getPeli().getMan().getSuunta();
+        int x = kayttis.getPeli().getMan().getX();
+        int y = kayttis.getPeli().getMan().getY();
 
-        if (peli.getAlusta().getPeliruutu(x + suunta.getX(), y + suunta.getY()).getRuudunTyyppi() == 0) {
+        if (kayttis.getPeli().getAlusta().getPeliruutu(x + suunta.getX(), y + suunta.getY()).getRuudunTyyppi() == 0) {
             return true;
         } else {
             return false;

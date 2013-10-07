@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import pacman.gui.Kayttoliittyma;
 
 /**
  * Highscore luokka käsittelee pelin piste-ennätykseen liittyvät toiminnot.
@@ -27,10 +26,6 @@ public class Highscore {
      */
     private Scanner lukija;
     /**
-     * Kayttoliittyman kautta päästään käsiksi tarvittavaan virheilmoitukseen.
-     */
-    private Kayttoliittyma kayttis;
-    /**
      * Kertoo parhaimman pistemäärän
      */
     private int paras;
@@ -38,31 +33,32 @@ public class Highscore {
     /**
      * Konstruktorissa luodaan ennätystiedosto ja annetaan muuttujille
      * tarvittavat arvot.
-     *
-     * @param kayttis kayttoliittyma, jonka kautta päästään käsiksi virheilmoitukseen.
      */
-    public Highscore(Kayttoliittyma kayttis) {
-        this.ennatyslista = new File("ennatykset");
-        this.kayttis = kayttis;
+    public Highscore(File tiedosto) {
+        this.ennatyslista = tiedosto;
         this.paras = 0;
 
     }
 
     /**
-     * Tarkistetaan onko parametrina annetut pisteet uusi ennätys.
-     * Jos tiedostossa ei ole vielä mitään palautetaan true, jolloin uusi pistemäärä on uusi ennätys.
-     * Jos taas aiempi paras pistemäärä on pienempä kuin uusi pistemäärä on tehty ennätys.
-     * Muulloin palautetaan false.
-     * 
+     * Tarkistetaan onko parametrina annetut pisteet uusi ennätys. Jos
+     * tiedostossa ei ole vielä mitään palautetaan true, jolloin uusi pistemäärä
+     * on uusi ennätys. Jos taas aiempi paras pistemäärä on pienempä kuin uusi
+     * pistemäärä on tehty ennätys. Muulloin palautetaan false.
+     *
      * @param pisteet
      * @return
      */
-    public boolean tarkistaOnkoEnnatys(int pisteet) {
-        try {
-            this.lukija = new Scanner(ennatyslista);
-        } catch (FileNotFoundException ex) {
-            kayttis.virheilmoitus("Scannerin luonnissa tapahtui virhe.");
+    public boolean tarkistaOnkoEnnatys(int pisteet) throws FileNotFoundException {
+
+        if (!ennatyslista.exists()) {
+            if(pisteet < 0) {
+                return false;
+            }
+            return true;
         }
+        this.lukija = new Scanner(ennatyslista);
+
         if (!lukija.hasNextInt()) {
             return true;
         } else if (tamanHetkinenEnnatys() < pisteet) {
@@ -73,13 +69,13 @@ public class Highscore {
     }
 
     /**
-     * Tulostetaan tämän hetkinen paras pistemäärä.
-     * Jos tiedostossa ei ole mitään palautetaan nolla, muulloin lukija hakee tiedostosta seuraavan int arvon
-     * ja asettaa tämän parhaan arvoksi ja tulostaa haetun arvon.
-     * 
+     * Tulostetaan tämän hetkinen paras pistemäärä. Jos tiedostossa ei ole
+     * mitään palautetaan nolla, muulloin lukija hakee tiedostosta seuraavan int
+     * arvon ja asettaa tämän parhaan arvoksi ja tulostaa haetun arvon.
+     *
      * @return
      */
-    public int tamanHetkinenEnnatys() {
+    private int tamanHetkinenEnnatys() {
         if (!lukija.hasNextInt()) {
             return 0;
         } else {
@@ -91,16 +87,15 @@ public class Highscore {
 
     /**
      * FileWriter kirjoittaa uudet pisteet ennätystiedostoon.
+     *
      * @param pisteet pelaajan pistemäärä, joka on todettu uudeksi ennätykseksi.
      */
-    public void kirjaaEnnatys(int pisteet) {
-        try {
-            this.kirjuri = new FileWriter(ennatyslista);
-            kirjuri.write(Integer.toString(pisteet));
-            kirjuri.close();
-        } catch (IOException ex) {
-            kayttis.virheilmoitus("Ennätyksen kirjauksessa tapahtui virhe.");
-        }
+    public void kirjaaEnnatys(int pisteet) throws IOException {
+
+        this.kirjuri = new FileWriter(ennatyslista);
+        kirjuri.write(Integer.toString(pisteet));
+        kirjuri.close();
+
     }
 
     public int getParas() {

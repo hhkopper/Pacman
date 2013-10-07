@@ -5,7 +5,7 @@
 package pacman.peli.test;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import org.junit.After;
@@ -14,9 +14,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import pacman.gui.Kayttoliittyma;
 import pacman.peli.Highscore;
-import pacman.peli.Pacman;
 
 /**
  *
@@ -24,12 +22,8 @@ import pacman.peli.Pacman;
  */
 public class HighscoreTest {
     
-    private Pacman peli;
-    private File ennatykset;
-    private Kayttoliittyma kayttis;
-    private FileWriter kirjoittaja;
-    private Scanner lukija;
     private Highscore highscore;
+    private File tempFile;
     
     public HighscoreTest() {
     }
@@ -43,17 +37,9 @@ public class HighscoreTest {
     }
     
     @Before
-    public void setUp() {
-        peli = new Pacman();
-        kayttis = new Kayttoliittyma(peli);        
-        ennatykset = new File("Ennatykset");
-        try {
-            kirjoittaja = new FileWriter(ennatykset);
-            lukija = new Scanner(ennatykset);
-        } catch (IOException ex) {
-            kayttis.virheilmoitus("Virhe testejä suoritettaessa.");
-        }
-        highscore = new Highscore(kayttis);
+    public void setUp() throws IOException {
+        tempFile = File.createTempFile("testi", "tiedosto");
+        highscore = new Highscore(tempFile);
     }
     
     @After
@@ -61,10 +47,33 @@ public class HighscoreTest {
     }
 
     @Test
-    public void katsooOikeinOnkoUusiEnnatys() {
-        assertEquals(true, highscore.tarkistaOnkoEnnatys(200));
+    public void katsooOikeinOnkoUusiEnnatys() throws IOException {
+        highscore.kirjaaEnnatys(51);
+        assertEquals(true, highscore.tarkistaOnkoEnnatys(200));       
+    }
+    
+    @Test
+    public void kirjataankoTulosOikein() throws IOException {
+        highscore.kirjaaEnnatys(195); 
+        Scanner lukija = new Scanner(tempFile);
+        assertEquals(195, lukija.nextInt());
+    }
+    
+    @Test
+    public void katsooOikeinEttaEiEnnatys() throws IOException {
         highscore.kirjaaEnnatys(200);
         assertEquals(false, highscore.tarkistaOnkoEnnatys(50));
-        assertEquals(true, highscore.tarkistaOnkoEnnatys(500));        
+    }
+    
+    @Test
+    public void toimiiOikeinJosTiedostoaEiOlemassa1() throws FileNotFoundException {
+        highscore = new Highscore(new File("enOleOlemassa"));        
+        assertEquals(false, highscore.tarkistaOnkoEnnatys(-53));
+    }
+    
+    @Test
+    public void toimiiOikeinJosTiedostoaEiOlemassa2() throws FileNotFoundException {
+        highscore = new Highscore(new File("enOleOlemassa"));        
+        assertEquals(true, highscore.tarkistaOnkoEnnatys(10));        
     }
 }

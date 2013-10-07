@@ -36,13 +36,7 @@ public class PacmanTest {
 
     @Test
     public void kuoleekoManKunHaamuVahva() {
-        pacman.getMan().setX(10);
-        pacman.getMan().setY(7);
-        pacman.getMan().setSuunta(Suunta.VASEN);
-        pacman.getHaamuLista().get(0).setX(9);
-        pacman.getHaamuLista().get(0).setY(8);
-        pacman.getMan().liiku();
-        pacman.getHaamuLista().get(0).liiku();
+        liikutetaanManJaHaamuSamaanRuutuun();
         pacman.kuoleekoHaamuTaiMan();
 
         assertEquals(9, pacman.getMan().getX());
@@ -52,13 +46,7 @@ public class PacmanTest {
     @Test
     public void kuoleekoHaamuKunHaamuHeikko() {
         pacman.getHaamuLista().get(0).setTyyppi("heikko");
-        pacman.getMan().setX(10);
-        pacman.getMan().setY(7);
-        pacman.getMan().setSuunta(Suunta.VASEN);
-        pacman.getHaamuLista().get(0).setX(9);
-        pacman.getHaamuLista().get(0).setY(8);
-        pacman.getMan().liiku();
-        pacman.getHaamuLista().get(0).liiku();
+        liikutetaanManJaHaamuSamaanRuutuun();
         pacman.kuoleekoHaamuTaiMan();
 
         assertEquals(9, pacman.getHaamuLista().get(0).getX());
@@ -67,8 +55,7 @@ public class PacmanTest {
 
     @Test
     public void syokoManPistepallonOikein() {
-        pacman.getMan().liiku();
-        pacman.manSyoPistepallo();
+        manLiikuJaSyoPistepallo();
         assertEquals(false, pacman.getAlusta().getPeliruutu(10, 11).getOnkoPallo());
         assertEquals(20, pacman.getLaskuri().getPisteet());
     }
@@ -106,10 +93,7 @@ public class PacmanTest {
 
     @Test
     public void asettaaHedelmanKunTarpeeksiPisteitaJaTarkistaaOnkoHedelmaAlustalla() {
-        pacman.getMan().liiku();
-        pacman.manSyoPistepallo();
-        pacman.getMan().liiku();
-        pacman.getLaskuri().kasvata(400);
+        syodaanPistepalloJaKasvatetaanPisteet();
         pacman.arvoHedelma();
         assertEquals(10, pacman.getHedelmanPaikka().getX());
         assertEquals(11, pacman.getHedelmanPaikka().getY());
@@ -118,10 +102,7 @@ public class PacmanTest {
 
     @Test
     public void manOsuuOikeinHedelmaan() {
-        pacman.getMan().liiku();
-        pacman.manSyoPistepallo();
-        pacman.getMan().liiku();
-        pacman.getLaskuri().kasvata(400);
+        syodaanPistepalloJaKasvatetaanPisteet();
         pacman.arvoHedelma();
         pacman.getMan().setSuunta(Suunta.VASEN);
         pacman.getMan().liiku();
@@ -130,12 +111,9 @@ public class PacmanTest {
 
     @Test
     public void loytaaKaikkiHedelmanPaikat() {
-        pacman.getMan().liiku();
-        pacman.manSyoPistepallo();
-        pacman.getMan().liiku();
-        pacman.manSyoPistepallo();
-        pacman.getMan().liiku();
-        pacman.manSyoPistepallo();
+        manLiikuJaSyoPistepallo();
+        manLiikuJaSyoPistepallo();
+        manLiikuJaSyoPistepallo();
         pacman.etsiHedelmanPaikat();
 
         assertEquals(3, pacman.getHedelmanPaikat().size());
@@ -147,14 +125,35 @@ public class PacmanTest {
             for (int x = 0; x < pacman.getAlusta().getLeveys(); x++) {
                 if (pacman.getAlusta().getPeliruutu(x, y).getOnkoPallo()) {
                     pacman.getAlusta().getPeliruutu(x, y).setOnkoPallo(false);
-                } else if(pacman.getAlusta().getPeliruutu(x, y).getOnkoExtraPallo()) {
+                } else if (pacman.getAlusta().getPeliruutu(x, y).getOnkoExtraPallo()) {
                     pacman.getAlusta().getPeliruutu(x, y).setOnkoExtraPallo(false);
                 }
             }
         }
         pacman.paattyykoPeli();
-        
+
         assertEquals(true, pacman.getTilanne());
         assertEquals(false, pacman.getJatkuu());
+    }
+
+    private void syodaanPistepalloJaKasvatetaanPisteet() {
+        manLiikuJaSyoPistepallo();
+        pacman.getMan().liiku();
+        pacman.getLaskuri().kasvata(400);
+    }
+
+    private void manLiikuJaSyoPistepallo() {
+        pacman.getMan().liiku();
+        pacman.manSyoPistepallo();
+    }
+
+    private void liikutetaanManJaHaamuSamaanRuutuun() {
+        pacman.getMan().setX(10);
+        pacman.getMan().setY(7);
+        pacman.getMan().setSuunta(Suunta.VASEN);
+        pacman.getHaamuLista().get(0).setX(9);
+        pacman.getHaamuLista().get(0).setY(8);
+        pacman.getMan().liiku();
+        pacman.getHaamuLista().get(0).liiku();
     }
 }

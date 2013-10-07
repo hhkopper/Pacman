@@ -7,6 +7,7 @@ import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,11 +35,10 @@ public class Kayttoliittyma implements Runnable {
      */
     public Kayttoliittyma(Pacman peli) {
         this.peli = peli;
-        this.piirtoalusta = new Piirtoalusta(peli, 30, frame, this);
-        this.nappaimistonkuuntelija = new Nappaimistonkuuntelija(this, peli);
-        this.highscore = new Highscore(this);
+        this.piirtoalusta = new Piirtoalusta(30, frame, this);
+        this.nappaimistonkuuntelija = new Nappaimistonkuuntelija(this);
+        this.highscore = new Highscore(new File("ennatykset"));
         this.ikkuna = false;
-
     }
 
     @Override
@@ -76,10 +76,12 @@ public class Kayttoliittyma implements Runnable {
      */
     public void uusiPeli() {
         peli = new Pacman();
-        piirtoalusta.setPeli(peli);
-        nappaimistonkuuntelija.setPeli(peli);
         peli.setPaivitettava(this.getPaivitettava());
         peli.start();
+    }
+    
+    public Pacman getPeli() {
+        return this.peli;
     }
 
     public Highscore getHighscore() {
