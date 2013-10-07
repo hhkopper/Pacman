@@ -14,8 +14,17 @@ import pacman.alusta.Pelialusta;
  */
 public class Haamu {
 
+    /**
+     * Koordinaatti Y
+     */
     private int y;
+      /**
+     * Koordinaatti X
+     */
     private int x;
+      /**
+     * Suunta, johon haamu liikkuu.
+     */
     private Suunta suunta;
     /**
      * Tyyppi kertoo onko haamu heikko vai vahva.
@@ -43,6 +52,7 @@ public class Haamu {
     /**
      * Konstruktorissa Haamulle asetetaan tarvittavat arvot, jotka saadaan
      * parametrina. Haamun tyypiksi asetetaan aluksi vahva.
+     *
      * @param x koordinaatti X
      * @param y koordinaatti Y
      * @param nimi haamun nimi, jonka avulla tunnistetaan väri.
@@ -121,11 +131,11 @@ public class Haamu {
     }
 
     /**
-     * Jos haamun seuraava ruutu olisi seinä arvotaan uusi suunta, minkä jälkeen
-     * liikutaan tähän suuntaa. Liiku metodi myös tarkistaa, pääseekö ruudusta
-     * jossa haamu on myös muualle kuin samaan suuntaan jatkamalla tai
-     * peruuttamalla. Jos muuallekin pääsee arvotaan uusi suunta ja liikutaan
-     * sinne. Muissa tapauksissa liikutaan suuntaan, joka haamulla on suuntana.
+     * Haamua liikuttava metodi. 
+     * Jos haamun seuraava ruutu olisi seinä arvotaan uusi suunta, minkä jälkeen liikutaan tähän suuntaa. 
+     * Liiku metodi myös tarkistaa, pääseekö ruudusta, jossa haamu on myös muualle kuin samaan suuntaan jatkamalla tai peruuttamalla. 
+     * Jos muuallekin pääsee arvotaan uusi suunta ja liikutaan sinne. 
+     * Muissa tapauksissa liikutaan suuntaan, joka haamulla on suuntana.
      */
     public void liiku() {
         if (alusta.getPeliruutu(x + this.suunta.getX(), y + this.suunta.getY()).getRuudunTyyppi() == 0) {

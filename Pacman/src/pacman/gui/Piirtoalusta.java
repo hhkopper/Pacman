@@ -21,7 +21,6 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     /**
      * Peli, jonka kautta päästään käsiksi tarvittaviin elementteihin.
      */
-
     private int ruudunSivu;
     private JFrame frame;
     private String nimi;
@@ -29,6 +28,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
 
     /**
      * Konstruktorissa asetetaan kaikki tarvittavat arvot piirtoalustalle.
+     *
      * @param sivu
      * @param frame
      * @param kayttis
@@ -65,27 +65,27 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     /**
-     * Värittää jokaisen haamun omalla värillään, kun haamut ovat vahvoja.
-     * Värittää haamut sinisiksi, kun ovat heikkoja.
+     * Jokaiselle haamulle annetaan kuva nimen perusteella.
+     * Jos haamujen tyyppi on heikko piirretään haamujen heikot kuvat.
      *
      * @param g
      */
-    private void varitaHaamut(Graphics g) {
+    private void kuvitaHaamut(Graphics g) {
 
         for (Haamu haamu : kayttis.getPeli().getHaamuLista()) {
             if (haamu.getTyyppi().equals("vahva")) {
                 if (haamu.getNimi().equals("red")) {
-                    g.setColor(Color.RED);
-                    piirraHaamu(g, haamu);
+                    ImageIcon kuva = new ImageIcon(this.getClass().getResource("red.png"));
+                    piirräHaamunKuva( g, kuva, haamu);
                 } else if (haamu.getNimi().equals("green")) {
-                    g.setColor(Color.GREEN);
-                    piirraHaamu(g, haamu);
+                    ImageIcon kuva = new ImageIcon(this.getClass().getResource("green.png"));
+                    piirräHaamunKuva( g, kuva, haamu);
                 } else if (haamu.getNimi().equals("magenta")) {
-                    g.setColor(Color.MAGENTA);
-                    piirraHaamu(g, haamu);
+                    ImageIcon kuva = new ImageIcon(this.getClass().getResource("magenta.png"));
+                    piirräHaamunKuva( g, kuva, haamu);
                 } else if (haamu.getNimi().equals("cyan")) {
-                    g.setColor(Color.CYAN);
-                    piirraHaamu(g, haamu);
+                    ImageIcon kuva = new ImageIcon(this.getClass().getResource("cyan.png"));
+                    piirräHaamunKuva( g, kuva, haamu);
                 }
             } else {
                 piirraHeikotHaamut(g, haamu);
@@ -100,17 +100,8 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * @param haamu haamu joka piirretään.
      */
     private void piirraHeikotHaamut(Graphics g, Haamu haamu) {
-        g.setColor(Color.BLUE);
-        piirraHaamu(g, haamu);
-    }
-
-    /**
-     *
-     * @param g
-     * @param haamu haamu, joka piirretään.
-     */
-    public void piirraHaamu(Graphics g, Haamu haamu) {
-        g.fillOval(haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, this.ruudunSivu, this.ruudunSivu);
+        ImageIcon kuva = new ImageIcon(this.getClass().getResource("heikkoHaamu.png"));
+        piirräHaamunKuva( g, kuva, haamu);
     }
 
     /**
@@ -255,7 +246,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             }
         }
         piirraHedelma(g);
-        varitaHaamut(g);
+        kuvitaHaamut(g);
         piirraPisteet(g);
     }
 
@@ -265,9 +256,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     private void onkoEnnatys() {
         try {
             if (kayttis.getHighscore().tarkistaOnkoEnnatys(kayttis.getPeli().getPisteet())) {
-
                 kayttis.getHighscore().kirjaaEnnatys(kayttis.getPeli().getPisteet());
-
             }
         } catch (FileNotFoundException ex) {
             kayttis.virheilmoitus("Scannerin luonnissa tapahtui virhe.");
@@ -302,5 +291,16 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      */
     private void piirraManinKuva(Graphics g, ImageIcon kuva) {
         g.drawImage(kuva.getImage(), kayttis.getPeli().getMan().getX() * this.ruudunSivu, kayttis.getPeli().getMan().getY() * this.ruudunSivu, frame);
+    }
+
+    /**
+     * Piirretään haamun kuva.
+     * 
+     * @param g
+     * @param kuva haamun oma kuva
+     * @param haamu haamu, josta kuva piirretään
+     */
+    private void piirräHaamunKuva(Graphics g, ImageIcon kuva, Haamu haamu) {
+        g.drawImage(kuva.getImage(), haamu.getX() * this.ruudunSivu, haamu.getY() * this.ruudunSivu, frame);
     }
 }

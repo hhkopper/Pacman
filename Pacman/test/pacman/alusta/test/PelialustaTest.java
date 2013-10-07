@@ -62,6 +62,18 @@ public class PelialustaTest {
     
     @Test
     public void laittaaEkstraPistepallonOikeaanPaikkaan() {
+        assertEquals(2, alusta.getPeliruutu(1, 5).getRuudunTyyppi());
         assertEquals(true, alusta.getPeliruutu(1, 5).getOnkoExtraPallo());
+    }
+    
+    @Test
+    public void laittaaPistepallonOikeaanPaikkaan() {
+        assertEquals(1, alusta.getPeliruutu(1, 1).getRuudunTyyppi());
+        assertEquals(true, alusta.getPeliruutu(1, 1).getOnkoPallo());
+    }
+    
+    @Test
+    public void asettaaSeinan() {
+        assertEquals(0, alusta.getPeliruutu(0, 0).getRuudunTyyppi());        
     }
 }

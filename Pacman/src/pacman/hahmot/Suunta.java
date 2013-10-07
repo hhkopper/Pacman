@@ -3,7 +3,7 @@ package pacman.hahmot;
 /**
  * Määrittelee haamujen ja manin liikkumissuunnat.
  * 
- * @author Hanna
+ * @author hhkopper
  */
 public enum Suunta {
 
@@ -24,7 +24,13 @@ public enum Suunta {
      */
     VASEN(-1, 0);
     
+      /**
+     * Kertoo X koordinaatin muutoksen.
+     */
     private int x;
+      /**
+     * Kertoo Y koordinaatin muutoksen.
+     */
     private int y;
 
     private Suunta(int x, int y) {

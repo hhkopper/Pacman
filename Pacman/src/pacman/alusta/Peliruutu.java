@@ -1,21 +1,48 @@
 package pacman.alusta;
 
 /**
+ * Peliruutu tietää kaiken tärkeän tiedon mitä ruudussa tapahtuu ja ketä ja mitä
+ * se sisältää.
  *
- * Peliruutu tietää kaiken tärkeän tiedon mitä ruudussa tapahtuu ja ketä ja mitä se sisältää.
- * 
- * @author Hanna
+ * @author hhkopper
  */
 public class Peliruutu {
 
+    /**
+     * Ruudun X koordinaatti.
+     */
     private int x;
+    /**
+     * Ruudun Y koordinaatti.
+     */
     private int y;
+    /**
+     * Kertoo ruudun tyypin, 0 jos seinä, 1 jos käytävä, 2 jos ekstrapallon paikka ja 3 jos vaikka jonne ei laiteta mitään.
+     */
     private int ruudunTyyppi;
+      /**
+     * Kertoo onko Man ruudussa, true, jos on ja false, jos ei.
+     */
     private boolean onkoMan;
+      /**
+     * Kertoo onko Haamu ruudussa, true, jos on ja false, jos ei.
+     */
     private boolean onkoHaamu;
+      /**
+     * Kertoo onko pistepallo ruudussa vai ei, true, jos on ja false, jos ei.
+     */
     private boolean onkoPallo;
+      /**
+     * Kertoo onko ekstra pistepallo ruudussa, true, jos on ja false, jos ei.
+     */
     private boolean onkoExtraPallo;
 
+    /**
+     * Konstruktorissa annetaan arvot koordinaateille.
+     *
+     * @param x koordinaatti X
+     * @param y koordinaatti Y
+     */
     public Peliruutu(int x, int y) {
         this.x = x;
         this.y = y;
@@ -29,7 +56,6 @@ public class Peliruutu {
         return this.y;
     }
 
-    //jos ruutu on polku se on 1, jos seinä on 0 
     public void setRuudunTyyppi(int uusiTyyppi) {
         this.ruudunTyyppi = uusiTyyppi;
     }
@@ -57,15 +83,15 @@ public class Peliruutu {
     public void setOnkoPallo(boolean arvo) {
         this.onkoPallo = arvo;
     }
-    
+
     public boolean getOnkoPallo() {
         return this.onkoPallo;
     }
-    
+
     public void setOnkoExtraPallo(boolean arvo) {
         this.onkoExtraPallo = arvo;
     }
-    
+
     public boolean getOnkoExtraPallo() {
         return this.onkoExtraPallo;
     }

@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Highscore luokka käsittelee pelin piste-ennätykseen liittyvät toiminnot.
  *
- * @author Hanna
+ * @author hhkopper
  */
 public class Highscore {
 
@@ -46,8 +46,8 @@ public class Highscore {
      * on uusi ennätys. Jos taas aiempi paras pistemäärä on pienempä kuin uusi
      * pistemäärä on tehty ennätys. Muulloin palautetaan false.
      *
-     * @param pisteet
-     * @return
+     * @param pisteet pelaajan saama pistemäärä
+     * @return palauttaa boolean arvon, true, jos on ennätys ja false, jos ei.
      */
     public boolean tarkistaOnkoEnnatys(int pisteet) throws FileNotFoundException {
 
@@ -73,7 +73,7 @@ public class Highscore {
      * mitään palautetaan nolla, muulloin lukija hakee tiedostosta seuraavan int
      * arvon ja asettaa tämän parhaan arvoksi ja tulostaa haetun arvon.
      *
-     * @return
+     * @return int arvon, joka on tämän hetkinen ennätys.
      */
     private int tamanHetkinenEnnatys() {
         if (!lukija.hasNextInt()) {
@@ -95,7 +95,6 @@ public class Highscore {
         this.kirjuri = new FileWriter(ennatyslista);
         kirjuri.write(Integer.toString(pisteet));
         kirjuri.close();
-
     }
 
     public int getParas() {

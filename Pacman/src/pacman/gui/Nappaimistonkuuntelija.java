@@ -19,7 +19,8 @@ public class Nappaimistonkuuntelija implements KeyListener {
 
     /**
      * Kunstruktorissa asetetaan nappaimistonkuuntelijalle tarvittavat arvot.
-     * @param kayttis
+     * 
+     * @param kayttis Kayttoliittyma, jotta päästään käsiksi tarvittaviin tietoihin pelistä.
      */
     public Nappaimistonkuuntelija(Kayttoliittyma kayttis) {
         this.kayttis = kayttis;
@@ -64,7 +65,6 @@ public class Nappaimistonkuuntelija implements KeyListener {
     }
 
     /**
-     *
      * Tarkistetaan onko uudessa suunnassa vastassa seinä, jos on muutetaan
      * suunnaksi vanha suunta, joka oli ennen kuin painettiin nuolinäppäintä.
      *

@@ -47,9 +47,14 @@ public class HighscoreTest {
     }
 
     @Test
-    public void katsooOikeinOnkoUusiEnnatys() throws IOException {
-        highscore.kirjaaEnnatys(51);
+    public void katsooOikeinOnkoUusiEnnatys1() throws IOException {
         assertEquals(true, highscore.tarkistaOnkoEnnatys(200));       
+    }
+    
+    @Test
+    public void katsooOikeinOnkoUusiEnnatys2() throws IOException {
+        highscore.kirjaaEnnatys(51);
+        assertEquals(true, highscore.tarkistaOnkoEnnatys(200)); 
     }
     
     @Test

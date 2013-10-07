@@ -126,4 +126,11 @@ public class ManTest {
         assertEquals(9, man.getX());
         assertEquals(11, man.getY());
     }
+    
+    @Test
+    public void vahennetaanElamatOikein() {
+        man.vahennaElama();
+        assertEquals(2, man.getElamat());
+    }
+
 }

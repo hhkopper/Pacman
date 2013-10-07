@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Pelialusta luokassa luodaan pelialusta.
  * 
- * @author Hanna
+ * @author hhkopper
  */
 public class Pelialusta {
 
@@ -19,8 +19,8 @@ public class Pelialusta {
     /**
      * Konstruktorissa annetaan tarvittavat arvot pelialustalle.
      * Luodaan pelialusta, joka muodostuu peliruuduista. 
-     * @param leveys
-     * @param korkeus
+     * @param leveys pelialusta leveys 
+     * @param korkeus pelialusta korkeus
      */
     public Pelialusta(int leveys, int korkeus) {
         this.korkeus = korkeus;
@@ -59,7 +59,7 @@ public class Pelialusta {
     }
 
     /**
-     * Käydään läpi tekstitiedosto kenttä
+     * Käydään läpi tekstitiedosto kentta.
      * 
      */
     public void rakennaSeinatJaLuoPisteet() {
@@ -80,8 +80,8 @@ public class Pelialusta {
      * Luetaan Kentta tiedostosta arvo ja sen perusteella annetaan Pelialusta peliruuduille tarvittavat tiedot.
      * x ja y kertovat käsiteltävän peliruudun koordinaatit.
      * @param Scanner lukija
-     * @param int y
-     * @param int x
+     * @param x koordinaatti x
+     * @param y koordinaatti y
      */
     private void asetaSeinatJaPistepallot(Scanner lukija, int y, int x) {
         int arvo =lukija.nextInt();
