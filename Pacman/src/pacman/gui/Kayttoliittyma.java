@@ -18,7 +18,7 @@ import pacman.peli.Pacman;
 /**
  * Pacmanin käyttöliittymä
  * 
-* @author Hanna
+* @author hhkopper
  */
 public class Kayttoliittyma implements Runnable {
 
@@ -31,7 +31,8 @@ public class Kayttoliittyma implements Runnable {
 
     /**
      * Konstruktorissa annetaan kaikille tarvitteville muuttujille arvot.
-     * @param peli
+     *
+     * @param peli Pacman jota käsitellään.
      */
     public Kayttoliittyma(Pacman peli) {
         this.peli = peli;
@@ -56,7 +57,7 @@ public class Kayttoliittyma implements Runnable {
     /**
      * Luodaan komponentit frameen ja lisätään näppäimistönkuuntelija.
      *     
-* @param container
+     * @param container komponentit lisätään.
      */
     private void luoKomponentit(Container container) {
         container.add(piirtoalusta);
@@ -79,7 +80,7 @@ public class Kayttoliittyma implements Runnable {
         peli.setPaivitettava(this.getPaivitettava());
         peli.start();
     }
-    
+
     public Pacman getPeli() {
         return this.peli;
     }
@@ -92,7 +93,7 @@ public class Kayttoliittyma implements Runnable {
      * Muodostaa uuden ikkunan, jossa kerrotaan parametrina saatu virheilmoitus.
      * Ok nappia painamalla peli sulkeutuu kokonaa.
      *
-     * @param virhe
+     * @param virhe String, jossa kerrotaan missä virhe on tapahtunut.
      */
     public void virheilmoitus(String virhe) {
         peli.stop();
@@ -111,9 +112,9 @@ public class Kayttoliittyma implements Runnable {
 
     /**
      * Luodaan komponentit virheilmoitus frameen.
-     *     
-     * @param container
-     * @param virhe
+     *
+     * @param container Container, johon komponentit lisätään.
+     * @param virhe String, jossa kerrotaan missä virhe on tapahtunut.
      */
     private void luoVirheenKomponentit(Container container, String virhe) {
         container.setLayout(new BorderLayout());

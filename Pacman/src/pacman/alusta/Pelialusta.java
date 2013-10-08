@@ -13,7 +13,13 @@ public class Pelialusta {
      * Pelialusta muodostetaan kaksiulotteisesta Peliruutu taulukosta.
      */
     private Peliruutu[][] pelialusta;
+    /**
+     * Pelialustan korkeus, standardi 21.
+     */
     private int korkeus;
+    /**
+     * Pelialustan leveys, standardi 19.
+     */
     private int leveys;
 
     /**

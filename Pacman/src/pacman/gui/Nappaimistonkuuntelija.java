@@ -8,7 +8,7 @@ import pacman.hahmot.Suunta;
  * Pacmanin näppäimistönkuuntelija, joka muuttaa manin suuntaa pelaajan
  * näppäimistönpainallusten mukaisesti.
  *
- * @author Hanna
+ * @author hhkopper
  */
 public class Nappaimistonkuuntelija implements KeyListener {
 

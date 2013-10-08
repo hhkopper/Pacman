@@ -21,15 +21,24 @@ import pacman.hahmot.Suunta;
  */
 public class Pacman extends Timer implements ActionListener {
 
+    /**
+     * Man, joka liikkuu pelissä.
+     */
     private Man man;
+    /**
+     * Pelialusta, jolla kaikki toiminta tapahtuu.
+     */
     private Pelialusta alusta;
     /**
      * ArrayList, joka sisältää kaikki kentällä olevat haamut.
      */
     private ArrayList<Haamu> haamut;
+    /**
+     * Pistelaskuri, joka pitää kirjaa kasvavasta pistemäärästä.
+     */
     private Pistelaskuri laskuri;
     /**
-     * Arpojaa käytetään arpomaan uusi hedelmänpaikka
+     * Arpojaa käytetään arpomaan uusi hedelmänpaikka.
      */
     private Random arpoja = new Random();
     /**
@@ -37,11 +46,12 @@ public class Pacman extends Timer implements ActionListener {
      */
     private ArrayList<Peliruutu> hedelmanPaikat;
     /**
-     * Paivitettavan avulla voidaan kutsua Piirtoalustan, joka toteuttaa rajapinnan paivitettava, metodia paivita.
+     * Paivitettavan avulla voidaan kutsua Piirtoalustan, joka toteuttaa
+     * rajapinnan paivitettava, metodia paivita.
      */
     private Paivitettava paivitettava;
     /**
-     * Kertoo missä ruudussa hedelma sijaitsee
+     * Kertoo missä ruudussa hedelma sijaitsee.
      */
     private Peliruutu hedelmanPaikka;
     /**
@@ -227,7 +237,9 @@ public class Pacman extends Timer implements ActionListener {
     }
 
     /**
-     * Katsotaan, onko koordinaateissa sijaitseva ruutu sopiva hedelmän paikaksi.
+     * Katsotaan, onko koordinaateissa sijaitseva ruutu sopiva hedelmän
+     * paikaksi.
+     *
      * @param x koordinaatti X
      * @param y koordinaatti Y
      * @return palauttaa boolean arvon
@@ -299,6 +311,7 @@ public class Pacman extends Timer implements ActionListener {
 
     /**
      * Suoritetaan pelin toiminnot yhdeltä peli kierrokselta.
+     *
      * @param e
      */
     @Override
@@ -317,10 +330,10 @@ public class Pacman extends Timer implements ActionListener {
         paattyykoPeli();
         if (man.getElamat() <= 0) {
             jatkuu = false;
-        }   
+        }
         this.paivitettava.paivita();
         setDelay(300);
-        
+
         if (!jatkuu) {
             this.stop();
         }

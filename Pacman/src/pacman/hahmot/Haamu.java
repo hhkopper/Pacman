@@ -10,7 +10,7 @@ import pacman.alusta.Pelialusta;
  * tehtävä on tietää minne se voi liikkua ja milloin. Haamu luokan avulla myös
  * asetetaan haamuille haluttuja ominaisuuksia.
  *
- * @author Hanna
+ * @author hhkopper
  */
 public class Haamu {
 

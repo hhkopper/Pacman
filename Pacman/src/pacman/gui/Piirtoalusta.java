@@ -12,39 +12,43 @@ import pacman.hahmot.Haamu;
 import pacman.hahmot.Suunta;
 
 /**
- * Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät.
+ * Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät sekä pelin päättymisen jälkeisen tekstikentän..
  * 
-* @author Hanna
+* @author hhkopper
  */
 public class Piirtoalusta extends JPanel implements Paivitettava {
-
+    
     /**
-     * Peli, jonka kautta päästään käsiksi tarvittaviin elementteihin.
+     * Kertoo minkä kokoiseksi halutaan pelialustan yhtä ruutua kuvaavan ruudun sivun pituus.
      */
     private int ruudunSivu;
+    /**
+     * JFrame, johon kuvat liitetään.
+     */
     private JFrame frame;
-    private String nimi;
+    /**
+     * Kayttoliittyma, jonka kautta päästään käsiksi tarvittaviin tietoihin.
+     */
     private Kayttoliittyma kayttis;
 
     /**
      * Konstruktorissa asetetaan kaikki tarvittavat arvot piirtoalustalle.
      *
-     * @param sivu
-     * @param frame
-     * @param kayttis
+     * @param sivu int arvoinen luku.
+     * @param frame JFrame, johon kuvat halutaan.
+     * @param kayttis Kayttoliittyma, jonka kaytta tarvittavat tiedot kutsutaan.
      */
     public Piirtoalusta(int sivu, JFrame frame, Kayttoliittyma kayttis) {
         this.ruudunSivu = sivu;
         super.setBackground(Color.BLACK);
         this.frame = frame;
-        this.nimi = "";
         this.kayttis = kayttis;
     }
 
     /**
      * Piirtää pelialustan ja sen komponentit.
      *     
-* @param g
+     * @param g
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -275,7 +279,6 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         Font peliFontti = new Font("Candara", Font.BOLD, 25);
         g.setFont(peliFontti);
         piirretaanTilanne(g);
-        g.setColor(Color.RED);
         g.drawString("Pisteesi: " + kayttis.getPeli().getLaskuri().getPisteet(), 200, 330);
         onkoEnnatys();
         g.drawString("Ennätyspisteet: " + kayttis.getHighscore().getParas(), 200, 390);

@@ -1,10 +1,9 @@
 package pacman.gui;
 
 /**
- * Rajapinta Paivitettava sisältää metodin paivita, jonka avulla paivitetaan
- * piirtoalustan näkymä.
+ * Rajapinta Paivitettava sisältää metodin paivita.
  *
- * @author Hanna
+ * @author hhkopper
  */
 public interface Paivitettava {
 

@@ -5,7 +5,7 @@ import pacman.alusta.Peliruutu;
 
 /**
  * Man luokka kuvaa pelin päähahmoa, jota pelaaja liikuttaa kentällä. Manin
- * tehtävä on liikuttaa itseään kentällä ja tietää minne voi liikkua. Man myös
+ * tehtävä on liikuttaa itseään kentällä ja tietää minne se voi liikkua. Man myös
  * tietää omat elämänsä ja osaa vähentää niitä, kun man kuolee.
  *
  * @author hhkopper
