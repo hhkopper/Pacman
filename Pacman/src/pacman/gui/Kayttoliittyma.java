@@ -73,7 +73,7 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Luodaan ja käynnitetään uusi peli.
+     * Luodaan ja käynnistetään uusi peli.
      */
     public void uusiPeli() {
         peli = new Pacman();

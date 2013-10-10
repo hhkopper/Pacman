@@ -105,10 +105,6 @@ public class Pacman extends Timer implements ActionListener {
         return this.haamut;
     }
 
-    public int getPisteet() {
-        return laskuri.getPisteet();
-    }
-
     public boolean getTilanne() {
         return this.tilanne;
     }
@@ -128,7 +124,7 @@ public class Pacman extends Timer implements ActionListener {
     /**
      * Luodaan haamut pelialustalle omaan karsinaan.
      */
-    public void luoHaamut() {
+    private void luoHaamut() {
         Haamu red = new Haamu(8, 9, Suunta.YLOS, "red", alusta);
         Haamu green = new Haamu(9, 9, Suunta.YLOS, "green", alusta);
         Haamu cyan = new Haamu(10, 9, Suunta.YLOS, "cyan", alusta);

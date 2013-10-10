@@ -35,7 +35,6 @@ public class PistelaskuriTest {
     @Test
     public void kasvattaaPisteitaOikein() {
         laskuri.kasvata(20);
-        assertEquals(20, laskuri.getPisteet());
-        
+        assertEquals(20, laskuri.getPisteet());        
     }
 }

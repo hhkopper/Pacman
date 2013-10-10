@@ -12,7 +12,7 @@ import pacman.hahmot.Haamu;
 import pacman.hahmot.Suunta;
 
 /**
- * Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät sekä pelin päättymisen jälkeisen tekstikentän..
+ * Piirtoalusta piirtää pelikentän, haamut, manin, pisteet ja elämät sekä pelin päättymisen jälkeisen tekstikentän.
  * 
 * @author hhkopper
  */
@@ -259,8 +259,8 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      */
     private void onkoEnnatys() {
         try {
-            if (kayttis.getHighscore().tarkistaOnkoEnnatys(kayttis.getPeli().getPisteet())) {
-                kayttis.getHighscore().kirjaaEnnatys(kayttis.getPeli().getPisteet());
+            if (kayttis.getHighscore().tarkistaOnkoEnnatys(kayttis.getPeli().getLaskuri().getPisteet())) {
+                kayttis.getHighscore().kirjaaEnnatys(kayttis.getPeli().getLaskuri().getPisteet());
             }
         } catch (FileNotFoundException ex) {
             kayttis.virheilmoitus("Scannerin luonnissa tapahtui virhe.");

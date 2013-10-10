@@ -23,7 +23,7 @@ public class Pistelaskuri {
     /**
      * Kasvatetaan pistemäärää
      * 
-     * @param arvo kertoo kuinka paljon lisätään pisteisiin
+     * @param arvo kertoo kuinka paljon lisätään pisteisiin.
      */
     public void kasvata(int arvo) {
         pisteet = pisteet + arvo;

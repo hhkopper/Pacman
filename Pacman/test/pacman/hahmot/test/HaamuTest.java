@@ -52,8 +52,8 @@ public class HaamuTest {
         haamu.liiku();
         assertEquals(9, haamu.getX());
         assertEquals(9, haamu.getY());
-        assertEquals(true, alusta.getPeliruutu(9, 9).getOnkoHaamu());
-        assertEquals(false, alusta.getPeliruutu(9, 8).getOnkoHaamu());
+        assertTrue(alusta.getPeliruutu(9, 9).getOnkoHaamu());
+        assertFalse(alusta.getPeliruutu(9, 8).getOnkoHaamu());
     }
 
     @Test
@@ -63,8 +63,8 @@ public class HaamuTest {
         assertEquals(Suunta.YLOS, haamu.getSuunta());
         assertEquals(9, haamu.getX());
         assertEquals(7, haamu.getY());
-        assertEquals(true, alusta.getPeliruutu(9, 7).getOnkoHaamu());
-        assertEquals(false, alusta.getPeliruutu(9, 8).getOnkoHaamu());
+        assertTrue(alusta.getPeliruutu(9, 7).getOnkoHaamu());
+        assertFalse(alusta.getPeliruutu(9, 8).getOnkoHaamu());
     }
 
     @Test
@@ -76,8 +76,8 @@ public class HaamuTest {
         assertEquals(Suunta.OIKEA, haamu.getSuunta());
         assertEquals(8, haamu.getX());
         assertEquals(7, haamu.getY());
-        assertEquals(true, alusta.getPeliruutu(8, 7).getOnkoHaamu());
-        assertEquals(false, alusta.getPeliruutu(7, 7).getOnkoHaamu());
+        assertTrue(alusta.getPeliruutu(8, 7).getOnkoHaamu());
+        assertFalse(alusta.getPeliruutu(7, 7).getOnkoHaamu());
     }
 
     @Test
@@ -89,8 +89,8 @@ public class HaamuTest {
         assertEquals(Suunta.VASEN, haamu.getSuunta());
         assertEquals(6, haamu.getX());
         assertEquals(7, haamu.getY());
-        assertEquals(true, alusta.getPeliruutu(6, 7).getOnkoHaamu());
-        assertEquals(false, alusta.getPeliruutu(7, 7).getOnkoHaamu());
+        assertTrue(alusta.getPeliruutu(6, 7).getOnkoHaamu());
+        assertFalse(alusta.getPeliruutu(7, 7).getOnkoHaamu());
     }
 
     @Test
@@ -112,6 +112,6 @@ public class HaamuTest {
         haamu.setX(8);
         haamu.setY(7);
         haamu.setSuunta(Suunta.OIKEA);
-        assertEquals(true, haamu.katsoVoikoLiikkuaSivuille());
+        assertTrue(haamu.katsoVoikoLiikkuaSivuille());
     }
 }

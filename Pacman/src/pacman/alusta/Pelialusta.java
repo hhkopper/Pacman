@@ -26,8 +26,8 @@ public class Pelialusta {
      * Konstruktorissa annetaan tarvittavat arvot pelialustalle. Luodaan
      * pelialusta, joka muodostuu peliruuduista.
      *
-     * @param leveys pelialusta leveys
-     * @param korkeus pelialusta korkeus
+     * @param leveys pelialustan leveys
+     * @param korkeus pelialustan korkeus
      */
     public Pelialusta(int leveys, int korkeus) {
         this.korkeus = korkeus;
@@ -48,7 +48,7 @@ public class Pelialusta {
     }
 
     /**
-     * Luodaan pelialusta, joka puodostuu peliruuduista. Alustetaan jokaiselle
+     * Luodaan pelialusta, joka muodostuu peliruuduista. Alustetaan jokaiselle
      * ruudulle alustava tieto.
      *
      */
@@ -66,7 +66,7 @@ public class Pelialusta {
     }
 
     /**
-     * Käydään läpi tekstitiedosto kentta.
+     * Käydään läpi tekstitiedosto Kentta.
      *
      */
     public void rakennaSeinatJaLuoPisteet() {

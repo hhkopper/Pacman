@@ -77,8 +77,8 @@ public class Nappaimistonkuuntelija implements KeyListener {
     }
 
     /**
-     * Katsotaan onko seuraava ruutu, johon man on liikkumassa, seinä. Jos on
-     * palautetaan true jos ei palautetaan false.
+     * Katsotaan onko seuraava ruutu, johon man on liikkumassa, seinä. Jos on,
+     * palautetaan true, jos ei, palautetaan false.
      * @return palautetaan boolean arvo.
      */
     public boolean onkoSuunnassaSeina() {

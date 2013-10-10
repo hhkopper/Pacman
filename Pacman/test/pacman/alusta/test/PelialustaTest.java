@@ -41,7 +41,7 @@ public class PelialustaTest {
     }
     
     @Test
-    public void alustaLuodaan() {
+    public void alustaLuodaanOikeanKokoiseksi() {
         assertEquals(21, alusta.getKorkeus());
         assertEquals(19, alusta.getLeveys());
     }
@@ -54,22 +54,22 @@ public class PelialustaTest {
     
     @Test
     public void eiLaitaPistepalloaMinneSeEiKuulu() {
-        assertEquals(alusta.getPeliruutu(0, 7).getOnkoPallo(), false);
-        assertEquals(alusta.getPeliruutu(9, 11).getOnkoPallo(), false);
-        assertEquals(alusta.getPeliruutu(9, 9).getOnkoPallo(), false);
-        assertEquals(alusta.getPeliruutu(17, 7).getOnkoPallo(), false);
+        assertFalse(alusta.getPeliruutu(0, 7).getOnkoPallo());
+        assertFalse(alusta.getPeliruutu(9, 11).getOnkoPallo());
+        assertFalse(alusta.getPeliruutu(9, 9).getOnkoPallo());
+        assertFalse(alusta.getPeliruutu(17, 7).getOnkoPallo());
     }
     
     @Test
     public void laittaaEkstraPistepallonOikeaanPaikkaan() {
         assertEquals(2, alusta.getPeliruutu(1, 5).getRuudunTyyppi());
-        assertEquals(true, alusta.getPeliruutu(1, 5).getOnkoExtraPallo());
+        assertTrue(alusta.getPeliruutu(1, 5).getOnkoExtraPallo());
     }
     
     @Test
     public void laittaaPistepallonOikeaanPaikkaan() {
         assertEquals(1, alusta.getPeliruutu(1, 1).getRuudunTyyppi());
-        assertEquals(true, alusta.getPeliruutu(1, 1).getOnkoPallo());
+        assertTrue(alusta.getPeliruutu(1, 1).getOnkoPallo());
     }
     
     @Test

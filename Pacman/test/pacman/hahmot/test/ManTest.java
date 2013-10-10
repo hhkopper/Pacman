@@ -51,8 +51,8 @@ public class ManTest {
         man.liiku();
         assertEquals(9, man.getX());
         assertEquals(11, man.getY());
-        assertEquals(true, alusta.getPeliruutu(9, 11).getOnkoMan());
-        assertEquals(false, alusta.getPeliruutu(9, 12).getOnkoMan());
+        assertTrue(alusta.getPeliruutu(9, 11).getOnkoMan());
+        assertFalse(alusta.getPeliruutu(9, 12).getOnkoMan());
     }
 
     @Test
@@ -85,8 +85,8 @@ public class ManTest {
         man.liiku();
         assertEquals(8, man.getX());
         assertEquals(11, man.getY());
-        assertEquals(true, alusta.getPeliruutu(8, 11).getOnkoMan());
-        assertEquals(false, alusta.getPeliruutu(9, 11).getOnkoMan());
+        assertTrue(alusta.getPeliruutu(8, 11).getOnkoMan());
+        assertFalse(alusta.getPeliruutu(9, 11).getOnkoMan());
     }
 
     @Test
@@ -95,8 +95,8 @@ public class ManTest {
         man.liiku();
         assertEquals(10, man.getX());
         assertEquals(11, man.getY());
-        assertEquals(true, alusta.getPeliruutu(10, 11).getOnkoMan());
-        assertEquals(false, alusta.getPeliruutu(9, 11).getOnkoMan());
+        assertTrue(alusta.getPeliruutu(10, 11).getOnkoMan());
+        assertFalse(alusta.getPeliruutu(9, 11).getOnkoMan());
     }
 
     @Test
@@ -105,8 +105,8 @@ public class ManTest {
         man.liiku();
         assertEquals(6, man.getX());
         assertEquals(12, man.getY());
-        assertEquals(true, alusta.getPeliruutu(6, 12).getOnkoMan());
-        assertEquals(false, alusta.getPeliruutu(6, 11).getOnkoMan());
+        assertTrue(alusta.getPeliruutu(6, 12).getOnkoMan());
+        assertFalse(alusta.getPeliruutu(6, 11).getOnkoMan());
     }
 
     @Test
@@ -115,8 +115,8 @@ public class ManTest {
         man.liiku();
         assertEquals(6, man.getX());
         assertEquals(10, man.getY());
-        assertEquals(true, alusta.getPeliruutu(6, 10).getOnkoMan());
-        assertEquals(false, alusta.getPeliruutu(6, 11).getOnkoMan());
+        assertTrue(alusta.getPeliruutu(6, 10).getOnkoMan());
+        assertFalse(alusta.getPeliruutu(6, 11).getOnkoMan());
     }
     
     @Test

@@ -48,13 +48,13 @@ public class HighscoreTest {
 
     @Test
     public void katsooOikeinOnkoUusiEnnatys1() throws IOException {
-        assertEquals(true, highscore.tarkistaOnkoEnnatys(200));       
+        assertTrue(highscore.tarkistaOnkoEnnatys(200));       
     }
     
     @Test
     public void katsooOikeinOnkoUusiEnnatys2() throws IOException {
         highscore.kirjaaEnnatys(51);
-        assertEquals(true, highscore.tarkistaOnkoEnnatys(200)); 
+        assertTrue(highscore.tarkistaOnkoEnnatys(200)); 
     }
     
     @Test
@@ -67,26 +67,26 @@ public class HighscoreTest {
     @Test
     public void katsooOikeinEttaEiEnnatys() throws IOException {
         highscore.kirjaaEnnatys(200);
-        assertEquals(false, highscore.tarkistaOnkoEnnatys(50));
+        assertFalse(highscore.tarkistaOnkoEnnatys(50));
     }
     
     @Test
     public void toimiiOikeinJosTiedostoaEiOlemassa1() throws FileNotFoundException {
         highscore = new Highscore(new File("enOleOlemassa"));        
-        assertEquals(false, highscore.tarkistaOnkoEnnatys(-53));
+        assertFalse(highscore.tarkistaOnkoEnnatys(-53));
     }
     
     @Test
     public void toimiiOikeinJosTiedostoaEiOlemassa2() throws FileNotFoundException {
         highscore = new Highscore(new File("enOleOlemassa"));        
-        assertEquals(true, highscore.tarkistaOnkoEnnatys(10));        
+        assertTrue(highscore.tarkistaOnkoEnnatys(10));        
     }
     
     @Test
     public void onkoTiedostoOlemassa() throws IOException {;
         highscore = new Highscore(tempFile);
         highscore.kirjaaEnnatys(50);
-        assertEquals(true, tempFile.exists());
+        assertTrue(tempFile.exists());
 
     }
 }
