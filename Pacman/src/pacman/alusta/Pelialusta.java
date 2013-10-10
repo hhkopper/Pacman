@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Pelialusta luokassa luodaan pelialusta.
- * 
+ *
  * @author hhkopper
  */
 public class Pelialusta {
@@ -23,9 +23,10 @@ public class Pelialusta {
     private int leveys;
 
     /**
-     * Konstruktorissa annetaan tarvittavat arvot pelialustalle.
-     * Luodaan pelialusta, joka muodostuu peliruuduista. 
-     * @param leveys pelialusta leveys 
+     * Konstruktorissa annetaan tarvittavat arvot pelialustalle. Luodaan
+     * pelialusta, joka muodostuu peliruuduista.
+     *
+     * @param leveys pelialusta leveys
      * @param korkeus pelialusta korkeus
      */
     public Pelialusta(int leveys, int korkeus) {
@@ -47,9 +48,9 @@ public class Pelialusta {
     }
 
     /**
-     * Luodaan pelialusta, joka puodostuu peliruuduista.
-     * Alustetaan jokaiselle ruudulle alustava tieto.
-     * 
+     * Luodaan pelialusta, joka puodostuu peliruuduista. Alustetaan jokaiselle
+     * ruudulle alustava tieto.
+     *
      */
     public void luoPelialusta() {
         for (int i = 0; i <= korkeus - 1; i++) {
@@ -66,7 +67,7 @@ public class Pelialusta {
 
     /**
      * Käydään läpi tekstitiedosto kentta.
-     * 
+     *
      */
     public void rakennaSeinatJaLuoPisteet() {
         Scanner lukija = new Scanner(this.getClass().getResourceAsStream("Kentta"));
@@ -81,27 +82,28 @@ public class Pelialusta {
         lukija.close();
     }
 
-    
     /**
-     * Luetaan Kentta tiedostosta arvo ja sen perusteella annetaan Pelialusta peliruuduille tarvittavat tiedot.
-     * x ja y kertovat käsiteltävän peliruudun koordinaatit.
+     * Luetaan Kentta tiedostosta arvo ja sen perusteella annetaan Pelialusta
+     * peliruuduille tarvittavat tiedot. x ja y kertovat käsiteltävän peliruudun
+     * koordinaatit.
+     *
      * @param Scanner lukija
      * @param x koordinaatti x
      * @param y koordinaatti y
      */
     private void asetaSeinatJaPistepallot(Scanner lukija, int y, int x) {
-        int arvo =lukija.nextInt();
-        
+        int arvo = lukija.nextInt();
+
         if (arvo == 0) {
             this.pelialusta[y][x].setRuudunTyyppi(0);
-        } else if(arvo == 2) {
+        } else if (arvo == 2) {
             this.pelialusta[y][x].setRuudunTyyppi(2);
             this.pelialusta[y][x].setOnkoExtraPallo(true);
-        } else if(arvo == 1) {
+        } else if (arvo == 1) {
             this.pelialusta[y][x].setOnkoPallo(true);
         } else {
             this.pelialusta[y][x].setRuudunTyyppi(3);
         }
-        
+
     }
 }

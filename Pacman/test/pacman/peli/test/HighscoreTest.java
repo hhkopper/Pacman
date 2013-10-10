@@ -81,4 +81,12 @@ public class HighscoreTest {
         highscore = new Highscore(new File("enOleOlemassa"));        
         assertEquals(true, highscore.tarkistaOnkoEnnatys(10));        
     }
+    
+    @Test
+    public void onkoTiedostoOlemassa() throws IOException {;
+        highscore = new Highscore(tempFile);
+        highscore.kirjaaEnnatys(50);
+        assertEquals(true, tempFile.exists());
+
+    }
 }
