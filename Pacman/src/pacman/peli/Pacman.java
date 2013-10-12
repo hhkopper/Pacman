@@ -146,6 +146,11 @@ public class Pacman extends Timer implements ActionListener {
         }
     }
 
+    /**
+     * Jos haamun tyyppi on heikko ja heikkousaika on loppunut, muutetaan haamun tyyppi vahvaksi.
+     * Jos heikkousaika ei ole vielä loppu, vähennetään sitä.
+     * @param haamu haamu, jonka tyyppiä tutkitaan.
+     */
     private void haamuHeikostaVahvaksi(Haamu haamu) {
         if (haamu.getTyyppi().equals("heikko")) {
             if (haamu.getHeikkous() == 0) {
@@ -158,6 +163,8 @@ public class Pacman extends Timer implements ActionListener {
 
     /**
      * Man syö pistepallon kentältä ja kasvatetaan pistemäärää.
+     * Jos tavallinen pistepallo, kasvatetaan vain pistemäärää.
+     * Jos ekstrapistepallo, muutetaan haamujen tyyppi heikoksi ja kasvatetaan pistemäärää.
      */
     public void manSyoPistepallo() {
         if (alusta.getPeliruutu(man.getX(), man.getY()).getOnkoPallo()) {
@@ -171,7 +178,9 @@ public class Pacman extends Timer implements ActionListener {
     }
 
     /**
-     * Katsotaan kuoleeko haamu tai man, kun ne osuvat samaan ruutuun.
+     * Katsotaan kuoleeko haamu tai man, kun ne osuvat samaan ruutuun. 
+     * Jos haamun tyyppi on heikko, tällöin haamu kuolee ja palaa lähtöruutuunsa.
+     * Jos taas haamun tyyppi on vahva, niin man kuolee ja palaa lähtöruutuun.
      */
     public void kuoleekoHaamuTaiMan() {
         for (Haamu haamu : haamut) {
