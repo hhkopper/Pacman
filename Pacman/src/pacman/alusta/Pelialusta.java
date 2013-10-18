@@ -87,7 +87,7 @@ public class Pelialusta {
      * peliruuduille tarvittavat tiedot. x ja y kertovat käsiteltävän peliruudun
      * koordinaatit.
      *
-     * @param Scanner lukija
+     * @param lukija lukija
      * @param x koordinaatti x
      * @param y koordinaatti y
      */
